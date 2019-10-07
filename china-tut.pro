@@ -16,17 +16,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dbmanager.cpp \
+    grouplistitem.cpp \
     grouplistpage.cpp \
+    grouplistwidget.cpp \
     main.cpp \
     mainwindow.cpp \
+    shared/clickablelabel.cpp \
+    wordlistitem.cpp \
     wordlistwidget.cpp
 
 HEADERS += \
+    dbmanager.h \
+    grouplistitem.h \
     grouplistpage.h \
+    grouplistwidget.h \
     mainwindow.h \
+    shared/clickablelabel.h \
+    wordlistitem.h \
     wordlistwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Static.qrc

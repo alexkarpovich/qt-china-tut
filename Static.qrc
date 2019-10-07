@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/static">
+        <file>app.db</file>
+    </qresource>
+</RCC>

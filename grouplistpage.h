@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
+#include <QPushButton>
 #include <QWidget>
 #include "wordlistwidget.h"
 
@@ -11,9 +12,10 @@ class GroupListPage : public QWidget
 {
     Q_OBJECT
     QLabel* groupListLbl;
-    QListWidget* groupListWdg;
+    QPushButton* addGroupBtn;
+    QListWidget* groupListWgt;
     QLineEdit* wordInput;
-    WordListWidget* wordListWdg;
+    WordListWidget* wordListWgt;
 
     void initGroupListSection();
     void initWordListSection();
@@ -25,6 +27,7 @@ signals:
 
 public slots:
     void onWordInputReturnPressed();
+    void onAddGroupBtnClicked();
 };
 
 #endif // GROUPLISTPAGE_H

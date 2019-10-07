@@ -1,4 +1,6 @@
 #include <QHBoxLayout>
+#include <QListWidgetItem>
+#include "grouplistitem.h"
 #include "grouplistpage.h"
 
 GroupListPage::GroupListPage(QWidget *parent) : QWidget(parent)
@@ -17,12 +19,17 @@ void GroupListPage::initGroupListSection()
 {
     QWidget* glSection = new QWidget;
     QVBoxLayout* glSectionLayout = new QVBoxLayout;
+    QHBoxLayout* glTopLayout = new QHBoxLayout;
     groupListLbl = new QLabel("Наборы:");
-    groupListWdg = new QListWidget;
+    addGroupBtn = new QPushButton("+ добавить");
+    glTopLayout->addWidget(groupListLbl);
+    glTopLayout->addWidget(addGroupBtn);
+    groupListWgt = new QListWidget;
+    connect(addGroupBtn, SIGNAL( clicked() ), SLOT(onAddGroupBtnClicked()));
 
     glSection->setMaximumWidth(250);
-    glSectionLayout->addWidget(groupListLbl);
-    glSectionLayout->addWidget(groupListWdg);
+    glSectionLayout->addItem(glTopLayout);
+    glSectionLayout->addWidget(groupListWgt);
     glSection->setLayout(glSectionLayout);
 
     layout()->addWidget(glSection);
@@ -48,15 +55,24 @@ void GroupListPage::initWordListSection()
     wordInputWgt->setLayout(wiLayout);
     wlSection->setLayout(wlSectionLayout);
 
-    wordListWdg = new WordListWidget;
+    wordListWgt = new WordListWidget;
 
     wlSectionLayout->addWidget(wordInputWgt);
-    wlSectionLayout->addWidget(wordListWdg);
+    wlSectionLayout->addWidget(wordListWgt);
 
     layout()->addWidget(wlSection);
 }
 
 void GroupListPage::onWordInputReturnPressed()
 {
-    wordListWdg->appendWord(wordInput->text());
+    wordListWgt->appendWord(wordInput->text());
+    wordInput->clear();
+}
+
+void GroupListPage::onAddGroupBtnClicked()
+{
+    GroupListItem* glItem = new GroupListItem;
+    QListWidgetItem* item = new QListWidgetItem( groupListWgt );
+    item->setSizeHint( glItem->sizeHint() );
+    groupListWgt->setItemWidget( item, glItem );
 }

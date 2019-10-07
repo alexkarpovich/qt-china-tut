@@ -27,3 +27,8 @@ void MainWindow::initWorkspace()
     pagesWidget->setCurrentIndex(pageIndex);
 }
 
+void MainWindow::setDbManager(DbManager *dbManager)
+{
+    m_db = dbManager;
+}
+
