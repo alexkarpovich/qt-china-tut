@@ -1,6 +1,17 @@
+#include "dbmanager.h"
 #include "grouplistitem.h"
 
 #include <QHBoxLayout>
+
+Group *GroupListItem::getGroup() const
+{
+    return group;
+}
+
+void GroupListItem::setGroup(Group *value)
+{
+    group = value;
+}
 
 GroupListItem::GroupListItem(QWidget *parent) : QWidget(parent)
 {
@@ -20,16 +31,18 @@ GroupListItem::GroupListItem(QWidget *parent) : QWidget(parent)
 
 void GroupListItem::onGroupNameInputReturnPressed()
 {
-    groupName = groupNameInput->text();
-    groupNameLbl->setText(groupName);
+    Group* gr = DbManager::insertGroup(groupNameInput->text());
+    setGroup(gr);
+    groupNameLbl->setText(group->getName());
     groupNameInput->hide();
     groupNameLbl->show();
+
 
 }
 
 void GroupListItem::onGroupNameLblDoubleClicked()
 {
-    groupNameInput->setText(groupName);
+    groupNameInput->setText(group->getName());
     groupNameLbl->hide();
     groupNameInput->show();
 }

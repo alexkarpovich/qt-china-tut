@@ -23,6 +23,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     models/group.cpp \
+    models/groupword.cpp \
+    models/wort.cpp \
     shared/clickablelabel.cpp \
     wordlistitem.cpp \
     wordlistwidget.cpp
@@ -34,6 +36,8 @@ HEADERS += \
     grouplistwidget.h \
     mainwindow.h \
     models/group.h \
+    models/groupword.h \
+    models/wort.h \
     shared/clickablelabel.h \
     wordlistitem.h \
     wordlistwidget.h

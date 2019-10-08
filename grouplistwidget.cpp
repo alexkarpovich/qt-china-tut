@@ -10,7 +10,7 @@ GroupListWidget::GroupListWidget(QWidget* parent)
     groupList = DbManager::getAllGroups();
 }
 
-void GroupListWidget::addGroup()
+void GroupListWidget::addGroup(const QString& name = "")
 {
     GroupListItem* glItem = new GroupListItem;
     QListWidgetItem* item = new QListWidgetItem(this);

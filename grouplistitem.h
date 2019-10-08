@@ -4,13 +4,14 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QWidget>
+#include <models/group.h>
 #include "shared/clickablelabel.h"
 
 class GroupListItem : public QWidget
 {
     Q_OBJECT
     bool isEditing = true;
-    QString groupName;
+    Group *group;
     QWidget* groupNameWdg;
     QLineEdit* groupNameInput;
     ClickableLabel* groupNameLbl;
@@ -18,6 +19,9 @@ class GroupListItem : public QWidget
 
 public:
     explicit GroupListItem(QWidget *parent = nullptr);    
+
+    Group *getGroup() const;
+    void setGroup(Group *value);
 
 signals:
 

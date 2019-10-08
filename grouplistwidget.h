@@ -12,7 +12,7 @@ class GroupListWidget : public QListWidget
     QList<Group*> groupList;
 public:
     explicit GroupListWidget(QWidget *parent = nullptr);
-    void addGroup();
+    void addGroup(const QString& name);
 
 signals:
 
