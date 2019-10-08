@@ -22,6 +22,7 @@ SOURCES += \
     grouplistwidget.cpp \
     main.cpp \
     mainwindow.cpp \
+    models/group.cpp \
     shared/clickablelabel.cpp \
     wordlistitem.cpp \
     wordlistwidget.cpp
@@ -32,6 +33,7 @@ HEADERS += \
     grouplistpage.h \
     grouplistwidget.h \
     mainwindow.h \
+    models/group.h \
     shared/clickablelabel.h \
     wordlistitem.h \
     wordlistwidget.h

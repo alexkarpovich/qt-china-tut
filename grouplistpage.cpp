@@ -10,7 +10,10 @@ GroupListPage::GroupListPage(QWidget *parent) : QWidget(parent)
 
 void GroupListPage::initLayout()
 {
-    setLayout(new QHBoxLayout);
+    QHBoxLayout* rootLayout = new QHBoxLayout;
+    rootLayout->setSpacing(0);
+    rootLayout->setMargin(0);
+    setLayout(rootLayout);
     initGroupListSection();
     initWordListSection();
 }
@@ -19,12 +22,16 @@ void GroupListPage::initGroupListSection()
 {
     QWidget* glSection = new QWidget;
     QVBoxLayout* glSectionLayout = new QVBoxLayout;
+    glSectionLayout->setSpacing(0);
+    glSectionLayout->setMargin(0);
     QHBoxLayout* glTopLayout = new QHBoxLayout;
+    glTopLayout->setMargin(3);
     groupListLbl = new QLabel("Наборы:");
     addGroupBtn = new QPushButton("+ добавить");
     glTopLayout->addWidget(groupListLbl);
     glTopLayout->addWidget(addGroupBtn);
-    groupListWgt = new QListWidget;
+    groupListWgt = new GroupListWidget;
+    groupListWgt->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
     connect(addGroupBtn, SIGNAL( clicked() ), SLOT(onAddGroupBtnClicked()));
 
     glSection->setMaximumWidth(250);

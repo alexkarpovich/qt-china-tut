@@ -3,9 +3,9 @@
 
 #include <QLabel>
 #include <QLineEdit>
-#include <QListWidget>
 #include <QPushButton>
 #include <QWidget>
+#include "grouplistwidget.h"
 #include "wordlistwidget.h"
 
 class GroupListPage : public QWidget
@@ -13,7 +13,7 @@ class GroupListPage : public QWidget
     Q_OBJECT
     QLabel* groupListLbl;
     QPushButton* addGroupBtn;
-    QListWidget* groupListWgt;
+    GroupListWidget* groupListWgt;
     QLineEdit* wordInput;
     WordListWidget* wordListWgt;
 

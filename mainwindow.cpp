@@ -9,9 +9,12 @@ MainWindow::MainWindow(QWidget *parent)
     rootWidget = new QWidget(this);
     pagesWidget = new QStackedWidget;
     QHBoxLayout* rootLayout = new QHBoxLayout;
-    rootLayout->addWidget(pagesWidget);
-    rootWidget->setFixedSize(640, 480);
+    QHBoxLayout* pagesLayout = new QHBoxLayout;
+    pagesLayout->addWidget(pagesWidget);
+    rootLayout->addItem(pagesLayout);
+    rootLayout->setMargin(0);
     rootWidget->setLayout(rootLayout);
+    resize(640, 480);
     setCentralWidget(rootWidget);
     initWorkspace();
 }

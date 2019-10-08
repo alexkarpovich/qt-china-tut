@@ -3,6 +3,7 @@
 
 #include <QSqlDatabase>
 #include <QString>
+#include "models/group.h"
 
 class DbManager
 {
@@ -10,6 +11,7 @@ class DbManager
 public:
     DbManager(const QString& path);
     bool openConnection();
+    static QList<Group*> getAllGroups();
 };
 
 #endif // DBMANAGER_H
