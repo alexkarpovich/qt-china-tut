@@ -4,7 +4,7 @@
 #include <QListWidget>
 #include <QWidget>
 
-#include <models/group.h>
+#include <entities/group.h>
 
 class GroupListWidget : public QListWidget
 {
@@ -12,7 +12,7 @@ class GroupListWidget : public QListWidget
     QList<Group*> groupList;
 public:
     explicit GroupListWidget(QWidget *parent = nullptr);
-    void addGroup(const QString& name);
+    void addGroup(Group* gr = nullptr);
 
 signals:
 

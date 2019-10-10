@@ -1,48 +1,38 @@
-#include "dbmanager.h"
+#include <QApplication>
+#include <QDebug>
+#include <QPushButton>
+#include <QStyleOptionViewItemV4>
+#include <models/grouplistmodel.h>
+#include <models/grouplistmodel.h>
 #include "grouplistitem.h"
 
-#include <QHBoxLayout>
-
-Group *GroupListItem::getGroup() const
+GroupListItem::GroupListItem()
 {
-    return group;
-}
-
-void GroupListItem::setGroup(Group *value)
-{
-    group = value;
-}
-
-GroupListItem::GroupListItem(QWidget *parent) : QWidget(parent)
-{
-    QHBoxLayout* rootLayout = new QHBoxLayout;
-    rootLayout->setMargin(5);
-    groupNameInput = new QLineEdit;
-    groupNameLbl = new ClickableLabel;
-    removeGroupBtn = new QPushButton("✕");
-    groupNameLbl->hide();
-    rootLayout->addWidget(groupNameLbl);
-    rootLayout->addWidget(groupNameInput);
-    rootLayout->addWidget(removeGroupBtn);
-    connect(groupNameLbl, SIGNAL(doubleClicked()), SLOT(onGroupNameLblDoubleClicked()));
-    connect(groupNameInput, SIGNAL(returnPressed()), SLOT(onGroupNameInputReturnPressed()));
-    setLayout(rootLayout);
-}
-
-void GroupListItem::onGroupNameInputReturnPressed()
-{
-    Group* gr = DbManager::insertGroup(groupNameInput->text());
-    setGroup(gr);
-    groupNameLbl->setText(group->getName());
-    groupNameInput->hide();
-    groupNameLbl->show();
-
 
 }
 
-void GroupListItem::onGroupNameLblDoubleClicked()
+GroupListItem::~GroupListItem()
 {
-    groupNameInput->setText(group->getName());
-    groupNameLbl->hide();
-    groupNameInput->show();
+}
+
+//alocate each item size in listview.
+QSize GroupListItem::sizeHint(const QStyleOptionViewItem &  option ,
+                              const QModelIndex & index) const
+{
+//    QIcon icon = qvariant_cast<QIcon>(index.data(IconRole));
+//    QSize iconsize = icon.actualSize(option.decorationSize);
+//    QFont font = QApplication::font();
+//    QFontMetrics fm(font);
+
+    return(QSize(24, 24));
+
+}
+void GroupListItem::paint(QPainter *painter, const QStyleOptionViewItem &option,
+                           const QModelIndex &index) const
+{
+
+    if (option.state & QStyle::State_Selected)
+            painter->fillRect(option.rect, option.palette.highlight());
+        QWidget *widget = new QPushButton("bonjour");
+        widget->render(painter, QPoint(option.rect.x() + 20, option.rect.y() + 3), QRegion(option.rect));
 }

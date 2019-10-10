@@ -29,7 +29,7 @@ QList<Group*> DbManager::getAllGroups()
     return groupList;
 }
 
-Wort *DbManager::insertWord(const QString &zh, const QString &ru = "", const QString &transcription = "", int status = 0)
+Word *DbManager::insertWord(const QString &zh, const QString &ru = "", const QString &transcription = "", int status = 0)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO word (zh, ru, transcription, status) VALUES (:zh, :ru, :transcription, :status)");
@@ -39,7 +39,7 @@ Wort *DbManager::insertWord(const QString &zh, const QString &ru = "", const QSt
     query.bindValue(":status", status);
 
     if (query.exec()) {
-        Wort *word = new Wort;
+        Word *word = new Word;
         word->setId(query.lastInsertId().toInt());
         word->setZh(zh);
         word->setRu(ru);
@@ -91,7 +91,7 @@ Group *DbManager::getOrInsertGroup(const QString &name)
     return nullptr;
 }
 
-Wort *DbManager::getOrInsertWord(const QString &zh)
+Word *DbManager::getOrInsertWord(const QString &zh)
 {
     QSqlQuery query;
     query.prepare("SELECT * FROM words WHERE zh=(:zh)");
@@ -99,7 +99,7 @@ Wort *DbManager::getOrInsertWord(const QString &zh)
 
     if (query.exec()) {
         if (query.next()) {
-            Wort* word = new Wort;
+            Word* word = new Word;
             word->setId(query.value(0).toInt());
             word->setZh(zh);
             word->setRu(query.value(2).toString());
@@ -108,7 +108,7 @@ Wort *DbManager::getOrInsertWord(const QString &zh)
 
             return word;
         } else {
-            Wort* word = insertWord(zh);
+            Word* word = insertWord(zh);
             return word;
         }
     }
@@ -116,19 +116,20 @@ Wort *DbManager::getOrInsertWord(const QString &zh)
     return nullptr;
 }
 
-GroupWord *DbManager::addGroupWord(const QString &text)
+GroupWord *DbManager::addGroupWord(int groupId, const QString &text)
 {
-    int wordId;
+    Word *word = getOrInsertWord(text);
     QSqlQuery query;
-    query.prepare("SELECT * FROM words WHERE name=(:name)");
-    query.bindValue(":name", text);
+    query.prepare("INSERT INTO group_words (group_id, word_id) VALUES (:groupId, :wordId)");
+    query.bindValue(":groupId", groupId);
+    query.bindValue(":wordId", word->getId());
 
     if (query.exec()) {
-        if (query.next()) {
-            wordId = query.value(0).toInt();
-        } else {
-            query.prepare("INSERT");
-        }
+
+//        GroupWord *groupWord = new GroupWord;
+//        groupWord->setWord(word);
+
+//        return groupWord;
     }
 
     return nullptr;

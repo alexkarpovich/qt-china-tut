@@ -30,13 +30,16 @@ void GroupListPage::initGroupListSection()
     addGroupBtn = new QPushButton("+ добавить");
     glTopLayout->addWidget(groupListLbl);
     glTopLayout->addWidget(addGroupBtn);
-    groupListWgt = new GroupListWidget;
-    groupListWgt->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
+    groupListView = new QListView;
+    groupListModel = new GroupListModel();
+    groupListView->setItemDelegate(new GroupListItem());
+    groupListView->setModel(groupListModel);
+    groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
     connect(addGroupBtn, SIGNAL( clicked() ), SLOT(onAddGroupBtnClicked()));
 
     glSection->setMaximumWidth(250);
     glSectionLayout->addItem(glTopLayout);
-    glSectionLayout->addWidget(groupListWgt);
+    glSectionLayout->addWidget(groupListView);
     glSection->setLayout(glSectionLayout);
 
     layout()->addWidget(glSection);
@@ -78,8 +81,8 @@ void GroupListPage::onWordInputReturnPressed()
 
 void GroupListPage::onAddGroupBtnClicked()
 {
-    GroupListItem* glItem = new GroupListItem;
-    QListWidgetItem* item = new QListWidgetItem( groupListWgt );
-    item->setSizeHint( glItem->sizeHint() );
-    groupListWgt->setItemWidget( item, glItem );
+    Group *group = new Group;
+    group->setId(1);
+    group->setName("Test Group");
+    groupListModel->addGroup(group);
 }

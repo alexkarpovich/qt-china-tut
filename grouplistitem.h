@@ -1,33 +1,26 @@
 #ifndef GROUPLISTITEM_H
 #define GROUPLISTITEM_H
 
-#include <QLineEdit>
-#include <QPushButton>
-#include <QWidget>
-#include <models/group.h>
-#include "shared/clickablelabel.h"
+#include <QStyledItemDelegate>
+#include <QtGui>
 
-class GroupListItem : public QWidget
-{
-    Q_OBJECT
-    bool isEditing = true;
-    Group *group;
-    QWidget* groupNameWdg;
-    QLineEdit* groupNameInput;
-    ClickableLabel* groupNameLbl;
-    QPushButton* removeGroupBtn;
-
+class GroupListItem : public QStyledItemDelegate
+    {
 public:
-    explicit GroupListItem(QWidget *parent = nullptr);    
+    GroupListItem();
+    virtual ~GroupListItem();
 
-    Group *getGroup() const;
-    void setGroup(Group *value);
+    enum datarole {
+        headerTextRole = Qt::UserRole + 100,
+        subHeaderTextrole = Qt::UserRole + 101
+    };
 
-signals:
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const;
 
-public slots:
-    void onGroupNameInputReturnPressed();
-    void onGroupNameLblDoubleClicked();
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index ) const;
+
 };
 
 #endif // GROUPLISTITEM_H

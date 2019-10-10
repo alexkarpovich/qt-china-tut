@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,27 +17,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     dbmanager.cpp \
+    entities/group.cpp \
+    entities/groupword.cpp \
+    entities/word.cpp \
     grouplistitem.cpp \
     grouplistpage.cpp \
     grouplistwidget.cpp \
     main.cpp \
     mainwindow.cpp \
-    models/group.cpp \
-    models/groupword.cpp \
-    models/wort.cpp \
+    models/grouplistmodel.cpp \
     shared/clickablelabel.cpp \
     wordlistitem.cpp \
     wordlistwidget.cpp
 
 HEADERS += \
     dbmanager.h \
+    entities/group.h \
+    entities/groupword.h \
+    entities/word.h \
     grouplistitem.h \
     grouplistpage.h \
     grouplistwidget.h \
     mainwindow.h \
-    models/group.h \
-    models/groupword.h \
-    models/wort.h \
+    models/grouplistmodel.h \
     shared/clickablelabel.h \
     wordlistitem.h \
     wordlistwidget.h

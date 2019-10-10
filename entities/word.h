@@ -1,9 +1,9 @@
-#ifndef WORT_H
-#define WORT_H
+#ifndef WORD_H
+#define WORD_H
 
 #include <QString>
 
-class Wort
+class Word
 {
     int id;
     QString zh;
@@ -11,7 +11,7 @@ class Wort
     QString transcription;
     int status;
 public:
-    Wort();
+    Word();
     int getId() const;
     void setId(int value);
     QString getZh() const;
@@ -24,4 +24,4 @@ public:
     void setStatus(int value);
 };
 
-#endif // WORT_H
+#endif // WORD_H

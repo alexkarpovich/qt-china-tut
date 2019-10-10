@@ -1,11 +1,11 @@
-#include "models/groupword.h"
+#include "groupword.h"
 
-Wort *GroupWord::getWord() const
+Word *GroupWord::getWord() const
 {
     return word;
 }
 
-void GroupWord::setWord(Wort *value)
+void GroupWord::setWord(Word *value)
 {
     word = value;
 }

@@ -1,23 +1,23 @@
-#ifndef WORD_H
-#define WORD_H
+#ifndef GROUPWORD_H
+#define GROUPWORD_H
 
 #include <QString>
-#include "models/group.h"
-#include "models/wort.h"
+#include "group.h"
+#include "word.h"
 
 class GroupWord
 {
     int id;
     Group* group;
-    Wort* word;
+    Word* word;
 public:
     GroupWord();
     int getId() const;
     void setId(int value);
     Group *getGroup() const;
     void setGroup(Group *value);
-    Wort *getWord() const;
-    void setWord(Wort *value);
+    Word *getWord() const;
+    void setWord(Word *value);
 };
 
-#endif // WORD_H
+#endif // GROUPWORD_H
