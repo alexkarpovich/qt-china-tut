@@ -1,38 +1,69 @@
-#include <QApplication>
-#include <QDebug>
+#include <models/grouplistmodel.h>
 #include <QPushButton>
-#include <QStyleOptionViewItemV4>
-#include <models/grouplistmodel.h>
-#include <models/grouplistmodel.h>
+#include <QSpinBox>
+#include <QStylePainter>
+#include <QApplication>
 #include "grouplistitem.h"
 
-GroupListItem::GroupListItem()
+GroupListItem::GroupListItem(QObject *parent)
+    : QStyledItemDelegate(parent)
 {
 
 }
 
-GroupListItem::~GroupListItem()
+QWidget *GroupListItem::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    QSpinBox *editor = new QSpinBox(parent);
+    editor->setFrame(false);
+    editor->setMinimum(0);
+    editor->setMaximum(100);
+
+    return editor;
 }
 
-//alocate each item size in listview.
-QSize GroupListItem::sizeHint(const QStyleOptionViewItem &  option ,
-                              const QModelIndex & index) const
+void GroupListItem::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-//    QIcon icon = qvariant_cast<QIcon>(index.data(IconRole));
-//    QSize iconsize = icon.actualSize(option.decorationSize);
-//    QFont font = QApplication::font();
-//    QFontMetrics fm(font);
+    int value = index.data(GroupListModel::IdRole).toInt();
 
-    return(QSize(24, 24));
-
+    QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
+    spinBox->setValue(value);
 }
-void GroupListItem::paint(QPainter *painter, const QStyleOptionViewItem &option,
-                           const QModelIndex &index) const
+
+void GroupListItem::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
+    QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
+    spinBox->interpretText();
+    int value = spinBox->value();
 
-    if (option.state & QStyle::State_Selected)
-            painter->fillRect(option.rect, option.palette.highlight());
-        QWidget *widget = new QPushButton("bonjour");
-        widget->render(painter, QPoint(option.rect.x() + 20, option.rect.y() + 3), QRegion(option.rect));
+    model->setData(index, value, GroupListModel::IdRole);
 }
+
+void GroupListItem::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    editor->setGeometry(option.rect);
+}
+
+QSize GroupListItem::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    return QSize(QStyledItemDelegate::sizeHint(option, index).width(), 48);
+}
+
+void GroupListItem::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    if (option.state & QStyle::State_Selected) {
+        painter->fillRect(option.rect, option.palette.highlight());
+    }
+    QFont font = painter->font();
+    font.setPointSize(10);
+    font.setBold(true);
+    painter->setFont(font);
+
+    painter->drawText(option.rect.left() + 10, option.rect.top() + 20, index.data().toString());
+
+    font.setPointSize(8);
+    font.setBold(false);
+    painter->setFont(font);
+    painter->drawText(option.rect.left() + 10, option.rect.top() + 40, "10 items");
+}
+
+

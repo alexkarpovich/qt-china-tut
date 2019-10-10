@@ -27,6 +27,25 @@ int GroupListModel::rowCount(const QModelIndex &parent) const
     return groups.size();
 }
 
+Qt::ItemFlags GroupListModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return Qt::ItemIsEnabled;
+
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+}
+
+bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (index.isValid() && role == Qt::EditRole) {
+
+         //groups.replace(index.row(), value.toString());
+         emit dataChanged(index, index);
+         return true;
+     }
+     return false;
+}
+
 void GroupListModel::addGroup(Group *gr)
 {
     beginResetModel();

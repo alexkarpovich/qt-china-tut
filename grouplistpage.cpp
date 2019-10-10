@@ -1,4 +1,5 @@
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QListWidgetItem>
 #include "grouplistitem.h"
 #include "grouplistpage.h"
@@ -10,42 +11,56 @@ GroupListPage::GroupListPage(QWidget *parent) : QWidget(parent)
 
 void GroupListPage::initLayout()
 {
-    QHBoxLayout* rootLayout = new QHBoxLayout;
+    QVBoxLayout* rootLayout = new QVBoxLayout;
     rootLayout->setSpacing(0);
     rootLayout->setMargin(0);
     setLayout(rootLayout);
-    initGroupListSection();
-    initWordListSection();
+    buildControlsSection();
+    buildWorkSection();
 }
 
-void GroupListPage::initGroupListSection()
+void GroupListPage::buildControlsSection()
+{
+    QHBoxLayout *controlsLayout = new QHBoxLayout;
+    addGroupBtn = new QPushButton("+ набор");
+    controlsLayout->addWidget(addGroupBtn);
+    QVBoxLayout* rootLayout = qobject_cast<QVBoxLayout*>(layout());
+    rootLayout->addLayout(controlsLayout);
+}
+
+void GroupListPage::buildWorkSection()
+{
+    QHBoxLayout *workSectionLayout = new QHBoxLayout;
+    workSectionLayout->addWidget(buildGroupListSection());
+    workSectionLayout->addWidget(buildWordListSection());
+
+    QVBoxLayout* rootLayout = qobject_cast<QVBoxLayout*>(layout());
+    rootLayout->addLayout(workSectionLayout);
+}
+
+QWidget *GroupListPage::buildGroupListSection()
 {
     QWidget* glSection = new QWidget;
     QVBoxLayout* glSectionLayout = new QVBoxLayout;
     glSectionLayout->setSpacing(0);
     glSectionLayout->setMargin(0);
-    QHBoxLayout* glTopLayout = new QHBoxLayout;
-    glTopLayout->setMargin(3);
-    groupListLbl = new QLabel("Наборы:");
-    addGroupBtn = new QPushButton("+ добавить");
-    glTopLayout->addWidget(groupListLbl);
-    glTopLayout->addWidget(addGroupBtn);
     groupListView = new QListView;
     groupListModel = new GroupListModel();
-    groupListView->setItemDelegate(new GroupListItem());
+    groupListView->setItemDelegate(new GroupListItem);
+    groupListView->setEditTriggers(QAbstractItemView::DoubleClicked
+                                    | QAbstractItemView::SelectedClicked);
     groupListView->setModel(groupListModel);
-    groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
-    connect(addGroupBtn, SIGNAL( clicked() ), SLOT(onAddGroupBtnClicked()));
+    //groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
+    connect(addGroupBtn, SIGNAL(clicked()), SLOT(onAddGroupBtnClicked()));
 
     glSection->setMaximumWidth(250);
-    glSectionLayout->addItem(glTopLayout);
     glSectionLayout->addWidget(groupListView);
     glSection->setLayout(glSectionLayout);
 
-    layout()->addWidget(glSection);
+    return glSection;
 }
 
-void GroupListPage::initWordListSection()
+QWidget *GroupListPage::buildWordListSection()
 {
     QWidget* wlSection = new QWidget;
     QVBoxLayout* wlSectionLayout = new QVBoxLayout;
@@ -70,7 +85,7 @@ void GroupListPage::initWordListSection()
     wlSectionLayout->addWidget(wordInputWgt);
     wlSectionLayout->addWidget(wordListWgt);
 
-    layout()->addWidget(wlSection);
+    return wlSection;
 }
 
 void GroupListPage::onWordInputReturnPressed()

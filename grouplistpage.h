@@ -7,21 +7,21 @@
 #include <QListView>
 #include <QWidget>
 #include <models/grouplistmodel.h>
-#include "grouplistwidget.h"
 #include "wordlistwidget.h"
 
 class GroupListPage : public QWidget
 {
     Q_OBJECT
-    QLabel* groupListLbl;
     QPushButton* addGroupBtn;
     GroupListModel* groupListModel;
     QListView* groupListView;
     QLineEdit* wordInput;
     WordListWidget* wordListWgt;
 
-    void initGroupListSection();
-    void initWordListSection();
+    void buildControlsSection();
+    void buildWorkSection();
+    QWidget *buildGroupListSection();
+    QWidget *buildWordListSection();
 public:
     explicit GroupListPage(QWidget *parent = nullptr);
     void initLayout();

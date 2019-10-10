@@ -22,7 +22,6 @@ SOURCES += \
     entities/word.cpp \
     grouplistitem.cpp \
     grouplistpage.cpp \
-    grouplistwidget.cpp \
     main.cpp \
     mainwindow.cpp \
     models/grouplistmodel.cpp \
@@ -37,7 +36,6 @@ HEADERS += \
     entities/word.h \
     grouplistitem.h \
     grouplistpage.h \
-    grouplistwidget.h \
     mainwindow.h \
     models/grouplistmodel.h \
     shared/clickablelabel.h \

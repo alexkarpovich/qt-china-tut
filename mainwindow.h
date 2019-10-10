@@ -14,10 +14,12 @@ class MainWindow : public QMainWindow
     QWidget* rootWidget;
     QStackedWidget* pagesWidget;
     int pageIndex = 0;
+
+    void initPalette();
+    void initWorkspace();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void initWorkspace();
     void setDbManager(DbManager* dbManager);
 };
 #endif // MAINWINDOW_H

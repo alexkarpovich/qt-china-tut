@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     rootWidget = new QWidget(this);
-    pagesWidget = new QStackedWidget;
+    pagesWidget = new QStackedWidget;    
     QHBoxLayout* rootLayout = new QHBoxLayout;
     QHBoxLayout* pagesLayout = new QHBoxLayout;
     pagesLayout->addWidget(pagesWidget);
@@ -16,11 +16,29 @@ MainWindow::MainWindow(QWidget *parent)
     rootWidget->setLayout(rootLayout);
     resize(640, 480);
     setCentralWidget(rootWidget);
+    initPalette();
     initWorkspace();
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::initPalette()
+{
+    QPalette pal(palette());
+    QBrush brush(QColor(70, 70, 70, 255));
+    brush.setStyle(Qt::SolidPattern);
+    pal.setBrush(QPalette::Active, QPalette::Base, brush);
+    QBrush brush1(QColor(50, 50, 50, 255));
+    brush1.setStyle(Qt::SolidPattern);
+    pal.setBrush(QPalette::Active, QPalette::Window, brush1);
+    pal.setBrush(QPalette::Inactive, QPalette::Base, brush);
+    pal.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+    pal.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+    pal.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+    pal.setBrush(QPalette::Active, QPalette::Button, brush);
+    setPalette(pal);
 }
 
 void MainWindow::initWorkspace()
