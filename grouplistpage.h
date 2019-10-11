@@ -6,17 +6,18 @@
 #include <QPushButton>
 #include <QListView>
 #include <QWidget>
-#include <models/grouplistmodel.h>
-#include "wordlistwidget.h"
+#include <models/group_list_model.h>
+#include <models/word_list_model.h>
 
 class GroupListPage : public QWidget
 {
     Q_OBJECT
     QPushButton* addGroupBtn;
-    GroupListModel* groupListModel;
-    QListView* groupListView;
+    GroupListModel *groupListModel;
+    WordListModel *wordListModel;
+    QListView *groupListView;
+    QListView *wordListView;
     QLineEdit* wordInput;
-    WordListWidget* wordListWgt;
 
     void buildControlsSection();
     void buildWorkSection();
@@ -26,13 +27,14 @@ class GroupListPage : public QWidget
     void initializeWidgets();
 
 public:
-    explicit GroupListPage(QWidget *parent = nullptr);
+    explicit GroupListPage(QWidget *parent = nullptr);    
 
 signals:
 
 public slots:
     void onWordInputReturnPressed();
     void onAddGroupBtnClicked();
+    void onGroupSelectionChanged(const QItemSelection& selection);
 };
 
 #endif // GROUPLISTPAGE_H

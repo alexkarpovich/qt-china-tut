@@ -18,29 +18,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     dbmanager.cpp \
     entities/group.cpp \
-    entities/groupword.cpp \
     entities/word.cpp \
-    grouplistitem.cpp \
+    group_list_item.cpp \
     grouplistpage.cpp \
     main.cpp \
     mainwindow.cpp \
-    models/grouplistmodel.cpp \
+    models/group_list_model.cpp \
+    models/word_list_model.cpp \
     shared/clickablelabel.cpp \
-    wordlistitem.cpp \
-    wordlistwidget.cpp
+    word_list_item.cpp
 
 HEADERS += \
     dbmanager.h \
     entities/group.h \
-    entities/groupword.h \
     entities/word.h \
-    grouplistitem.h \
+    group_list_item.h \
     grouplistpage.h \
     mainwindow.h \
-    models/grouplistmodel.h \
+    models/group_list_model.h \
+    models/word_list_model.h \
     shared/clickablelabel.h \
-    wordlistitem.h \
-    wordlistwidget.h
+    word_list_item.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

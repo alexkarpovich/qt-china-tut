@@ -1,25 +1,28 @@
-#ifndef GROUPLISTMODEL_H
-#define GROUPLISTMODEL_H
+#ifndef WORDLISTMODEL_H
+#define WORDLISTMODEL_H
 
 #include <QList>
 #include <QHash>
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractListModel>
-#include <entities/group.h>
+#include <entities/word.h>
 
 
-class GroupListModel : public QAbstractListModel
+class WordListModel : public QAbstractListModel
 {
     Q_OBJECT
-    QList<Group*> groups;
+    QList<Word*> words;
 public:
-    explicit GroupListModel(QObject *parent = nullptr);
+    explicit WordListModel(QObject *parent = nullptr);
 
-    enum groupRoles {
-        NameRole = Qt::DisplayRole,
+    enum wordRoles {
+        ZhRole = Qt::DisplayRole,
         IdRole = Qt::UserRole + 1,
-        WordCountRole = Qt::UserRole + 2
+        RuRole = Qt::UserRole + 2,
+        TranscriptionRole = Qt::UserRole + 3,
+        StatusRole = Qt::UserRole + 4,
+        GroupIdRole = Qt::UserRole + 5
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;
@@ -27,9 +30,10 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value,
               int role = Qt::EditRole);
 public slots:
-    void addGroup(Group* gr);
+    void addWord(Word* wrd);
+    void setWords(QList<Word*> _words);
 private:
     QHash<int, QByteArray> roleNames() const;
 };
 
-#endif // GROUPLISTMODEL_H
+#endif // WORDLISTMODEL_H

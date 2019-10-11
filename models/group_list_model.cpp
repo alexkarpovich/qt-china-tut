@@ -1,4 +1,4 @@
-#include "grouplistmodel.h"
+#include "group_list_model.h"
 
 #include <dbmanager.h>
 
@@ -43,7 +43,7 @@ bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, in
 
         Group *gr = groups.at(index.row());
         gr->setName(value.toString());
-        gr = DbManager::updateOrInsertGroup(gr);
+        gr = DbManager::saveGroup(gr);
         groups.replace(index.row(), gr);
         emit dataChanged(index, index);
         return true;
@@ -59,6 +59,13 @@ void GroupListModel::addGroup(Group *gr)
 
     groups << gr;
 
+    endResetModel();
+}
+
+void GroupListModel::setGroups(QList<Group *> _groups)
+{
+    beginResetModel();
+    groups = _groups;
     endResetModel();
 }
 

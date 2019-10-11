@@ -4,7 +4,6 @@
 #include <QSqlDatabase>
 #include <QString>
 #include "entities/group.h"
-#include "entities/groupword.h"
 #include "entities/word.h"
 
 class DbManager
@@ -14,12 +13,14 @@ public:
     DbManager(const QString& path);
     bool openConnection();
     static QList<Group*> getAllGroups();
+    static QList<Word *> getAllGroupWords(int groupId);
     static Word *insertWord(const QString& zh, const QString& ru, const QString& transcription, int status);
     static Group *insertGroup(const QString& name);
+    static Word *insertGroupWord(int groupId, const QString &zh);
     static Group* getOrInsertGroup(const QString& name);
     static Word *getOrInsertWord(const QString& zh);
-    static GroupWord *addGroupWord(int groupId, const QString& text);
-    static Group *updateOrInsertGroup(Group *gr);
+    static Group *saveGroup(Group *gr);
+    static Word *saveGroupWord(int groupId, Word *wrd);
 };
 
 #endif // DBMANAGER_H

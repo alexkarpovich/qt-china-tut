@@ -50,7 +50,17 @@ void Word::setStatus(int value)
     status = value;
 }
 
+int Word::getGroupId() const
+{
+    return groupId;
+}
+
+void Word::setGroupId(int value)
+{
+    groupId = value;
+}
+
 Word::Word()
 {
-
+    
 }

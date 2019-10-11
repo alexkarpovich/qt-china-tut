@@ -6,6 +6,7 @@
 class Word
 {
     int id;
+    int groupId;
     QString zh;
     QString ru;
     QString transcription;
@@ -22,6 +23,8 @@ public:
     void setTranscription(const QString &value);
     int getStatus() const;
     void setStatus(int value);
+    int getGroupId() const;
+    void setGroupId(int value);
 };
 
 #endif // WORD_H

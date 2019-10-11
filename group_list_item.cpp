@@ -1,8 +1,8 @@
-#include <models/grouplistmodel.h>
+#include <models/group_list_model.h>
 #include <QLineEdit>
 #include <QStylePainter>
 #include <QApplication>
-#include "grouplistitem.h"
+#include "group_list_item.h"
 
 GroupListItem::GroupListItem(QObject *parent)
     : QStyledItemDelegate(parent)

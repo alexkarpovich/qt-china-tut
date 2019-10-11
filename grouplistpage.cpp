@@ -1,12 +1,15 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QListWidgetItem>
-#include "grouplistitem.h"
+#include "dbmanager.h"
+#include "group_list_item.h"
 #include "grouplistpage.h"
+#include "word_list_item.h"
 
 GroupListPage::GroupListPage(QWidget *parent) : QWidget(parent)
 {
     buildLayout();
+    initializeWidgets();
 }
 
 void GroupListPage::buildLayout()
@@ -52,6 +55,7 @@ QWidget *GroupListPage::buildGroupListSection()
     groupListView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
     groupListView->setModel(groupListModel);
+    connect(groupListView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onGroupSelectionChanged(QItemSelection)));
     //groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
     connect(addGroupBtn, SIGNAL(clicked()), SLOT(onAddGroupBtnClicked()));
 
@@ -83,22 +87,32 @@ QWidget *GroupListPage::buildWordListSection()
     wordInputWgt->setLayout(wiLayout);
     wlSection->setLayout(wlSectionLayout);
 
-    wordListWgt = new WordListWidget;
-
+    wordListView = new QListView;
+    wordListModel = new WordListModel;
+    wordListView->setFrameStyle(QFrame::NoFrame);
+    wordListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    wordListView->setItemDelegate(new WordListItem);
+    wordListView->setEditTriggers(QAbstractItemView::DoubleClicked
+                                    | QAbstractItemView::SelectedClicked);
+    wordListView->setModel(wordListModel);
     wlSectionLayout->addWidget(wordInputWgt);
-    wlSectionLayout->addWidget(wordListWgt);
+    wlSectionLayout->addWidget(wordListView);
 
     return wlSection;
 }
 
 void GroupListPage::initializeWidgets()
 {
-
+    QList<Group*> groups = DbManager::getAllGroups();
+    groupListModel->setGroups(groups);
 }
 
 void GroupListPage::onWordInputReturnPressed()
 {
-    wordListWgt->appendWord(wordInput->text());
+    QModelIndex index = groupListView->currentIndex();
+    int groupId = index.data(GroupListModel::IdRole).toInt();
+    Word *wrd = DbManager::insertGroupWord(groupId, wordInput->text());
+    wordListModel->addWord(wrd);
     wordInput->clear();
 }
 
@@ -107,4 +121,14 @@ void GroupListPage::onAddGroupBtnClicked()
     Group *group = new Group;
     group->setName("<Задайте имя группы>");
     groupListModel->addGroup(group);
+}
+
+void GroupListPage::onGroupSelectionChanged(const QItemSelection& selection)
+{
+    QModelIndex index = selection.indexes().first();
+    int groupId = index.data(GroupListModel::IdRole).toInt();
+    qDebug() << QString("Group selection changed %1").arg(groupId);
+
+    QList<Word*> words = DbManager::getAllGroupWords(groupId);
+    wordListModel->setWords(words);
 }
