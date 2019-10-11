@@ -18,12 +18,15 @@ QList<Group*> DbManager::getAllGroups()
 {
     QSqlQuery query;
     QList<Group*> groupList;
-    query.prepare("SELECT * FROM groups");
+    query.prepare("SELECT gr.id, gr.name, COUNT(gw.word_id) as word_count FROM groups gr "\
+                  "LEFT JOIN group_words gw ON gr.id=gw.group_id "\
+                  "GROUP BY gr.id");
 
     while (query.next()) {
         Group* gr = new Group;
         gr->setId(query.value(0).toInt());
         gr->setName(query.value(1).toString());
+        gr->setWordCount(query.value(2).toInt());
     }
 
     return groupList;
@@ -55,10 +58,13 @@ Word *DbManager::insertWord(const QString &zh, const QString &ru = "", const QSt
 Group *DbManager::insertGroup(const QString &name)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO groups (name) VALUES (:name)");
+    query.prepare("INSERT INTO groups (name) VALUES ((:name))");
     query.bindValue(":name", name);
 
+    qDebug() << QString("insert here %1").arg(name);
+
     if (query.exec()) {
+        qDebug() << "insert done";
         Group* group = new Group;
         group->setId(query.lastInsertId().toInt());
         group->setName(name);
@@ -130,6 +136,35 @@ GroupWord *DbManager::addGroupWord(int groupId, const QString &text)
 //        groupWord->setWord(word);
 
 //        return groupWord;
+    }
+
+    return nullptr;
+}
+
+Group *DbManager::updateOrInsertGroup(Group *gr)
+{
+    QSqlQuery query;
+    query.prepare("SELECT 1 FROM groups WHERE id=:id");
+    query.bindValue(":id", gr->getId());
+
+    qDebug() << QString("I tut %1 %2").arg((QString)gr->getId(), gr->getName());
+
+    if (query.exec()) {
+        qDebug() << "and tut";
+        if (query.next()) {
+            query.prepare("UPDATE groups SET name=(:name) WHERE id=:id");
+            query.bindValue(":id", gr->getId());
+            query.bindValue(":name", gr->getName());
+
+            qDebug() << "and and tut";
+
+            if (query.exec()) {
+                return gr;
+            }
+        } else {
+            qDebug() << "and tut insert";
+            return insertGroup(gr->getName());
+        }
     }
 
     return nullptr;

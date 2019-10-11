@@ -6,10 +6,10 @@
 
 GroupListPage::GroupListPage(QWidget *parent) : QWidget(parent)
 {
-    initLayout();
+    buildLayout();
 }
 
-void GroupListPage::initLayout()
+void GroupListPage::buildLayout()
 {
     QVBoxLayout* rootLayout = new QVBoxLayout;
     rootLayout->setSpacing(0);
@@ -46,6 +46,8 @@ QWidget *GroupListPage::buildGroupListSection()
     glSectionLayout->setMargin(0);
     groupListView = new QListView;
     groupListModel = new GroupListModel();
+    groupListView->setFrameStyle(QFrame::NoFrame);
+    groupListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     groupListView->setItemDelegate(new GroupListItem);
     groupListView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
@@ -66,6 +68,7 @@ QWidget *GroupListPage::buildWordListSection()
     QVBoxLayout* wlSectionLayout = new QVBoxLayout;
     QWidget* wordInputWgt = new QWidget;
     QHBoxLayout* wiLayout = new QHBoxLayout;
+    wiLayout->setMargin(0);
     QSpacerItem* leftSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding);
     QSpacerItem* rightSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding);
     wordInput = new QLineEdit;
@@ -88,6 +91,11 @@ QWidget *GroupListPage::buildWordListSection()
     return wlSection;
 }
 
+void GroupListPage::initializeWidgets()
+{
+
+}
+
 void GroupListPage::onWordInputReturnPressed()
 {
     wordListWgt->appendWord(wordInput->text());
@@ -97,7 +105,6 @@ void GroupListPage::onWordInputReturnPressed()
 void GroupListPage::onAddGroupBtnClicked()
 {
     Group *group = new Group;
-    group->setId(1);
-    group->setName("Test Group");
+    group->setName("<Задайте имя группы>");
     groupListModel->addGroup(group);
 }

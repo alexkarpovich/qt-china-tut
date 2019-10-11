@@ -10,8 +10,20 @@ void Group::setId(int value)
     id = value;
 }
 
+int Group::getWordCount() const
+{
+    return wordCount;
+}
+
+void Group::setWordCount(int value)
+{
+    wordCount = value;
+}
+
 Group::Group()
 {
+    id = 0;
+    wordCount = 0;
 }
 
 QString Group::getName() const

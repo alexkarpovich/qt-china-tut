@@ -18,7 +18,8 @@ public:
 
     enum groupRoles {
         NameRole = Qt::DisplayRole,
-        IdRole = Qt::UserRole + 1
+        IdRole = Qt::UserRole + 1,
+        WordCountRole = Qt::UserRole + 2
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;

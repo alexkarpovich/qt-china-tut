@@ -1,5 +1,7 @@
 #include "grouplistmodel.h"
 
+#include <dbmanager.h>
+
 GroupListModel::GroupListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -37,12 +39,17 @@ Qt::ItemFlags GroupListModel::flags(const QModelIndex &index) const
 
 bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (index.isValid() && role == Qt::EditRole) {
+    if (index.isValid() && role == NameRole) {
 
-         //groups.replace(index.row(), value.toString());
-         emit dataChanged(index, index);
-         return true;
+        Group *gr = groups.at(index.row());
+        gr->setName(value.toString());
+        gr = DbManager::updateOrInsertGroup(gr);
+        groups.replace(index.row(), gr);
+        emit dataChanged(index, index);
+        return true;
+
      }
+
      return false;
 }
 
@@ -60,6 +67,7 @@ QHash<int, QByteArray> GroupListModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
     roles[IdRole] = "id";
+    roles[WordCountRole] = "word count";
 
     return roles;
 }

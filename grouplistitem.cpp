@@ -1,6 +1,5 @@
 #include <models/grouplistmodel.h>
-#include <QPushButton>
-#include <QSpinBox>
+#include <QLineEdit>
 #include <QStylePainter>
 #include <QApplication>
 #include "grouplistitem.h"
@@ -13,29 +12,26 @@ GroupListItem::GroupListItem(QObject *parent)
 
 QWidget *GroupListItem::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QSpinBox *editor = new QSpinBox(parent);
+    QLineEdit *editor = new QLineEdit(parent);
     editor->setFrame(false);
-    editor->setMinimum(0);
-    editor->setMaximum(100);
 
     return editor;
 }
 
 void GroupListItem::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    int value = index.data(GroupListModel::IdRole).toInt();
+    QString value = index.data(GroupListModel::NameRole).toString();
 
-    QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
-    spinBox->setValue(value);
+    QLineEdit *nameEdit = static_cast<QLineEdit*>(editor);
+    nameEdit->setText(value);
 }
 
 void GroupListItem::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
-    spinBox->interpretText();
-    int value = spinBox->value();
+    QLineEdit *nameEdit = static_cast<QLineEdit*>(editor);
+    QString groupName = nameEdit->text();
 
-    model->setData(index, value, GroupListModel::IdRole);
+    model->setData(index, groupName, GroupListModel::NameRole);
 }
 
 void GroupListItem::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -50,6 +46,9 @@ QSize GroupListItem::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 
 void GroupListItem::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    QString name = index.data(GroupListModel::NameRole).toString();
+    int wordCount = index.data(GroupListModel::WordCountRole).toInt();
+
     if (option.state & QStyle::State_Selected) {
         painter->fillRect(option.rect, option.palette.highlight());
     }
@@ -58,12 +57,12 @@ void GroupListItem::paint(QPainter *painter, const QStyleOptionViewItem &option,
     font.setBold(true);
     painter->setFont(font);
 
-    painter->drawText(option.rect.left() + 10, option.rect.top() + 20, index.data().toString());
+    painter->drawText(option.rect.left() + 10, option.rect.top() + 20, name);
 
     font.setPointSize(8);
     font.setBold(false);
     painter->setFont(font);
-    painter->drawText(option.rect.left() + 10, option.rect.top() + 40, "10 items");
+    painter->drawText(option.rect.left() + 10, option.rect.top() + 40, QString("%1 word(s)").arg(wordCount));
 }
 
 

@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
     QStackedWidget* pagesWidget;
     int pageIndex = 0;
 
-    void initPalette();
     void initWorkspace();
 public:
     MainWindow(QWidget *parent = nullptr);

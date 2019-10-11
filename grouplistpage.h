@@ -22,9 +22,11 @@ class GroupListPage : public QWidget
     void buildWorkSection();
     QWidget *buildGroupListSection();
     QWidget *buildWordListSection();
+    void buildLayout();
+    void initializeWidgets();
+
 public:
     explicit GroupListPage(QWidget *parent = nullptr);
-    void initLayout();
 
 signals:
 

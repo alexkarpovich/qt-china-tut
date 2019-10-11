@@ -19,6 +19,7 @@ public:
     static Group* getOrInsertGroup(const QString& name);
     static Word *getOrInsertWord(const QString& zh);
     static GroupWord *addGroupWord(int groupId, const QString& text);
+    static Group *updateOrInsertGroup(Group *gr);
 };
 
 #endif // DBMANAGER_H
