@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractListModel>
-#include <entities/group.h>
+#include <Entities/Group.h>
 
 
 class GroupListModel : public QAbstractListModel

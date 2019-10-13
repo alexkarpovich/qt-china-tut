@@ -1,4 +1,4 @@
-#include "group.h"
+#include "Group.h"
 
 int Group::getId() const
 {

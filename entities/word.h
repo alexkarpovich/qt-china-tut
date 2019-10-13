@@ -12,6 +12,12 @@ class Word
     QString transcription;
     int status;
 public:
+    enum Status {
+        StatusNew = 0,
+        StatusScraped = 1,
+        StatusDeleted = 2
+    };
+
     Word();
     int getId() const;
     void setId(int value);
@@ -25,6 +31,7 @@ public:
     void setStatus(int value);
     int getGroupId() const;
     void setGroupId(int value);
+
 };
 
 #endif // WORD_H

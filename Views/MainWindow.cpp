@@ -1,20 +1,20 @@
-#include "grouplistpage.h"
-#include "mainwindow.h"
-
 #include <QHBoxLayout>
+
+#include "MainWindow.h"
+#include "Views/ManagementView.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     rootWidget = new QWidget(this);
-    pagesWidget = new QStackedWidget;    
+    views = new QStackedWidget;
     QHBoxLayout* rootLayout = new QHBoxLayout;
-    QHBoxLayout* pagesLayout = new QHBoxLayout;
-    pagesLayout->addWidget(pagesWidget);
-    rootLayout->addItem(pagesLayout);
+    QHBoxLayout* viewsLayout = new QHBoxLayout;
+    viewsLayout->addWidget(views);
+    rootLayout->addLayout(viewsLayout);
     rootLayout->setMargin(0);
     rootWidget->setLayout(rootLayout);
-    resize(640, 480);
+    resize(740, 600);
     setCentralWidget(rootWidget);
     initWorkspace();
 }
@@ -25,9 +25,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::initWorkspace()
 {
-    GroupListPage* glPage = new GroupListPage;
-    pagesWidget->addWidget(glPage);
-    pagesWidget->setCurrentIndex(pageIndex);
+    ManagementView* managementView = new ManagementView;
+    views->addWidget(managementView);
+    views->setCurrentIndex(viewState);
 }
 
 void MainWindow::setDbManager(DbManager *dbManager)

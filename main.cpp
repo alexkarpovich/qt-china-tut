@@ -1,12 +1,12 @@
-#include "dbmanager.h"
-#include "mainwindow.h"
-
 #include <QApplication>
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QDir>
 #include <QStyleFactory>
+
+#include "dbmanager.h"
+#include "Views/MainWindow.h"
 
 void initializePalette(QApplication &a) {
     a.setStyle(QStyleFactory::create("fusion"));
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     initializePalette(a);
     QDir appDataLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
-    QString dbFilePath = appDataLocation.filePath("app.db");
+    QString dbFilePath = appDataLocation.filePath("db.sqlite");
 
     if (!appDataLocation.exists()) {
         appDataLocation.mkpath(".");

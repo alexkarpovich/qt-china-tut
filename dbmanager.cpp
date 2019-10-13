@@ -65,7 +65,7 @@ QList<Word *> DbManager::getAllGroupWords(int groupId)
     return wordList;
 }
 
-Word *DbManager::insertWord(const QString &zh, const QString &ru = "", const QString &transcription = "", int status = 0)
+Word *DbManager::insertWord(const QString &zh, const QString &ru = "", const QString &transcription = "", int status = Word::StatusNew)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO words (zh, ru, transcription, status, updated_at) VALUES (:zh, :ru, :transcription, :status, CURRENT_TIMESTAMP)");
@@ -176,7 +176,39 @@ Word *DbManager::getOrInsertWord(const QString &zh)
 
 Word *DbManager::saveGroupWord(int groupId, Word *wrd)
 {
+    QSqlQuery query;
 
+    if (!groupWordExists(groupId, wrd)) {
+        Word *wrd_ = insertGroupWord(groupId, wrd->getZh());
+        wrd->setId(wrd_->getId());
+    }
+
+    query.prepare("UPDATE words SET zh=:zh, ru=:ru, transcription=:transcription, status=:status WHERE id=:id");
+    query.bindValue(":id", wrd->getId());
+    query.bindValue(":zh", wrd->getZh());
+    query.bindValue(":ru", wrd->getRu());
+    query.bindValue(":transcription", wrd->getTranscription());
+    query.bindValue(":status", wrd->getStatus());
+
+    if (query.exec()) {
+        return wrd;
+    }
+
+    return nullptr;
+}
+
+bool DbManager::groupWordExists(int groupId, Word *wrd)
+{
+    QSqlQuery query;
+    query.prepare("SELECT 1 FROM group_words gw "
+                  "LEFT JOIN words w ON w.id=gw.word_id "
+                  "WHERE gw.word_id=:worId AND w.zh=:zh AND gw.group_id=:groupId");
+    query.bindValue(":groupId", groupId);
+    query.bindValue(":wordId", wrd->getId());
+    query.bindValue(":zh", wrd->getZh());
+
+    bool ok = query.exec();
+    return ok && query.next();
 }
 
 Group *DbManager::saveGroup(Group *gr)

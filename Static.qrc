@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/static">
-        <file>app.db</file>
+        <file>db.sqlite</file>
     </qresource>
 </RCC>

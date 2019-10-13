@@ -3,8 +3,8 @@
 
 #include <QSqlDatabase>
 #include <QString>
-#include "entities/group.h"
-#include "entities/word.h"
+#include <Entities/Group.h>
+#include <Entities/Word.h>
 
 class DbManager
 {
@@ -21,6 +21,7 @@ public:
     static Word *getOrInsertWord(const QString& zh);
     static Group *saveGroup(Group *gr);
     static Word *saveGroupWord(int groupId, Word *wrd);
+    static bool groupWordExists(int groupId, Word *wrd);
 };
 
 #endif // DBMANAGER_H

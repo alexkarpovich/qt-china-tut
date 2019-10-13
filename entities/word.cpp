@@ -1,4 +1,4 @@
-#include "word.h"
+#include "Word.h"
 
 int Word::getId() const
 {

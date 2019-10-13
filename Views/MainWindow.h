@@ -10,10 +10,14 @@
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    enum ViewStates {
+        ManagementState = 0
+    };
+
     DbManager* m_db;
     QWidget* rootWidget;
-    QStackedWidget* pagesWidget;
-    int pageIndex = 0;
+    QStackedWidget* views;
+    ViewStates viewState = ManagementState;
 
     void initWorkspace();
 public:
@@ -21,4 +25,5 @@ public:
     ~MainWindow();
     void setDbManager(DbManager* dbManager);
 };
+
 #endif // MAINWINDOW_H

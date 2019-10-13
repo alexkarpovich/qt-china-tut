@@ -1,14 +1,14 @@
-#ifndef WORDLISTITEM_H
-#define WORDLISTITEM_H
+#ifndef GROUPLISTITEMVIEW_H
+#define GROUPLISTITEMVIEW_H
 
 #include <QStyledItemDelegate>
 #include <QtGui>
 
-class WordListItem : public QStyledItemDelegate
+class GroupListItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    WordListItem(QObject *parent = nullptr);
+    GroupListItemDelegate(QObject *parent = nullptr);
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
@@ -30,4 +30,4 @@ public:
 
 };
 
-#endif // WORDLISTITEM_H
+#endif // GROUPLISTITEMVIEW_H

@@ -5,18 +5,18 @@
 #include <QHash>
 #include <QVariant>
 #include <QModelIndex>
-#include <QAbstractListModel>
-#include <entities/word.h>
+#include <QAbstractTableModel>
+#include <Entities/Word.h>
 
 
-class WordListModel : public QAbstractListModel
+class WordTableModel : public QAbstractTableModel
 {
     Q_OBJECT
     QList<Word*> words;
 public:
-    explicit WordListModel(QObject *parent = nullptr);
+    explicit WordTableModel(QObject *parent = nullptr);
 
-    enum wordRoles {
+    enum WordRoles {
         ZhRole = Qt::DisplayRole,
         IdRole = Qt::UserRole + 1,
         RuRole = Qt::UserRole + 2,
@@ -26,9 +26,18 @@ public:
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;
+    int columnCount(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool setData(const QModelIndex &index, const QVariant &value,
-              int role = Qt::EditRole);
+    bool setData(const QModelIndex &index,
+                 const QVariant &value,
+                 int role = Qt::EditRole);
+    QVariant headerData(int section,
+                        Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const;
+//    bool setHeaderData(int section,
+//                       Qt::Orientation orientation,
+//                       const QVariant &value,
+//                       int role = Qt::EditRole);
 public slots:
     void addWord(Word* wrd);
     void setWords(QList<Word*> _words);

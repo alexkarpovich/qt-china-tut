@@ -1,4 +1,4 @@
-#include "group_list_model.h"
+#include "GroupListModel.h"
 
 #include <dbmanager.h>
 
@@ -16,10 +16,12 @@ QVariant GroupListModel::data(const QModelIndex &index, int role) const
 
     const Group* gr = groups[index.row()];
 
-    if (role == NameRole)
-        return gr->getName();
-    else if (role == IdRole)
-        return gr->getId();
+    switch (role) {
+    case IdRole: return gr->getId();
+    case NameRole: return gr->getName();
+    case WordCountRole: return gr->getWordCount();
+    }
+
     return QVariant();
 }
 
