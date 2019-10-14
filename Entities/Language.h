@@ -9,6 +9,10 @@ class Language
     QString word;
     QString transcription;
 public:
+    enum Code {
+        CodeZh = 0,
+        CodeRu = 1,
+    };
     Language();
     QString getWord() const;
     void setWord(const QString &value);
