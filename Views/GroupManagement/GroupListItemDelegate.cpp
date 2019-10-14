@@ -3,7 +3,7 @@
 #include <QApplication>
 
 #include <Views/GroupManagement/GroupListItemDelegate.h>
-#include <models/GroupListModel.h>
+#include <Models/GroupListModel.h>
 
 GroupListItemDelegate::GroupListItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)

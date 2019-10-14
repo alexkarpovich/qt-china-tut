@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
     if (!QFileInfo::exists(dbFilePath)) {
         qDebug() << "DB file doesn't exist. Copying default one from resources.";
-        QFile::copy(":/static/app.db", dbFilePath);
+        QFile::copy(":/static/db.sqlite", dbFilePath);
         QFile::setPermissions(dbFilePath, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
     }
 

@@ -16,39 +16,43 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Dao/GroupDao.cpp \
     Entities/Group.cpp \
+    Entities/GroupTranslation.cpp \
+    Entities/Language.cpp \
     Entities/Ru.cpp \
     Entities/Translation.cpp \
-    Entities/Word.cpp \
     Entities/Zh.cpp \
+    Models/TranslationModel.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
     Views/GroupManagement/GroupNotSelectedView.cpp \
     Views/GroupManagement/GroupView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
-    Views/WordManagement/WordListItemDelegate.cpp \
+    Views/TranslationManagement/TranslationItemDelegate.cpp \
     dbmanager.cpp \
     main.cpp \
-    Models/GroupListModel.cpp \
-    Models/WordTableModel.cpp
+    Models/GroupListModel.cpp
 
 HEADERS += \
+    Dao/GroupDao.h \
     Entities/Group.h \
+    Entities/GroupTranslation.h \
+    Entities/Language.h \
     Entities/Ru.h \
     Entities/Translation.h \
-    Entities/Word.h \
     Entities/Zh.h \
+    Models/TranslationModel.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
     Views/GroupManagement/GroupNotSelectedView.h \
     Views/GroupManagement/GroupView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
-    Views/WordManagement/WordListItemDelegate.h \
+    Views/TranslationManagement/TranslationItemDelegate.h \
     dbmanager.h \
-    Models/GroupListModel.h \
-    Models/WordTableModel.h
+    Models/GroupListModel.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

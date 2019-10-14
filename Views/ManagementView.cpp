@@ -2,9 +2,10 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 
+#include <Dao/GroupDao.h>
+
 #include <Views/ManagementView.h>
 #include <Views/GroupManagement/GroupListItemDelegate.h>
-#include "dbmanager.h"
 
 ManagementView::ManagementView(QWidget *parent)
     : QWidget(parent)
@@ -70,8 +71,8 @@ QWidget *ManagementView::buildGroupListSection()
 
 void ManagementView::initializeWidgets()
 {
-    QList<Group*> groups = DbManager::getAllGroups();
-    groupListModel->setGroups(groups);
+    GroupDao gdao;
+    groupListModel->setGroups(gdao.all());
 }
 
 void ManagementView::onAddGroupBtnClicked()

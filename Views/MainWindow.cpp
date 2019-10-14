@@ -1,7 +1,7 @@
 #include <QHBoxLayout>
 
-#include "MainWindow.h"
-#include "Views/ManagementView.h"
+#include <Views/MainWindow.h>
+#include <Views/ManagementView.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

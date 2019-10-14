@@ -4,13 +4,13 @@
 #include <QTableView>
 #include <QWidget>
 
-#include <models/WordTableModel.h>
+#include <Models/TranslationModel.h>
 
 class GroupEditView : public QWidget
 {
     Q_OBJECT
     int groupId = 0;
-    WordTableModel *wordTableModel;
+    TranslationModel *translationModel;
     QTableView *wordTableView;
     QLineEdit* wordInput;
 

@@ -4,7 +4,14 @@
 #include <QSqlDatabase>
 #include <QString>
 #include <Entities/Group.h>
-#include <Entities/Word.h>
+#include <Entities/Translation.h>
+#include <Entities/GroupTranslation.h>
+
+#define GROUPS_TABLE "groups"
+#define GROUP_TRANSLATION_TABLE "group_translation"
+#define TRANSLATIONS_TABLE "translations"
+#define ZH_TABLE "zh"
+#define RU_TABLE "ru"
 
 class DbManager
 {
@@ -13,15 +20,13 @@ public:
     DbManager(const QString& path);
     bool openConnection();
     static QList<Group*> getAllGroups();
-    static QList<Word *> getAllGroupWords(int groupId);
-    static Word *insertWord(const QString& zh, const QString& ru, const QString& transcription, int status);
+    static QList<GroupTranslation *> getAllGroupTranslations();
     static Group *insertGroup(const QString& name);
-    static Word *insertGroupWord(int groupId, const QString &zh);
+    static Group *getGroupById(int id);
     static Group* getOrInsertGroup(const QString& name);
-    static Word *getOrInsertWord(const QString& zh);
     static Group *saveGroup(Group *gr);
-    static Word *saveGroupWord(int groupId, Word *wrd);
-    static bool groupWordExists(int groupId, Word *wrd);
+    static Language *getSourceByDirAndId(Translation::Direction dir, int id);
+    static Translation *getTranslationById(int id);
 };
 
 #endif // DBMANAGER_H

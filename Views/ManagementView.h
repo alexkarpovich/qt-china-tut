@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QWidget>
 
-#include <models/GroupListModel.h>
+#include <Models/GroupListModel.h>
 #include <Views/GroupManagement/GroupView.h>
 
 class ManagementView : public QWidget

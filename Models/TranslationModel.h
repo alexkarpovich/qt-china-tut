@@ -1,24 +1,24 @@
-#ifndef WORDLISTMODEL_H
-#define WORDLISTMODEL_H
+#ifndef TRANSLATIONMODEL_H
+#define TRANSLATIONMODEL_H
 
 #include <QList>
 #include <QHash>
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractTableModel>
-#include <Entities/Word.h>
+#include <Entities/GroupTranslation.h>
 
 
-class WordTableModel : public QAbstractTableModel
+class TranslationModel : public QAbstractTableModel
 {
     Q_OBJECT
-    QList<Word*> words;
+    QList<GroupTranslation*> translations;
 public:
-    explicit WordTableModel(QObject *parent = nullptr);
+    explicit TranslationModel(QObject *parent = nullptr);
 
-    enum WordRoles {
-        ZhRole = Qt::DisplayRole,
-        IdRole = Qt::UserRole + 1,
+    enum TranslationRoles {
+        IdRole = Qt::UserRole,
+        ZhRole = Qt::UserRole + 1,
         RuRole = Qt::UserRole + 2,
         TranscriptionRole = Qt::UserRole + 3,
         StatusRole = Qt::UserRole + 4,
@@ -39,10 +39,10 @@ public:
 //                       const QVariant &value,
 //                       int role = Qt::EditRole);
 public slots:
-    void addWord(Word* wrd);
-    void setWords(QList<Word*> _words);
+    void addTranslation(GroupTranslation* tr);
+    void setTranslations(QList<GroupTranslation*> _trl);
 private:
     QHash<int, QByteArray> roleNames() const;
 };
 
-#endif // WORDLISTMODEL_H
+#endif // TRANSLATIONMODEL_H

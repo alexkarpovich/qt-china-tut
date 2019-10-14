@@ -4,7 +4,7 @@
 
 #include <dbmanager.h>
 #include <Views/GroupManagement/GroupEditView.h>
-#include <Views/WordManagement/WordListItemDelegate.h>
+#include <Views/TranslationManagement/TranslationItemDelegate.h>
 
 GroupEditView::GroupEditView(QWidget *parent)
     : QWidget(parent)
@@ -15,8 +15,8 @@ GroupEditView::GroupEditView(QWidget *parent)
 void GroupEditView::setGroupId(int _groupId)
 {
     groupId = _groupId;
-    QList<Word*> words = DbManager::getAllGroupWords(groupId);
-    wordTableModel->setWords(words);
+//    QList<Word*> words = DbManager::getAllGroupWords(groupId);
+//    wordTableModel->setWords(words);
 }
 
 void GroupEditView::buildLayout()
@@ -40,24 +40,24 @@ void GroupEditView::buildLayout()
     setLayout(wlSectionLayout);
 
     wordTableView = new QTableView;
-    wordTableModel = new WordTableModel;
+    translationModel = new TranslationModel;
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     //wordTableView->horizontalHeader()->hide();
     wordTableView->horizontalHeader()->setStretchLastSection(true);
     wordTableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    wordTableView->setItemDelegate(new WordListItemDelegate);
+    wordTableView->setItemDelegate(new TranslationItemDelegate);
     wordTableView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
-    wordTableView->setModel(wordTableModel);
+    wordTableView->setModel(translationModel);
     wlSectionLayout->addWidget(wordInputWgt);
     wlSectionLayout->addWidget(wordTableView);
 }
 
 void GroupEditView::onWordInputReturnPressed()
 {
-    Word *wrd = DbManager::insertGroupWord(groupId, wordInput->text());
-    wordTableModel->addWord(wrd);
-    wordInput->clear();
+//    Word *wrd = DbManager::insertGroupWord(groupId, wordInput->text());
+//    wordTableModel->addWord(wrd);
+//    wordInput->clear();
 }
 
