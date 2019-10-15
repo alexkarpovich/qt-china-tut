@@ -2,65 +2,65 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSqlError>
-#include "LangDao.h"
+#include "WordDao.h"
 
-LangDao::LangDao(const Language::Code &code)
+WordDao::WordDao(const Word::Language &code)
 {
     this->code = code;
 }
 
-void LangDao::setCode(const Language::Code &value)
+void WordDao::setCode(const Word::Language &value)
 {
     code = value;
 }
 
-QList<Language *> LangDao::all()
+QList<Word *> WordDao::all()
 {
-    QList<Language *> langs;
+    QList<Word *> words;
     QSqlQuery query;
-    QString table = Language::codeString(code);
+    QString table = Word::codeString(code);
     query.prepare("SELECT * FROM "+ table);
 
     if (query.exec()) {
         while (query.next()) {
-            Language* lng = new Language;
-            lng->setId(query.value(0).toInt());
-            lng->setWord(query.value(1).toString());
-            lng->setTranscription(query.value(2).toString());
-            langs << lng;
+            Word* wrd = new Word;
+            wrd->setId(query.value(0).toInt());
+            wrd->setText(query.value(1).toString());
+            wrd->setTranscription(query.value(2).toString());
+            words << wrd;
         }
     }
 
 
 
-    return langs;
+    return words;
 }
 
-Language *LangDao::get(int id)
+Word *WordDao::get(int id)
 {
     QSqlQuery query;
-    QString table = Language::codeString(code);
+    QString table = Word::codeString(code);
     query.prepare("SELECT * FROM " + table + " WHERE id=:id");
     query.bindValue(":id", id);
 
     if (query.exec() && query.next()) {
-        Language* lng = new Language;
-        lng->setId(query.value(0).toInt());
-        lng->setWord(query.value(1).toString());
-        lng->setTranscription(query.value(2).toString());
+        Word* wrd = new Word;
+        wrd->setId(query.value(0).toInt());
+        wrd->setText(query.value(1).toString());
+        wrd->setTranscription(query.value(2).toString());
 
-        return lng;
+        return wrd;
     }
 
     return nullptr;
 }
 
-Language *LangDao::create(Language *value)
+Word *WordDao::create(Word *value)
 {
     QSqlQuery query;
-    QString table = Language::codeString(code);
+    QString table = Word::codeString(code);
     query.prepare("INSERT INTO " + table + " (word, transcription) VALUES ((:word), (:transcription))");
-    query.bindValue(":name", value->getWord());
+    query.bindValue(":word", value->getText());
     query.bindValue(":transcription", value->getTranscription());
 
     if (query.exec() && query.next()) {
@@ -72,32 +72,32 @@ Language *LangDao::create(Language *value)
     return nullptr;
 }
 
-void LangDao::update(Language *value)
+void WordDao::update(Word *value)
 {
     QSqlQuery query;
-    QString table = Language::codeString(code);
+    QString table = Word::codeString(code);
     query.prepare("UPDATE" + table + "SET word=:word, transcription=:transcription WHERE id=:id");
     query.bindValue(":id", value->getId());
-    query.bindValue(":word", value->getWord());
+    query.bindValue(":word", value->getText());
     query.bindValue(":transcription", value->getTranscription());
 
     if (query.exec() && query.next()) {
-        qDebug() << QString("Lang was updated (%1, %2)").arg(QString::number(value->getId()), value->getWord());
+        qDebug() << QString("Lang was updated (%1, %2)").arg(QString::number(value->getId()), value->getText());
     } else {
         qDebug() << QString("Lang update error: %s").arg(query.lastError().text());
     }
 }
 
-void LangDao::del(Language *value)
+void WordDao::del(Word *value)
 {
     QSqlQuery query;
-    QString table = Language::codeString(code);
+    QString table = Word::codeString(code);
 
     query.prepare("DELETE FROM" + table + "WHERE id=:id");
     query.bindValue(":id", value->getId());
 
     if (query.exec() && query.next()) {
-        qDebug() << QString("Group (%1, %2) was deleted").arg(QString::number(value->getId()), value->getWord());
+        qDebug() << QString("Group (%1, %2) was deleted").arg(QString::number(value->getId()), value->getText());
     } else {
         qDebug() << QString("Group deleting error: %s").arg(query.lastError().text());
     }

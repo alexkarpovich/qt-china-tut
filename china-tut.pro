@@ -17,11 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Dao/GroupDao.cpp \
-    Dao/LangDao.cpp \
-    Dao/TranslationDao.cpp \
+    Dao/WordDao.cpp \
     Entities/Group.cpp \
-    Entities/Language.cpp \
-    Entities/Translation.cpp \
+    Entities/Word.cpp \
     Models/TranslationModel.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
@@ -36,11 +34,9 @@ SOURCES += \
 
 HEADERS += \
     Dao/GroupDao.h \
-    Dao/LangDao.h \
-    Dao/TranslationDao.h \
+    Dao/WordDao.h \
     Entities/Group.h \
-    Entities/Language.h \
-    Entities/Translation.h \
+    Entities/Word.h \
     Models/TranslationModel.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
