@@ -35,28 +35,6 @@ QList<Group*> DbManager::getAllGroups()
     return groupList;
 }
 
-QList<GroupTranslation *> DbManager::getAllGroupTranslations()
-{
-    QSqlQuery query;
-    QList<GroupTranslation *> groupTranslationList;
-    query.prepare("SELECT * FROM " GROUP_TRANSLATION_TABLE);
-
-    if (query.exec()) {
-        while (query.next()) {
-            Group *gr = getGroupById(query.value(0).toInt());
-            Translation *tr = getTranslationById(query.value(1).toInt());
-            GroupTranslation *gt = new GroupTranslation;
-            gt->setGroup(gr);
-            gt->setTranslation(tr);
-
-            groupTranslationList << gt;
-        }
-    }
-
-    return groupTranslationList;
-}
-
-
 Group *DbManager::insertGroup(const QString &name)
 {
     QSqlQuery query;

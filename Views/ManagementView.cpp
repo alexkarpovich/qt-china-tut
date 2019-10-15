@@ -71,8 +71,8 @@ QWidget *ManagementView::buildGroupListSection()
 
 void ManagementView::initializeWidgets()
 {
-    GroupDao gdao;
-    groupListModel->setGroups(gdao.all());
+    GroupDao gd;
+    groupListModel->setGroups(gd.all());
 }
 
 void ManagementView::onAddGroupBtnClicked()

@@ -13,7 +13,7 @@ QList<Group *> GroupDao::all()
 {
     QList<Group *> groups;
     QSqlQuery query;
-    query.prepare("SELECT gr.id, gr.name, 0 as word_count FROM" GROUP_TABLE);
+    query.prepare("SELECT id, name, 0 as word_count FROM" GROUP_TABLE);
 
     if (query.exec()) {
         while (query.next()) {
@@ -69,10 +69,10 @@ void GroupDao::update(Group *value)
     query.bindValue(":id", value->getId());
     query.bindValue(":name", value->getName());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         qDebug() << QString("Group was updated (%1, %2)").arg(QString::number(value->getId()), value->getName());
     } else {
-        qDebug() << QString("Group update error: %s").arg(query.lastError().text());
+        qDebug() << QString("Group update error: %1").arg(query.lastError().text());
     }
 }
 
@@ -82,9 +82,9 @@ void GroupDao::del(Group *value)
     query.prepare("DELETE FROM" GROUP_TABLE "WHERE id=:id");
     query.bindValue(":id", value->getId());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         qDebug() << QString("Group (%1, %2) was deleted").arg(QString::number(value->getId()), value->getName());
     } else {
-        qDebug() << QString("Group deleting error: %s").arg(query.lastError().text());
+        qDebug() << QString("Group deleting error: %1").arg(query.lastError().text());
     }
 }

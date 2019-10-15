@@ -14,7 +14,7 @@ QVariant TranslationModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const GroupTranslation* tr = translations[index.row()];
+    const Translation* tr = translations[index.row()];
 
 //    switch (role) {
 //    case IdRole: return wrd->getId();
@@ -44,7 +44,7 @@ Qt::ItemFlags TranslationModel::flags(const QModelIndex &index) const
 bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid()) {
-        GroupTranslation *tr = translations.at(index.row());
+        Translation *tr = translations.at(index.row());
 
 //        switch (role) {
 //        case ZhRole: tr->setZh(value.toString()); break;
@@ -72,16 +72,14 @@ QVariant TranslationModel::headerData(int section, Qt::Orientation orientation, 
     }
 }
 
-void TranslationModel::addTranslation(GroupTranslation* tr)
+void TranslationModel::addTranslation(Translation* tr)
 {
     beginResetModel();
-
     translations << tr;
-
     endResetModel();
 }
 
-void TranslationModel::setTranslations(QList<GroupTranslation *> _trl)
+void TranslationModel::setTranslations(QList<Translation *> _trl)
 {
     beginResetModel();
     translations = _trl;

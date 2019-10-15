@@ -6,13 +6,13 @@
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractTableModel>
-#include <Entities/GroupTranslation.h>
+#include <Entities/Translation.h>
 
 
 class TranslationModel : public QAbstractTableModel
 {
     Q_OBJECT
-    QList<GroupTranslation*> translations;
+    QList<Translation*> translations;
 public:
     explicit TranslationModel(QObject *parent = nullptr);
 
@@ -39,8 +39,8 @@ public:
 //                       const QVariant &value,
 //                       int role = Qt::EditRole);
 public slots:
-    void addTranslation(GroupTranslation* tr);
-    void setTranslations(QList<GroupTranslation*> _trl);
+    void addTranslation(Translation* tr);
+    void setTranslations(QList<Translation*> _trl);
 private:
     QHash<int, QByteArray> roleNames() const;
 };

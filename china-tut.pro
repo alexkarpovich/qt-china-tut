@@ -18,8 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Dao/GroupDao.cpp \
     Dao/LangDao.cpp \
+    Dao/TranslationDao.cpp \
     Entities/Group.cpp \
-    Entities/GroupTranslation.cpp \
     Entities/Language.cpp \
     Entities/Translation.cpp \
     Models/TranslationModel.cpp \
@@ -37,8 +37,8 @@ SOURCES += \
 HEADERS += \
     Dao/GroupDao.h \
     Dao/LangDao.h \
+    Dao/TranslationDao.h \
     Entities/Group.h \
-    Entities/GroupTranslation.h \
     Entities/Language.h \
     Entities/Translation.h \
     Models/TranslationModel.h \

@@ -20,6 +20,7 @@ public:
     void setTranscription(const QString &value);
     int getId() const;
     void setId(int value);
+    static QString codeString(Code code);
 };
 
 #endif // LANGUAGE_H

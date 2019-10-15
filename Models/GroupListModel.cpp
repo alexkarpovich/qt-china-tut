@@ -2,6 +2,8 @@
 
 #include <dbmanager.h>
 
+#include <Dao/GroupDao.h>
+
 GroupListModel::GroupListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -42,10 +44,10 @@ Qt::ItemFlags GroupListModel::flags(const QModelIndex &index) const
 bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid() && role == NameRole) {
-
+        GroupDao gd;
         Group *gr = groups.at(index.row());
         gr->setName(value.toString());
-        gr = DbManager::saveGroup(gr);
+        gd.update(gr);
         groups.replace(index.row(), gr);
         emit dataChanged(index, index);
         return true;

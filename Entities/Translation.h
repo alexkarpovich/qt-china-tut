@@ -6,10 +6,6 @@
 class Translation
 {    
 public:
-    enum Direction {
-        DirectionZhRu = 0,
-    };
-
     Translation();
     Language *getSource() const;
     void setSource(Language *value);
@@ -21,8 +17,9 @@ public:
 private:
     int id;
     Language *source;
+    Language::Code sourceCode;
     Language *dist;
-    Direction direction;
+    Language::Code distCode;
 };
 
 #endif // TRANSLATION_H

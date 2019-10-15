@@ -30,6 +30,16 @@ void Language::setId(int value)
     id = value;
 }
 
+QString Language::codeString(Language::Code code)
+{
+    switch (code) {
+    case CodeZh: return "zh";
+    case CodeRu: return "ru";
+    }
+
+    return "";
+}
+
 Language::Language()
 {
 
