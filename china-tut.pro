@@ -17,35 +17,41 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Dao/GroupDao.cpp \
+    Dao/LanguageDao.cpp \
+    Dao/ProfileDao.cpp \
     Dao/WordDao.cpp \
     Entities/Group.cpp \
+    Entities/Language.cpp \
+    Entities/Profile.cpp \
     Entities/Word.cpp \
-    Models/TranslationModel.cpp \
+    Models/WordModel.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
     Views/GroupManagement/GroupNotSelectedView.cpp \
     Views/GroupManagement/GroupView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
-    Views/TranslationManagement/TranslationItemDelegate.cpp \
-    dbmanager.cpp \
+    Views/WordManagement/WordItemDelegate.cpp \
     main.cpp \
     Models/GroupListModel.cpp
 
 HEADERS += \
     Dao/GroupDao.h \
+    Dao/LanguageDao.h \
+    Dao/ProfileDao.h \
     Dao/WordDao.h \
     Entities/Group.h \
+    Entities/Language.h \
+    Entities/Profile.h \
     Entities/Word.h \
-    Models/TranslationModel.h \
+    Models/WordModel.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
     Views/GroupManagement/GroupNotSelectedView.h \
     Views/GroupManagement/GroupView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
-    Views/TranslationManagement/TranslationItemDelegate.h \
-    dbmanager.h \
+    Views/WordManagement/WordItemDelegate.h \
     Models/GroupListModel.h
 
 # Default rules for deployment.

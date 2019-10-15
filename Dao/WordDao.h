@@ -3,18 +3,20 @@
 
 #include <QList>
 #include <Entities/Word.h>
+#include <Entities/Profile.h>
 
 class WordDao
 {
-    Word::Language code;
+    Profile *profile;
 public:
-    WordDao(const Word::Language &code);
+    WordDao();
     QList<Word *> all();
     Word *get(int id);
+    Word *getByText(const QString& value);
     Word *create(Word *value);
     void update(Word *value);
     void del(Word *value);
-    void setCode(const Word::Language &value);
+    QList<Word *> translations(int id);
 };
 
 #endif // WORDDAO_H

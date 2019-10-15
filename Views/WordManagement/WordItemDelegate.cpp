@@ -2,26 +2,26 @@
 #include <QStylePainter>
 #include <QApplication>
 
-#include <Views/TranslationManagement/TranslationItemDelegate.h>
+#include <Views/WordManagement/WordItemDelegate.h>
 
-TranslationModel::TranslationRoles TranslationItemDelegate::getWordRoleByColumn(int column) const
+WordModel::WordRoles WordItemDelegate::getWordRoleByColumn(int column) const
 {
     switch (column) {
-    case 0: return TranslationModel::ZhRole;
-    case 1: return TranslationModel::TranscriptionRole;
-    case 2: return TranslationModel::RuRole;
+    case 0: return WordModel::ZhRole;
+    case 1: return WordModel::TranscriptionRole;
+    case 2: return WordModel::RuRole;
     }
 
-    return TranslationModel::ZhRole;
+    return WordModel::ZhRole;
 }
 
-TranslationItemDelegate::TranslationItemDelegate(QObject *parent)
+WordItemDelegate::WordItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
 
 }
 
-QWidget *TranslationItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget *WordItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QLineEdit *editor = new QLineEdit(parent);
     editor->setFrame(false);
@@ -29,7 +29,7 @@ QWidget *TranslationItemDelegate::createEditor(QWidget *parent, const QStyleOpti
     return editor;
 }
 
-void TranslationItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
+void WordItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     QString value = index.data(getWordRoleByColumn(index.column())).toString();
 
@@ -37,7 +37,7 @@ void TranslationItemDelegate::setEditorData(QWidget *editor, const QModelIndex &
     nameEdit->setText(value);
 }
 
-void TranslationItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+void WordItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QLineEdit *nameEdit = static_cast<QLineEdit*>(editor);
     QString text = nameEdit->text();
@@ -45,21 +45,21 @@ void TranslationItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *
     model->setData(index, text, getWordRoleByColumn(index.column()));
 }
 
-void TranslationItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void WordItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     editor->setGeometry(option.rect);
 }
 
-QSize TranslationItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+QSize WordItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     return QSize(QStyledItemDelegate::sizeHint(option, index).width(), 48);
 }
 
-void TranslationItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void WordItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QString zh = index.data(TranslationModel::ZhRole).toString();
-    QString ru = index.data(TranslationModel::RuRole).toString();
-    QString transcription = index.data(TranslationModel::TranscriptionRole).toString();
+    QString zh = index.data(WordModel::ZhRole).toString();
+    QString ru = index.data(WordModel::RuRole).toString();
+    QString transcription = index.data(WordModel::TranscriptionRole).toString();
 
     if (option.state & QStyle::State_Selected) {
         painter->fillRect(option.rect, option.palette.highlight());

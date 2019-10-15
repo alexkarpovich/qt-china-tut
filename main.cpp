@@ -4,8 +4,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QStyleFactory>
+#include <QSqlDatabase>
 
-#include "dbmanager.h"
 #include "Views/MainWindow.h"
 
 void initializePalette(QApplication &a) {
@@ -27,6 +27,14 @@ void initializePalette(QApplication &a) {
     a.setPalette(palette);
 }
 
+bool connectToDatabase(QString path) {
+    qDebug()  <<  QSqlDatabase::drivers();
+    QSqlDatabase m_db = QSqlDatabase::addDatabase("QSQLITE");
+    m_db.setDatabaseName(path);
+
+    return m_db.open();
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -46,14 +54,11 @@ int main(int argc, char *argv[])
         QFile::setPermissions(dbFilePath, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
     }
 
-    DbManager* dbm = new DbManager(dbFilePath);
-
-    if (!dbm->openConnection()) {
+    if (!connectToDatabase(dbFilePath)) {
         return 1;
     }
 
     MainWindow w;
-    w.setDbManager(dbm);
     w.show();
     return a.exec();
 }

@@ -1,20 +1,21 @@
 #include <QDebug>
-#include <Models/TranslationModel.h>
-#include <dbmanager.h>
+#include <Models/WordModel.h>
+#include <Dao/GroupDao.h>
+#include <Dao/WordDao.h>
 
-TranslationModel::TranslationModel(QObject *parent)
+WordModel::WordModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
 
 }
 
-QVariant TranslationModel::data(const QModelIndex &index, int role) const
+QVariant WordModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
     }
 
-    const Translation* tr = translations[index.row()];
+    const Word* wrd = words[index.row()];
 
 //    switch (role) {
 //    case IdRole: return wrd->getId();
@@ -27,13 +28,13 @@ QVariant TranslationModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int TranslationModel::rowCount(const QModelIndex &parent) const
+int WordModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return translations.size();
+    return words.size();
 }
 
-Qt::ItemFlags TranslationModel::flags(const QModelIndex &index) const
+Qt::ItemFlags WordModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::ItemIsEnabled;
@@ -41,10 +42,10 @@ Qt::ItemFlags TranslationModel::flags(const QModelIndex &index) const
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool WordModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid()) {
-        Translation *tr = translations.at(index.row());
+        Word *wrd = words.at(index.row());
 
 //        switch (role) {
 //        case ZhRole: tr->setZh(value.toString()); break;
@@ -61,7 +62,7 @@ bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, 
     return false;
 }
 
-QVariant TranslationModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant WordModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation != Qt::Horizontal || role != Qt::DisplayRole) return {};
     switch (section) {
@@ -72,21 +73,26 @@ QVariant TranslationModel::headerData(int section, Qt::Orientation orientation, 
     }
 }
 
-void TranslationModel::addTranslation(Translation* tr)
+void WordModel::addWord(const QString &value)
 {
     beginResetModel();
-    translations << tr;
+    GroupDao gd;
+    WordDao wd;
+    Word *wrd = gd.addWord(1, value);
+    words << wrd;
+    QList<Word *> translations = wd.translations(wrd->getId());
+    options[wrd->getId()] = translations;
     endResetModel();
 }
 
-void TranslationModel::setTranslations(QList<Translation *> _trl)
+void WordModel::setWords(QList<Word *> list)
 {
     beginResetModel();
-    translations = _trl;
+    words = list;
     endResetModel();
 }
 
-QHash<int, QByteArray> TranslationModel::roleNames() const
+QHash<int, QByteArray> WordModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
@@ -99,7 +105,7 @@ QHash<int, QByteArray> TranslationModel::roleNames() const
     return roles;
 }
 
-int TranslationModel::columnCount(const QModelIndex &parent) const
+int WordModel::columnCount(const QModelIndex &parent) const
 {
     return 3;
 }

@@ -1,22 +1,25 @@
-#ifndef TRANSLATIONMODEL_H
-#define TRANSLATIONMODEL_H
+#ifndef WORDMODEL_H
+#define WORDMODEL_H
 
 #include <QList>
 #include <QHash>
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractTableModel>
-#include <Entities/Translation.h>
+#include <Entities/Word.h>
 
 
-class TranslationModel : public QAbstractTableModel
+class WordModel : public QAbstractTableModel
 {
     Q_OBJECT
-    QList<Translation*> translations;
-public:
-    explicit TranslationModel(QObject *parent = nullptr);
+    QList<Word*> words;
+    QMap<int, QList<Word *>> options;
+    QMap<int, bool> optionFlags;
 
-    enum TranslationRoles {
+public:
+    explicit WordModel(QObject *parent = nullptr);
+
+    enum WordRoles {
         IdRole = Qt::UserRole,
         ZhRole = Qt::UserRole + 1,
         RuRole = Qt::UserRole + 2,
@@ -39,10 +42,10 @@ public:
 //                       const QVariant &value,
 //                       int role = Qt::EditRole);
 public slots:
-    void addTranslation(Translation* tr);
-    void setTranslations(QList<Translation*> _trl);
+    void addWord(const QString& value);
+    void setWords(QList<Word*> list);
 private:
     QHash<int, QByteArray> roleNames() const;
 };
 
-#endif // TRANSLATIONMODEL_H
+#endif // WORDMODEL_H

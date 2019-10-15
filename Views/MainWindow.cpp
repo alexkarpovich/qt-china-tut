@@ -30,8 +30,3 @@ void MainWindow::initWorkspace()
     views->setCurrentIndex(viewState);
 }
 
-void MainWindow::setDbManager(DbManager *dbManager)
-{
-    m_db = dbManager;
-}
-

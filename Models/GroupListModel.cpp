@@ -1,7 +1,5 @@
 #include "GroupListModel.h"
 
-#include <dbmanager.h>
-
 #include <Dao/GroupDao.h>
 
 GroupListModel::GroupListModel(QObject *parent)

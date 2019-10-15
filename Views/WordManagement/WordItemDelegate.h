@@ -1,17 +1,17 @@
-#ifndef TRANSLATIONITEMDELEGATE_H
-#define TRANSLATIONITEMDELEGATE_H
+#ifndef WORDITEMDELEGATE_H
+#define WORDITEMDELEGATE_H
 
 #include <QStyledItemDelegate>
 #include <QtGui>
 
-#include <Models/TranslationModel.h>
+#include <Models/WordModel.h>
 
-class TranslationItemDelegate : public QStyledItemDelegate
+class WordItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
-    TranslationModel::TranslationRoles getWordRoleByColumn(int column) const;
+    WordModel::WordRoles getWordRoleByColumn(int column) const;
 public:
-    TranslationItemDelegate(QObject *parent = nullptr);
+    WordItemDelegate(QObject *parent = nullptr);
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
@@ -33,4 +33,4 @@ public:
 
 };
 
-#endif // TRANSLATIONITEMDELEGATE_H
+#endif // WORDITEMDELEGATE_H
