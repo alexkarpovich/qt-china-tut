@@ -32,6 +32,8 @@ Profile *ProfileDao::get(int id)
         pr->setNativeLang(ld.get(query.value(2).toInt()));
 
         return pr;
+    } else {
+        qDebug() << QString("Profile get error: %s").arg(query.lastError().text());
     }
 
     return nullptr;
