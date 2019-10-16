@@ -25,6 +25,7 @@ SOURCES += \
     Entities/Profile.cpp \
     Entities/Word.cpp \
     Models/GroupModel.cpp \
+    Models/TranslationModel.cpp \
     Models/WordModel.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
     Views/WordManagement/TranslationEditor.cpp \
+    Views/WordManagement/TranslationItemDelegate.cpp \
     Views/WordManagement/WordItemDelegate.cpp \
     main.cpp
 
@@ -46,6 +48,7 @@ HEADERS += \
     Entities/Profile.h \
     Entities/Word.h \
     Models/GroupModel.h \
+    Models/TranslationModel.h \
     Models/WordModel.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
@@ -54,6 +57,7 @@ HEADERS += \
     Views/MainWindow.h \
     Views/ManagementView.h \
     Views/WordManagement/TranslationEditor.h \
+    Views/WordManagement/TranslationItemDelegate.h \
     Views/WordManagement/WordItemDelegate.h
 
 # Default rules for deployment.

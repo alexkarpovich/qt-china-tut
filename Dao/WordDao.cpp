@@ -36,6 +36,56 @@ QList<Word *> WordDao::translations(int id)
     return list;
 }
 
+Word *WordDao::getTranslationByText(int id, const QString &text)
+{
+    QSqlQuery query;
+    QString sql = "SELECT * FROM %1 WHERE text=:text";
+    query.prepare(sql.arg(profile->getNativeLang()->getCode()));
+    query.bindValue(":text", text);
+
+    if (query.exec() && query.next()) {
+        Word* wrd = new Word;
+        wrd->setId(query.value(0).toInt());
+        wrd->setText(query.value(1).toString());
+        wrd->setTranscription(query.value(2).toString());
+
+        return wrd;
+    }
+
+    return nullptr;
+}
+
+Word *WordDao::createTranslation(int id, Word *wrd)
+{
+    QSqlQuery query;
+    QString sql = QString("INSERT INTO %1 (text, transcription) VALUES (:text, :transcription)")
+        .arg(profile->getNativeLang()->getCode());
+    query.prepare(sql);
+    query.bindValue(":text", wrd->getText());
+    query.bindValue(":transcription", wrd->getTranscription());
+
+    if (query.exec()) {
+        wrd->setId(query.lastInsertId().toInt());
+
+        return wrd;
+    } else {
+        qDebug() << QString("Translation insert error: %s").arg(query.lastError().text());
+    }
+
+    return nullptr;
+}
+
+Word *WordDao::addTranslation(int id, const QString &text)
+{
+    if (!getTranslationByText(id, text)) {
+        Word *wrd = new Word;
+        wrd->setText(text);
+        return createTranslation(id, wrd);
+    }
+
+    return nullptr;
+}
+
 QList<Word *> WordDao::all()
 {
     QList<Word *> words;

@@ -17,6 +17,9 @@ public:
     void update(Word *value);
     void del(Word *value);
     QList<Word *> translations(int id);
+    Word *getTranslationByText(int id, const QString& text);
+    Word *createTranslation(int id, Word *wrd);
+    Word *addTranslation(int id, const QString& text);
 };
 
 #endif // WORDDAO_H
