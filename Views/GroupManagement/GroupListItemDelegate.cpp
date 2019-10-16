@@ -3,7 +3,7 @@
 #include <QApplication>
 
 #include <Views/GroupManagement/GroupListItemDelegate.h>
-#include <Models/GroupListModel.h>
+#include <Models/GroupModel.h>
 
 GroupListItemDelegate::GroupListItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
@@ -21,7 +21,7 @@ QWidget *GroupListItemDelegate::createEditor(QWidget *parent, const QStyleOption
 
 void GroupListItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    QString value = index.data(GroupListModel::NameRole).toString();
+    QString value = index.data(GroupModel::NameRole).toString();
 
     QLineEdit *nameEdit = static_cast<QLineEdit*>(editor);
     nameEdit->setText(value);
@@ -32,7 +32,7 @@ void GroupListItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *mo
     QLineEdit *nameEdit = static_cast<QLineEdit*>(editor);
     QString groupName = nameEdit->text();
 
-    model->setData(index, groupName, GroupListModel::NameRole);
+    model->setData(index, groupName, GroupModel::NameRole);
 }
 
 void GroupListItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -47,8 +47,8 @@ QSize GroupListItemDelegate::sizeHint(const QStyleOptionViewItem &option, const 
 
 void GroupListItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QString name = index.data(GroupListModel::NameRole).toString();
-    int wordCount = index.data(GroupListModel::WordCountRole).toInt();
+    QString name = index.data(GroupModel::NameRole).toString();
+    int wordCount = index.data(GroupModel::WordCountRole).toInt();
 
     if (option.state & QStyle::State_Selected) {
         painter->fillRect(option.rect, option.palette.highlight());

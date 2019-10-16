@@ -96,15 +96,18 @@ Word *WordDao::getByText(const QString &value)
 Word *WordDao::create(Word *value)
 {
     QSqlQuery query;
-    QString sql = "INSERT INTO %1 (word, transcription) VALUES ((:word), (:transcription))";
-    query.prepare(sql.arg(profile->getLearningLang()->getCode()));
-    query.bindValue(":word", value->getText());
+    QString sql = QString("INSERT INTO %1 (text, transcription) VALUES (:text, :transcription)")
+        .arg(profile->getLearningLang()->getCode());
+    query.prepare(sql);
+    query.bindValue(":text", value->getText());
     query.bindValue(":transcription", value->getTranscription());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         value->setId(query.lastInsertId().toInt());
 
         return value;
+    } else {
+        qDebug() << QString("Word insert error: %s").arg(query.lastError().text());
     }
 
     return nullptr;
@@ -113,14 +116,14 @@ Word *WordDao::create(Word *value)
 void WordDao::update(Word *value)
 {
     QSqlQuery query;
-    QString sql = "UPDATE %1 SET word=:word, transcription=:transcription WHERE id=:id";
+    QString sql = "UPDATE %1 SET text=:text, transcription=:transcription WHERE id=:id";
 
     query.prepare(sql.arg(profile->getLearningLang()->getCode()));
     query.bindValue(":id", value->getId());
-    query.bindValue(":word", value->getText());
+    query.bindValue(":text", value->getText());
     query.bindValue(":transcription", value->getTranscription());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         qDebug() << QString("Word was updated (%1, %2)").arg(QString::number(value->getId()), value->getText());
     } else {
         qDebug() << QString("Word update error: %s").arg(query.lastError().text());
@@ -134,7 +137,7 @@ void WordDao::del(Word *value)
     query.prepare(sql.arg(profile->getLearningLang()->getCode()));
     query.bindValue(":id", value->getId());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         qDebug() << QString("Word (%1, %2) was deleted").arg(QString::number(value->getId()), value->getText());
     } else {
         qDebug() << QString("Word deleting error: %s").arg(query.lastError().text());

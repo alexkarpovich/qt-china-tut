@@ -6,26 +6,30 @@
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractTableModel>
+
 #include <Entities/Word.h>
+#include <Dao/GroupDao.h>
+#include <Dao/WordDao.h>
 
 
 class WordModel : public QAbstractTableModel
 {
     Q_OBJECT
+    int groupid;
     QList<Word*> words;
     QMap<int, QList<Word *>> options;
     QMap<int, bool> optionFlags;
+    WordDao *wordDao;
+    GroupDao *groupDao;
 
 public:
-    explicit WordModel(QObject *parent = nullptr);
+    explicit WordModel(int groupid, QObject *parent = nullptr);
 
     enum WordRoles {
         IdRole = Qt::UserRole,
-        ZhRole = Qt::UserRole + 1,
-        RuRole = Qt::UserRole + 2,
-        TranscriptionRole = Qt::UserRole + 3,
-        StatusRole = Qt::UserRole + 4,
-        GroupIdRole = Qt::UserRole + 5
+        TextRole = Qt::UserRole + 1,
+        TranscriptionRole = Qt::UserRole + 2,
+        TranslationsRole = Qt::UserRole + 3
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;
@@ -43,7 +47,6 @@ public:
 //                       int role = Qt::EditRole);
 public slots:
     void addWord(const QString& value);
-    void setWords(QList<Word*> list);
 private:
     QHash<int, QByteArray> roleNames() const;
 };

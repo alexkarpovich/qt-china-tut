@@ -9,9 +9,9 @@ GroupView::GroupView(QWidget *parent) : QWidget(parent)
     buildLayout();
 }
 
-void GroupView::setGroupId(int groupId)
+void GroupView::switchGroup(int groupId)
 {
-    editView->setGroupId(groupId);
+    editView->switchGroup(groupId);
     setViewState(EditState);
 }
 

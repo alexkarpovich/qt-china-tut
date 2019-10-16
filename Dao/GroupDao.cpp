@@ -17,8 +17,9 @@ QList<Group *> GroupDao::all()
 {
     QList<Group *> groups;
     QSqlQuery query;
-    query.prepare("SELECT id, name, 0 as word_count FROM" GROUP_TABLE
-                  "WHERE lang_id=:langid");
+    query.prepare("SELECT g.id, g.name, COUNT(gw.word_id) as word_count FROM" GROUP_TABLE "g "
+                  "LEFT JOIN groups_words gw ON gw.group_id=g.id "
+                  "WHERE lang_id=:langid GROUP BY g.id");
     query.bindValue(":langid", profile->getLearningLang()->getId());
 
     if (query.exec()) {
@@ -69,6 +70,14 @@ Group *GroupDao::create(Group *value)
     return nullptr;
 }
 
+Group *GroupDao::create(const QString &name)
+{
+    Group *gr = new Group;
+    gr->setName(name);
+
+    return create(gr);
+}
+
 void GroupDao::update(Group *value)
 {
     QSqlQuery query;
@@ -79,7 +88,7 @@ void GroupDao::update(Group *value)
     if (query.exec()) {
         qDebug() << QString("Group was updated (%1, %2)").arg(QString::number(value->getId()), value->getName());
     } else {
-        qDebug() << QString("Group update error: %1").arg(query.lastError().text());
+        qDebug() << "Group update error: " + query.lastError().text();
     }
 }
 
@@ -92,8 +101,33 @@ void GroupDao::del(Group *value)
     if (query.exec()) {
         qDebug() << QString("Group (%1, %2) was deleted").arg(QString::number(value->getId()), value->getName());
     } else {
-        qDebug() << QString("Group deleting error: %1").arg(query.lastError().text());
+        qDebug() << "Group deleting error: " + query.lastError().text();
     }
+}
+
+QList<Word *> GroupDao::words(int groupid)
+{
+    QList<Word *> list;
+    QSqlQuery query;
+    QString sql = QString("SELECT w.* FROM %1 w LEFT JOIN groups_words gw ON w.id=gw.word_id WHERE gw.group_id=:groupid")
+        .arg(profile->getLearningLang()->getCode());
+    query.prepare(sql);
+    query.bindValue(":groupid", groupid);
+
+    if (query.exec()) {
+        while (query.next()) {
+            Word *wrd = new Word;
+            wrd->setId(query.value(0).toInt());
+            wrd->setText(query.value(1).toString());
+            wrd->setTranscription(query.value(2).toString());
+
+            list << wrd;
+        }
+    } else {
+        qDebug() << "Group words error: " + query.lastError().text();
+    }
+
+    return list;
 }
 
 Word *GroupDao::addWord(int groupid, const QString &text)
@@ -108,13 +142,13 @@ Word *GroupDao::addWord(int groupid, const QString &text)
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO groups_words (group_id, word_id) VALUES (:groupid, :wordid) ON DUPLICATE KEY IGNORE");
+    query.prepare("INSERT OR IGNORE INTO groups_words (group_id, word_id) VALUES (:groupid, :wordid)");
     query.bindValue(":groupid", groupid);
     query.bindValue(":wordid", wrd->getId());
 
     if (query.exec()) {
         return wrd;
     } else {
-        qDebug() << QString("Group deleting error: %1").arg(query.lastError().text());
+        qDebug() << "Add word to group error: " + query.lastError().text();
     }
 }

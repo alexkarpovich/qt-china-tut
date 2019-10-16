@@ -24,6 +24,7 @@ SOURCES += \
     Entities/Language.cpp \
     Entities/Profile.cpp \
     Entities/Word.cpp \
+    Models/GroupModel.cpp \
     Models/WordModel.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
@@ -31,9 +32,9 @@ SOURCES += \
     Views/GroupManagement/GroupView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
+    Views/WordManagement/TranslationEditor.cpp \
     Views/WordManagement/WordItemDelegate.cpp \
-    main.cpp \
-    Models/GroupListModel.cpp
+    main.cpp
 
 HEADERS += \
     Dao/GroupDao.h \
@@ -44,6 +45,7 @@ HEADERS += \
     Entities/Language.h \
     Entities/Profile.h \
     Entities/Word.h \
+    Models/GroupModel.h \
     Models/WordModel.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
@@ -51,8 +53,8 @@ HEADERS += \
     Views/GroupManagement/GroupView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
-    Views/WordManagement/WordItemDelegate.h \
-    Models/GroupListModel.h
+    Views/WordManagement/TranslationEditor.h \
+    Views/WordManagement/WordItemDelegate.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

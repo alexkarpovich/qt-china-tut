@@ -1,14 +1,13 @@
-#include "GroupListModel.h"
+#include "GroupModel.h"
 
-#include <Dao/GroupDao.h>
-
-GroupListModel::GroupListModel(QObject *parent)
+GroupModel::GroupModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-
+    groupDao = new GroupDao;
+    groups = groupDao->all();
 }
 
-QVariant GroupListModel::data(const QModelIndex &index, int role) const
+QVariant GroupModel::data(const QModelIndex &index, int role) const
 {
     if (index.row() < 0 || index.row() > groups.count()) {
         return QVariant();
@@ -25,13 +24,13 @@ QVariant GroupListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int GroupListModel::rowCount(const QModelIndex &parent) const
+int GroupModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return groups.size();
 }
 
-Qt::ItemFlags GroupListModel::flags(const QModelIndex &index) const
+Qt::ItemFlags GroupModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::ItemIsEnabled;
@@ -39,7 +38,7 @@ Qt::ItemFlags GroupListModel::flags(const QModelIndex &index) const
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool GroupModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid() && role == NameRole) {
         GroupDao gd;
@@ -55,23 +54,15 @@ bool GroupListModel::setData(const QModelIndex &index, const QVariant &value, in
      return false;
 }
 
-void GroupListModel::addGroup(Group *gr)
+void GroupModel::addGroup(const QString& name)
 {
     beginResetModel();
-
+    Group * gr = groupDao->create(name);
     groups << gr;
-
     endResetModel();
 }
 
-void GroupListModel::setGroups(QList<Group *> _groups)
-{
-    beginResetModel();
-    groups = _groups;
-    endResetModel();
-}
-
-QHash<int, QByteArray> GroupListModel::roleNames() const
+QHash<int, QByteArray> GroupModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";

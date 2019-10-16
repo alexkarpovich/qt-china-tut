@@ -1,12 +1,12 @@
 #include <QDebug>
 #include <Models/WordModel.h>
-#include <Dao/GroupDao.h>
-#include <Dao/WordDao.h>
 
-WordModel::WordModel(QObject *parent)
+WordModel::WordModel(int groupid, QObject *parent)
     : QAbstractTableModel(parent)
 {
-
+    wordDao = new WordDao;
+    groupDao = new GroupDao;
+    words = groupDao->words(groupid);
 }
 
 QVariant WordModel::data(const QModelIndex &index, int role) const
@@ -17,13 +17,12 @@ QVariant WordModel::data(const QModelIndex &index, int role) const
 
     const Word* wrd = words[index.row()];
 
-//    switch (role) {
-//    case IdRole: return wrd->getId();
-//    case GroupIdRole: return wrd->getGroupId();
-//    case ZhRole: return wrd->getZh();
-//    case RuRole: return wrd->getRu();
-//    case TranscriptionRole: return wrd->getTranscription();
-//    }
+    switch (role) {
+    case IdRole: return wrd->getId();
+    case TextRole: return wrd->getText();
+    case TranscriptionRole: return wrd->getTranscription();
+    case TranslationsRole: return "TRANSLATIONS";
+    }
 
     return QVariant();
 }
@@ -47,13 +46,12 @@ bool WordModel::setData(const QModelIndex &index, const QVariant &value, int rol
     if (index.isValid()) {
         Word *wrd = words.at(index.row());
 
-//        switch (role) {
-//        case ZhRole: tr->setZh(value.toString()); break;
-//        case RuRole: tr->setRu(value.toString()); break;
-//        case TranscriptionRole: tr->setTranscription(value.toString()); break;
-//        }
-//        tr = DbManager::saveGroupWord(tr->getGroupId(), tr);
-//        translations.replace(index.row(), tr);
+        if (role == TranscriptionRole) {
+            wrd->setTranscription(value.toString());
+            wordDao->update(wrd);
+            words.replace(index.row(), wrd);
+        }
+
         emit dataChanged(index, index);
         return true;
 
@@ -85,22 +83,13 @@ void WordModel::addWord(const QString &value)
     endResetModel();
 }
 
-void WordModel::setWords(QList<Word *> list)
-{
-    beginResetModel();
-    words = list;
-    endResetModel();
-}
 
 QHash<int, QByteArray> WordModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[ZhRole] = "zh";
-    roles[RuRole] = "ru";
+    roles[TextRole] = "text";
     roles[TranscriptionRole] = "transcription";
-    roles[StatusRole] = "status";
-    roles[GroupIdRole] = "group id";
 
     return roles;
 }

@@ -32,7 +32,8 @@ QString Word::codeString(Language code)
 
 Word::Word()
 {
-
+    text = "";
+    transcription = "";
 }
 
 QString Word::getText() const

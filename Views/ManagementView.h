@@ -5,14 +5,14 @@
 #include <QPushButton>
 #include <QWidget>
 
-#include <Models/GroupListModel.h>
+#include <Models/GroupModel.h>
 #include <Views/GroupManagement/GroupView.h>
 
 class ManagementView : public QWidget
 {
     Q_OBJECT
     QPushButton* addGroupBtn;
-    GroupListModel *groupListModel;
+    GroupModel *groupModel;
     QListView *groupListView;
     GroupView *groupView;
 

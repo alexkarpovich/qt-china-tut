@@ -11,7 +11,6 @@ ManagementView::ManagementView(QWidget *parent)
     : QWidget(parent)
 {
     buildLayout();
-    initializeWidgets();
 }
 
 void ManagementView::buildLayout()
@@ -51,13 +50,13 @@ QWidget *ManagementView::buildGroupListSection()
     glSectionLayout->setSpacing(0);
     glSectionLayout->setMargin(0);
     groupListView = new QListView;
-    groupListModel = new GroupListModel();
+    groupModel = new GroupModel();
     groupListView->setFrameStyle(QFrame::NoFrame);
     groupListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     groupListView->setItemDelegate(new GroupListItemDelegate);
     groupListView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
-    groupListView->setModel(groupListModel);
+    groupListView->setModel(groupModel);
     connect(groupListView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onGroupSelectionChanged(QItemSelection)));
     //groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
     connect(addGroupBtn, SIGNAL(clicked()), SLOT(onAddGroupBtnClicked()));
@@ -69,17 +68,9 @@ QWidget *ManagementView::buildGroupListSection()
     return glSection;
 }
 
-void ManagementView::initializeWidgets()
-{
-    GroupDao gd;
-    groupListModel->setGroups(gd.all());
-}
-
 void ManagementView::onAddGroupBtnClicked()
 {
-    Group *group = new Group;
-    group->setName("<Задайте имя группы>");
-    groupListModel->addGroup(group);
+    groupModel->addGroup("неизвестная группа");
 }
 
 void ManagementView::onGroupSelectionChanged(const QItemSelection& selection)
@@ -87,8 +78,8 @@ void ManagementView::onGroupSelectionChanged(const QItemSelection& selection)
     QModelIndex index = selection.indexes().first();
 
     if (index.isValid()) {
-        int groupId = index.data(GroupListModel::IdRole).toInt();
+        int groupId = index.data(GroupModel::IdRole).toInt();
         qDebug() << QString("Group selection changed %1").arg(groupId);
-        groupView->setGroupId(groupId);
+        groupView->switchGroup(groupId);
     }
 }

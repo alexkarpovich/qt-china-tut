@@ -1,20 +1,23 @@
-#ifndef GROUPLISTMODEL_H
-#define GROUPLISTMODEL_H
+#ifndef GROUPMODEL_H
+#define GROUPMODEL_H
 
 #include <QList>
 #include <QHash>
 #include <QVariant>
 #include <QModelIndex>
 #include <QAbstractListModel>
+
 #include <Entities/Group.h>
+#include <Dao/GroupDao.h>
 
 
-class GroupListModel : public QAbstractListModel
+class GroupModel : public QAbstractListModel
 {
     Q_OBJECT
     QList<Group*> groups;
+    GroupDao *groupDao;
 public:
-    explicit GroupListModel(QObject *parent = nullptr);
+    explicit GroupModel(QObject *parent = nullptr);
 
     enum groupRoles {
         NameRole = Qt::DisplayRole,
@@ -27,10 +30,9 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value,
               int role = Qt::EditRole);
 public slots:
-    void addGroup(Group* gr);
-    void setGroups(QList<Group*> _groups);
+    void addGroup(const QString& name);
 private:
     QHash<int, QByteArray> roleNames() const;
 };
 
-#endif // GROUPLISTMODEL_H
+#endif // GROUPMODEL_H
