@@ -76,10 +76,11 @@ Word *WordDao::createTranslationWord(Word *wrd)
 
 Word *WordDao::addTranslation(int groupid, int wordid, const QString &text)
 {
-    Word *wrd = new Word;
-    wrd->setText(text);
+    Word *wrd;
 
     if (!(wrd = getTranslationByText(wordid, text))) {
+        wrd = new Word;
+        wrd->setText(text);
         wrd = createTranslationWord(wrd);
     }
 

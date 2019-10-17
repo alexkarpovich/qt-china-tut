@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Application.cpp \
     Dao/GroupDao.cpp \
     Dao/LanguageDao.cpp \
     Dao/ProfileDao.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Application.h \
     Dao/GroupDao.h \
     Dao/LanguageDao.h \
     Dao/ProfileDao.h \

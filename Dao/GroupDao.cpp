@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QApplication>
 
 #include <Dao/GroupDao.h>
 #include <Dao/WordDao.h>
@@ -11,6 +12,7 @@ GroupDao::GroupDao()
 {
     ProfileDao pd;
     profile = pd.get(1);
+    qDebug() << qGuiApp->property("testVar");
 }
 
 QList<Group *> GroupDao::all()
