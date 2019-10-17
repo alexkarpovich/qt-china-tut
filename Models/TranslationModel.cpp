@@ -1,11 +1,14 @@
+#include <QDebug>
 #include "TranslationModel.h"
 
-TranslationModel::TranslationModel(int wordid, QObject *parent)
+TranslationModel::TranslationModel(int groupid, int wordid, QObject *parent)
     : QAbstractListModel(parent)
 {
+    this->groupid = groupid;
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
+    qDebug() << options.size();
 }
 
 QVariant TranslationModel::data(const QModelIndex &index, int role) const
@@ -51,7 +54,7 @@ bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, 
 
 void TranslationModel::addTranslation(const QString &text)
 {
-    Word *wrd = wordDao->addTranslation(wordid, text);
+    Word *wrd = wordDao->addTranslation(groupid, wordid, text);
     options << wrd;
 }
 

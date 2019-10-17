@@ -22,6 +22,7 @@ QVariant WordModel::data(const QModelIndex &index, int role) const
     case TextRole: return wrd->getText();
     case TranscriptionRole: return wrd->getTranscription();
     case TranslationsRole: return "TRANSLATIONS";
+    case GroupIdRole: return groupid;
     }
 
     return QVariant();

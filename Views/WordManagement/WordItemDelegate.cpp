@@ -25,8 +25,9 @@ WordItemDelegate::WordItemDelegate(QObject *parent)
 QWidget *WordItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (index.column() == 2) {
+        int groupid = index.data(WordModel::GroupIdRole).toInt();
         int wordid = index.data(WordModel::IdRole).toInt();
-        TranslationEditor *editor = new TranslationEditor(wordid, parent);
+        TranslationEditor *editor = new TranslationEditor(groupid, wordid, parent);
         return editor;
     } else {
         QLineEdit *editor = new QLineEdit(parent);
@@ -65,7 +66,7 @@ void WordItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionV
 {
     if (index.column() == 2) {
         QPoint pos = option.widget->mapToGlobal(QPoint(option.rect.x(), option.rect.y()));
-        editor->setGeometry(pos.x() + 2, pos.y() + 22, option.rect.width(), 200);
+        editor->setGeometry(pos.x() + 2, pos.y() + 18, option.rect.width(), 200);
     } else {
         editor->setGeometry(option.rect);
     }

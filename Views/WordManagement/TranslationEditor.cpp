@@ -2,9 +2,11 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include "TranslationEditor.h"
+#include "TranslationItemDelegate.h"
 
-TranslationEditor::TranslationEditor(int wordid, QWidget *parent) : QWidget(parent)
+TranslationEditor::TranslationEditor(int groupid, int wordid, QWidget *parent) : QWidget(parent)
 {
+    this->groupid = groupid;
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
@@ -13,7 +15,9 @@ TranslationEditor::TranslationEditor(int wordid, QWidget *parent) : QWidget(pare
     rootLayout->setMargin(5);
     translationInput = new QLineEdit;
     optionsView = new QListView;
-    translationModel = new TranslationModel(wordid);
+    optionsView->setItemDelegate(new TranslationItemDelegate);
+    translationModel = new TranslationModel(groupid, wordid);
+    optionsView->setModel(translationModel);
     translationInput->setPlaceholderText("Новый перевод");
     rootLayout->addWidget(translationInput, 0, Qt::AlignTop);
     rootLayout->addWidget(optionsView);

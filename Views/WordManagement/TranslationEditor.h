@@ -11,6 +11,7 @@
 class TranslationEditor : public QWidget
 {
     Q_OBJECT
+    int groupid;
     int wordid;
     QList<Word *> options;
     WordDao *wordDao;
@@ -19,7 +20,7 @@ class TranslationEditor : public QWidget
     TranslationModel *translationModel;
 
 public:
-    explicit TranslationEditor(int wordid, QWidget *parent = nullptr);
+    explicit TranslationEditor(int groupid, int wordid, QWidget *parent = nullptr);
 
 signals:
 

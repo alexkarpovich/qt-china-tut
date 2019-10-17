@@ -42,8 +42,8 @@ void GroupEditView::buildLayout()
     wordModel = new WordModel(groupid);
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    //wordTableView->horizontalHeader()->hide();
     wordTableView->horizontalHeader()->setStretchLastSection(true);
+    wordTableView->horizontalHeader()->setFixedHeight(18);
     wordTableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     wordTableView->setItemDelegate(new WordItemDelegate);
     wordTableView->setEditTriggers(QAbstractItemView::DoubleClicked

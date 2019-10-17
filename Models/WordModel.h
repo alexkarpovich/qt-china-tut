@@ -29,7 +29,8 @@ public:
         IdRole = Qt::UserRole,
         TextRole = Qt::UserRole + 1,
         TranscriptionRole = Qt::UserRole + 2,
-        TranslationsRole = Qt::UserRole + 3
+        TranslationsRole = Qt::UserRole + 3,
+        GroupIdRole = Qt::UserRole + 4
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;

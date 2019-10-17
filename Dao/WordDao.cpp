@@ -16,12 +16,11 @@ QList<Word *> WordDao::translations(int id)
 {
     QList<Word *> list;
     QSqlQuery query;
-    QString sql = "SELECT * FROM %1 ln "
-                  "LEFT JOIN translations t ON t.src_code=:srcCode AND t.src_id=:srcid "
-                  "WHERE t.dst_id=ln.id";
-    query.prepare(sql.arg(profile->getNativeLang()->getCode()));
-    query.bindValue(":srcid", id);
-    query.bindValue(":srcCode", profile->getNativeLang()->getId());
+    QString sql = "SELECT * FROM %1 "
+                  "LEFT JOIN translations t ON t.%1_id=%1.id "
+                  "WHERE t.%2_id=:wordid";
+    query.prepare(sql.arg(profile->getNativeLang()->getCode(), profile->getLearningLang()->getCode()));
+    query.bindValue(":wordid", id);
 
     if (query.exec()) {
         while (query.next()) {
@@ -55,7 +54,7 @@ Word *WordDao::getTranslationByText(int id, const QString &text)
     return nullptr;
 }
 
-Word *WordDao::createTranslation(int id, Word *wrd)
+Word *WordDao::createTranslationWord(Word *wrd)
 {
     QSqlQuery query;
     QString sql = QString("INSERT INTO %1 (text, transcription) VALUES (:text, :transcription)")
@@ -69,18 +68,40 @@ Word *WordDao::createTranslation(int id, Word *wrd)
 
         return wrd;
     } else {
-        qDebug() << QString("Translation insert error: %s").arg(query.lastError().text());
+        qDebug() << QString("Translation word insert error: %s").arg(query.lastError().text());
     }
 
     return nullptr;
 }
 
-Word *WordDao::addTranslation(int id, const QString &text)
+Word *WordDao::addTranslation(int groupid, int wordid, const QString &text)
 {
-    if (!getTranslationByText(id, text)) {
-        Word *wrd = new Word;
-        wrd->setText(text);
-        return createTranslation(id, wrd);
+    Word *wrd = new Word;
+    wrd->setText(text);
+
+    if (!(wrd = getTranslationByText(wordid, text))) {
+        wrd = createTranslationWord(wrd);
+    }
+
+    QSqlQuery query;
+    QString sql = QString("INSERT INTO translations (%1_id, %2_id) VALUES (:srcid, :trid)")
+            .arg(profile->getLearningLang()->getCode(), profile->getNativeLang()->getCode());
+    query.prepare(sql);
+    query.bindValue(":srcid", wordid);
+    query.bindValue(":trid", wrd->getId());
+
+    if (query.exec()) {
+        int trid = query.lastInsertId().toInt();
+
+        query.prepare("INSERT INTO groups_translations (group_id, translation_id) VALUES (:groupid, :trid)");
+        query.bindValue(":groupid", groupid);
+        query.bindValue(":trid", trid);
+
+        if (query.exec()) {
+            return wrd;
+        }
+    } else {
+        qDebug() << QString("Translation insert error: %s").arg(query.lastError().text());
     }
 
     return nullptr;
