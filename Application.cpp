@@ -6,14 +6,15 @@
 #include <QSqlDatabase>
 
 #include <Application.h>
-
 #include <Entities/Profile.h>
 
 
 Application::Application(int &argc, char **argv)
     : QApplication(argc, argv)
 {
-    //setProperty("profile", QVariant::fromValue<Profile>( new Profile ));
+    QVariant stored;
+    stored.setValue(Profile());
+    setProperty("profile", stored);
 }
 
 bool Application::init()

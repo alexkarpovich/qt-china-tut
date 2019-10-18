@@ -34,3 +34,9 @@ Profile::Profile()
 {
 
 }
+
+Profile::Profile(const Profile &other) :
+    id(other.getId()), learningLang(other.getLearningLang()), nativeLang(other.getNativeLang())
+{
+
+}
