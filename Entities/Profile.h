@@ -1,7 +1,6 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
-#include <QObject>
 #include <QVariant>
 #include <Entities/Language.h>
 
@@ -21,6 +20,6 @@ public:
     void setNativeLang(Language *value);
 };
 
-Q_DECLARE_METATYPE(Profile);
+Q_DECLARE_METATYPE(Profile*);
 
 #endif // PROFILE_H

@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QHeaderView>
@@ -49,13 +50,28 @@ void GroupEditView::buildLayout()
     wordTableView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
     wordTableView->setModel(wordModel);
+
+    QHBoxLayout *controlsLayout = new QHBoxLayout;
+    startTrainingBtn = new QPushButton("Тренировка");
+    startExamineBtn = new QPushButton("Экзамен");
+
+    connect(startTrainingBtn, SIGNAL(clicked()), SLOT(onStartTrainingClicked()));
+
+    controlsLayout->addWidget(startExamineBtn);
+    controlsLayout->addWidget(startTrainingBtn);
     wlSectionLayout->addWidget(wordInputWgt);
     wlSectionLayout->addWidget(wordTableView);
+    wlSectionLayout->addLayout(controlsLayout);
 }
 
 void GroupEditView::onWordInputReturnPressed()
 {
     wordModel->addWord(wordInput->text());
     wordInput->clear();
+}
+
+void GroupEditView::onStartTrainingClicked()
+{
+
 }
 

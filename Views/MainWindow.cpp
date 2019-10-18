@@ -1,3 +1,5 @@
+#include "LearningView.h"
+
 #include <QHBoxLayout>
 
 #include <Views/MainWindow.h>
@@ -26,7 +28,9 @@ MainWindow::~MainWindow()
 void MainWindow::initWorkspace()
 {
     ManagementView* managementView = new ManagementView;
+    LearningView *learningView = new LearningView;
     views->addWidget(managementView);
+    views->addWidget(learningView);
     views->setCurrentIndex(viewState);
 }
 

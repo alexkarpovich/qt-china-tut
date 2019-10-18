@@ -27,6 +27,7 @@ QWidget *WordItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
     if (index.column() == 2) {
         int groupid = index.data(WordModel::GroupIdRole).toInt();
         int wordid = index.data(WordModel::IdRole).toInt();
+        qDebug() << groupid << wordid;
         TranslationEditor *editor = new TranslationEditor(groupid, wordid, parent);
         return editor;
     } else {

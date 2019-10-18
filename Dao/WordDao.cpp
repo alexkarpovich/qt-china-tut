@@ -3,13 +3,12 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+#include <Application.h>
 #include <Dao/WordDao.h>
-#include <Dao/ProfileDao.h>
 
 WordDao::WordDao()
 {
-    ProfileDao pd;
-    profile = pd.get(1);
+    profile = qvariant_cast<Profile*>(qGuiApp->property("profile"));
 }
 
 QList<Word *> WordDao::translations(int id)
@@ -106,6 +105,47 @@ Word *WordDao::addTranslation(int groupid, int wordid, const QString &text)
     }
 
     return nullptr;
+}
+
+QMap<int, bool> WordDao::translationFlags(int groupid, int wordid)
+{
+    QMap<int, bool> flags;
+    QSqlQuery query;
+    QString sql = "SELECT t.%1_id FROM groups_translations gt "
+                  "LEFT JOIN translations t ON t.id=gt.translation_id "
+                  "WHERE gt.group_id=:groupid AND gt.status=1 AND t.%2_id=:wordid";
+    query.prepare(sql.arg(profile->getNativeLang()->getCode(), profile->getLearningLang()->getCode()));
+    query.bindValue(":groupid", groupid);
+    query.bindValue(":wordid", wordid);
+
+    if (query.exec()) {
+        while(query.next()) {
+            flags[query.value(0).toInt()] = true;
+        }
+    }
+
+    return flags;
+}
+
+void WordDao::updateTranslationFlags(int groupid, int wordid, int twordid, bool value)
+{
+    QSqlQuery query;
+    QString sql = "INSERT OR REPLACE INTO groups_translations (group_id, translation_id, status) "
+                  "SELECT :groupid, id, :status from translations WHERE %1_id=:wordid AND %2_id=:twordid";
+    qDebug() << groupid << wordid << twordid;
+
+    query.prepare(sql.arg(profile->getLearningLang()->getCode(), profile->getNativeLang()->getCode()));
+    query.bindValue(":groupid", groupid);
+    query.bindValue(":wordid", wordid);
+    query.bindValue(":twordid", twordid);
+    query.bindValue(":status", value);
+
+    if (query.exec()) {
+
+    } else {
+        qDebug() << "Translation flags update error: " + query.lastError().text();
+    }
+
 }
 
 QList<Word *> WordDao::all()

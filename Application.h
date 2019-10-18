@@ -12,6 +12,7 @@ class Application : public QApplication
     void initializePalette();
     void initializeStorage();
     bool openConnection();
+    void initProfile();
 public:
     Application(int &argc, char **argv);
     bool init();

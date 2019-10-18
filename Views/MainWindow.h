@@ -9,7 +9,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     enum ViewStates {
-        ManagementState = 0
+        ManagementState = 0,
+        LearningState = 1
     };
 
     QWidget* rootWidget;

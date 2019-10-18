@@ -8,6 +8,7 @@ TranslationModel::TranslationModel(int groupid, int wordid, QObject *parent)
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
+    optionFlags = wordDao->translationFlags(groupid, wordid);
     qDebug() << options.size();
 }
 
@@ -22,6 +23,7 @@ QVariant TranslationModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case IdRole: return wrd->getId();
     case TextRole: return wrd->getText();
+    case IsSelectedRole: return optionFlags.contains(wrd->getId()) && optionFlags[wrd->getId()];
     }
 
     return QVariant();
@@ -38,12 +40,18 @@ Qt::ItemFlags TranslationModel::flags(const QModelIndex &index) const
     if (!index.isValid())
         return Qt::ItemIsEnabled;
 
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable | Qt::ItemIsUserCheckable;
 }
 
 bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid()) {
+        Word *wrd = options[index.row()];
+
+        if (role == IsSelectedRole) {
+            optionFlags[wrd->getId()] = value.toBool();
+        }
+        wordDao->updateTranslationFlags(groupid, wordid, wrd->getId(), value.toBool());
         emit dataChanged(index, index);
         return true;
 

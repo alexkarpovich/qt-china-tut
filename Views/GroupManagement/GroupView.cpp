@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <Views/GroupManagement/GroupView.h>
 #include <Views/GroupManagement/GroupNotSelectedView.h>
 

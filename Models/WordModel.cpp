@@ -2,7 +2,7 @@
 #include <Models/WordModel.h>
 
 WordModel::WordModel(int groupid, QObject *parent)
-    : QAbstractTableModel(parent)
+    : QAbstractTableModel(parent), groupid(groupid)
 {
     wordDao = new WordDao;
     groupDao = new GroupDao;

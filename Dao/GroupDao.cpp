@@ -2,17 +2,14 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QApplication>
 
+#include <Application.h>
 #include <Dao/GroupDao.h>
 #include <Dao/WordDao.h>
-#include <Dao/ProfileDao.h>
 
 GroupDao::GroupDao()
 {
-    ProfileDao pd;
-    profile = pd.get(1);
-    qDebug() << qGuiApp->property("testVar");
+    profile = qvariant_cast<Profile*>(qGuiApp->property("profile"));
 }
 
 QList<Group *> GroupDao::all()

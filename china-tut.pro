@@ -32,6 +32,7 @@ SOURCES += \
     Views/GroupManagement/GroupListItemDelegate.cpp \
     Views/GroupManagement/GroupNotSelectedView.cpp \
     Views/GroupManagement/GroupView.cpp \
+    Views/LearningView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
     Views/WordManagement/TranslationEditor.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     Views/GroupManagement/GroupListItemDelegate.h \
     Views/GroupManagement/GroupNotSelectedView.h \
     Views/GroupManagement/GroupView.h \
+    Views/LearningView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
     Views/WordManagement/TranslationEditor.h \

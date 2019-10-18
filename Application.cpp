@@ -6,15 +6,14 @@
 #include <QSqlDatabase>
 
 #include <Application.h>
+#include <Dao/ProfileDao.h>
 #include <Entities/Profile.h>
 
 
 Application::Application(int &argc, char **argv)
     : QApplication(argc, argv)
 {
-    QVariant stored;
-    stored.setValue(Profile());
-    setProperty("profile", stored);
+
 }
 
 bool Application::init()
@@ -25,6 +24,8 @@ bool Application::init()
     if (!openConnection()) {
         return false;
     }
+
+    initProfile();
 
     return true;
 }
@@ -56,6 +57,15 @@ bool Application::openConnection()
     m_db.setDatabaseName(dbFilePath);
 
     return m_db.open();
+}
+
+void Application::initProfile()
+{
+    QVariant stored;
+    ProfileDao pd;
+    Profile *p = pd.get(1);
+    stored.setValue(p);
+    setProperty("profile", stored);
 }
 
 void Application::initializeStorage()

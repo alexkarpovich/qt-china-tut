@@ -10,11 +10,13 @@ class TranslationModel : public QAbstractListModel
     int groupid;
     int wordid;
     QList<Word *> options;
+    QMap<int, bool> optionFlags;
     WordDao *wordDao;
 public:
     enum TranslationRole {
         IdRole = Qt::UserRole,
-        TextRole = Qt::UserRole + 1
+        TextRole = Qt::UserRole + 1,
+        IsSelectedRole = Qt::UserRole + 2
     };
     explicit TranslationModel(int groupid, int wordid, QObject *parent = nullptr);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
