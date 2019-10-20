@@ -1,6 +1,8 @@
 #ifndef MANAGEMENTVIEW_H
 #define MANAGEMENTVIEW_H
 
+#include "PageSwitch.h"
+
 #include <QListView>
 #include <QPushButton>
 #include <QWidget>

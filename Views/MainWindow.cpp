@@ -1,36 +1,21 @@
-#include "LearningView.h"
-
 #include <QHBoxLayout>
 
 #include <Views/MainWindow.h>
-#include <Views/ManagementView.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     rootWidget = new QWidget(this);
-    views = new QStackedWidget;
+    views = new PageSwitch;
     QHBoxLayout* rootLayout = new QHBoxLayout;
-    QHBoxLayout* viewsLayout = new QHBoxLayout;
-    viewsLayout->addWidget(views);
-    rootLayout->addLayout(viewsLayout);
+    rootLayout->addWidget(views);
     rootLayout->setMargin(0);
     rootWidget->setLayout(rootLayout);
     resize(740, 600);
     setCentralWidget(rootWidget);
-    initWorkspace();
 }
 
 MainWindow::~MainWindow()
 {
-}
-
-void MainWindow::initWorkspace()
-{
-    ManagementView* managementView = new ManagementView;
-    LearningView *learningView = new LearningView;
-    views->addWidget(managementView);
-    views->addWidget(learningView);
-    views->setCurrentIndex(viewState);
 }
 

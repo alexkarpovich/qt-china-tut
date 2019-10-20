@@ -3,7 +3,6 @@
 #include <QHeaderView>
 
 #include <Dao/GroupDao.h>
-
 #include <Views/ManagementView.h>
 #include <Views/GroupManagement/GroupListItemDelegate.h>
 
@@ -35,7 +34,7 @@ void ManagementView::buildControlsSection()
 void ManagementView::buildWorkSection()
 {
     QHBoxLayout *workSectionLayout = new QHBoxLayout;
-    groupView = new GroupView;
+    groupView = new GroupView(this);
     workSectionLayout->addWidget(buildGroupListSection());
     workSectionLayout->addWidget(groupView);
 

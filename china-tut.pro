@@ -28,6 +28,9 @@ SOURCES += \
     Models/GroupModel.cpp \
     Models/TranslationModel.cpp \
     Models/WordModel.cpp \
+    Views/Cards/Card.cpp \
+    Views/Cards/CardAskView.cpp \
+    Views/Cards/CardDetailView.cpp \
     Views/GroupManagement/GroupEditView.cpp \
     Views/GroupManagement/GroupListItemDelegate.cpp \
     Views/GroupManagement/GroupNotSelectedView.cpp \
@@ -35,6 +38,7 @@ SOURCES += \
     Views/LearningView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
+    Views/PageSwitch.cpp \
     Views/WordManagement/TranslationEditor.cpp \
     Views/WordManagement/TranslationItemDelegate.cpp \
     Views/WordManagement/WordItemDelegate.cpp \
@@ -53,6 +57,9 @@ HEADERS += \
     Models/GroupModel.h \
     Models/TranslationModel.h \
     Models/WordModel.h \
+    Views/Cards/Card.h \
+    Views/Cards/CardAskView.h \
+    Views/Cards/CardDetailView.h \
     Views/GroupManagement/GroupEditView.h \
     Views/GroupManagement/GroupListItemDelegate.h \
     Views/GroupManagement/GroupNotSelectedView.h \
@@ -60,6 +67,7 @@ HEADERS += \
     Views/LearningView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
+    Views/PageSwitch.h \
     Views/WordManagement/TranslationEditor.h \
     Views/WordManagement/TranslationItemDelegate.h \
     Views/WordManagement/WordItemDelegate.h

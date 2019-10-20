@@ -20,7 +20,7 @@ void GroupView::buildLayout()
 {
     QHBoxLayout *rootLayout = new QHBoxLayout;
     QWidget *notSelectedView = new GroupNotSelectedView;
-    editView = new GroupEditView;
+    editView = new GroupEditView(this);
     views = new QStackedWidget;
     views->addWidget(notSelectedView);
     views->addWidget(editView);

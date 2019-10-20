@@ -4,6 +4,7 @@
 #include <QHeaderView>
 
 #include <Views/GroupManagement/GroupEditView.h>
+#include <Views/PageSwitch.h>
 #include <Views/WordManagement/WordItemDelegate.h>
 
 GroupEditView::GroupEditView(QWidget *parent)
@@ -72,6 +73,7 @@ void GroupEditView::onWordInputReturnPressed()
 
 void GroupEditView::onStartTrainingClicked()
 {
-
+    PageSwitch *pageSwitch = static_cast<PageSwitch *>(parent()->parent()->parent()->parent());
+    pageSwitch->setLearningView();
 }
 

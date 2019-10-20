@@ -3,21 +3,16 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <QStackedWidget>
+
+#include "PageSwitch.h"
+
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    enum ViewStates {
-        ManagementState = 0,
-        LearningState = 1
-    };
 
     QWidget* rootWidget;
-    QStackedWidget* views;
-    ViewStates viewState = ManagementState;
-
-    void initWorkspace();
+    PageSwitch* views;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
