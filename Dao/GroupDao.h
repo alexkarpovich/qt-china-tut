@@ -19,7 +19,7 @@ public:
     Group *create(const QString& name);
     void update(Group *value);
     void del(Group *value);
-    QList<Word *> words(int groupid);
+    QList<Word *> words(QList<int> groupids);
     Word *addWord(int groupid, const QString &text);
 };
 

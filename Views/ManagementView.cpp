@@ -75,11 +75,14 @@ void ManagementView::onAddGroupBtnClicked()
 
 void ManagementView::onGroupSelectionChanged(const QItemSelection& selection)
 {
-    QModelIndexList sel = groupListView->selectionModel()->selectedIndexes();
+    QModelIndexList selected = groupListView->selectionModel()->selectedIndexes();
 
-    if (sel.first().isValid()) {
-        int groupId = sel.first().data(GroupModel::IdRole).toInt();
-        qDebug() << QString("Group selection changed %1").arg(groupId);
-        groupView->switchGroup(groupId);
+    if (selected.size()) {
+        QList<int> groupids;
+        foreach (QModelIndex model, selected) {
+            groupids << model.data(GroupModel::IdRole).toInt();
+        }
+        qDebug() << QString("Group selection changed %1").arg(groupids.size());
+        groupView->switchGroup(groupids);
     }
 }

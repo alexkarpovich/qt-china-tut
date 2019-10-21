@@ -8,7 +8,7 @@ TranslationModel::TranslationModel(QList<int> groupids, int wordid, QObject *par
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
-    optionFlags = wordDao->translationFlags(groupids, wordid);
+    optionFlags = wordDao->translationFlags(groupids.first(), wordid);
     qDebug() << options.size();
 }
 
@@ -51,7 +51,7 @@ bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, 
         if (role == IsSelectedRole) {
             optionFlags[wrd->getId()] = value.toBool();
         }
-        wordDao->updateTranslationFlags(groupid, wordid, wrd->getId(), value.toBool());
+        wordDao->updateTranslationFlags(groupids.first(), wordid, wrd->getId(), value.toBool());
         emit dataChanged(index, index);
         return true;
 
@@ -62,7 +62,7 @@ bool TranslationModel::setData(const QModelIndex &index, const QVariant &value, 
 
 void TranslationModel::addTranslation(const QString &text)
 {
-    Word *wrd = wordDao->addTranslation(groupid, wordid, text);
+    Word *wrd = wordDao->addTranslation(groupids.first(), wordid, text);
     options << wrd;
 }
 

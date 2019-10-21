@@ -7,7 +7,7 @@
 
 class TranslationModel : public QAbstractListModel
 {
-    int groupid;
+    QList<int> groupids;
     int wordid;
     QList<Word *> options;
     QMap<int, bool> optionFlags;
@@ -18,7 +18,7 @@ public:
         TextRole = Qt::UserRole + 1,
         IsSelectedRole = Qt::UserRole + 2
     };
-    explicit TranslationModel(int groupid, int wordid, QObject *parent = nullptr);
+    explicit TranslationModel(QList<int> groupids, int wordid, QObject *parent = nullptr);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;

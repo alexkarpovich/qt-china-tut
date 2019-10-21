@@ -104,14 +104,22 @@ void GroupDao::del(Group *value)
     }
 }
 
-QList<Word *> GroupDao::words(int groupid)
+QList<Word *> GroupDao::words(QList<int> groupids)
 {
     QList<Word *> list;
     QSqlQuery query;
-    QString sql = QString("SELECT w.* FROM %1 w LEFT JOIN groups_words gw ON w.id=gw.word_id WHERE gw.group_id=:groupid")
-        .arg(profile->getLearningLang()->getCode());
+    QStringList askChars;
+
+    foreach(int id, groupids) {
+        askChars << "?";
+    }
+    QString sql = QString("SELECT w.* FROM %1 w LEFT JOIN groups_words gw ON w.id=gw.word_id WHERE gw.group_id IN (%2)")
+        .arg(profile->getLearningLang()->getCode(), askChars.join(","));
     query.prepare(sql);
-    query.bindValue(":groupid", groupid);
+
+    foreach(int id, groupids) {
+        query.addBindValue(id);
+    }
 
     if (query.exec()) {
         while (query.next()) {
