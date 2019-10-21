@@ -55,6 +55,7 @@ QWidget *ManagementView::buildGroupListSection()
     groupListView->setItemDelegate(new GroupListItemDelegate);
     groupListView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
+    groupListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     groupListView->setModel(groupModel);
     connect(groupListView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onGroupSelectionChanged(QItemSelection)));
     //groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
@@ -74,10 +75,10 @@ void ManagementView::onAddGroupBtnClicked()
 
 void ManagementView::onGroupSelectionChanged(const QItemSelection& selection)
 {
-    QModelIndex index = selection.indexes().first();
+    QModelIndexList sel = groupListView->selectionModel()->selectedIndexes();
 
-    if (index.isValid()) {
-        int groupId = index.data(GroupModel::IdRole).toInt();
+    if (sel.first().isValid()) {
+        int groupId = sel.first().data(GroupModel::IdRole).toInt();
         qDebug() << QString("Group selection changed %1").arg(groupId);
         groupView->switchGroup(groupId);
     }

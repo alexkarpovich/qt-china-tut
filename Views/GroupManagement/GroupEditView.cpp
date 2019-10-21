@@ -13,10 +13,10 @@ GroupEditView::GroupEditView(QWidget *parent)
     buildLayout();
 }
 
-void GroupEditView::switchGroup(int groupid)
+void GroupEditView::switchGroup(QList<int> groupids)
 {
-    this->groupid = groupid;
-    wordModel = new WordModel(groupid);
+    this->groupids = groupids;
+    wordModel = new WordModel(groupids);
     wordTableView->setModel(wordModel);
 }
 
@@ -41,7 +41,7 @@ void GroupEditView::buildLayout()
     setLayout(wlSectionLayout);
 
     wordTableView = new QTableView;
-    wordModel = new WordModel(groupid);
+    wordModel = new WordModel(groupids);
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     wordTableView->horizontalHeader()->setStretchLastSection(true);

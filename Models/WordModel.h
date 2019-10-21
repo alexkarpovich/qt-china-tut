@@ -15,7 +15,7 @@
 class WordModel : public QAbstractTableModel
 {
     Q_OBJECT
-    int groupid;
+    QList<int> groupids;
     QList<Word*> words;
     QMap<int, QList<Word *>> options;
     QMap<int, bool> optionFlags;
@@ -23,14 +23,14 @@ class WordModel : public QAbstractTableModel
     GroupDao *groupDao;
 
 public:
-    explicit WordModel(int groupid, QObject *parent = nullptr);
+    explicit WordModel(QList<int> groupids, QObject *parent = nullptr);
 
     enum WordRoles {
         IdRole = Qt::UserRole,
         TextRole = Qt::UserRole + 1,
         TranscriptionRole = Qt::UserRole + 2,
         TranslationsRole = Qt::UserRole + 3,
-        GroupIdRole = Qt::UserRole + 4
+        GroupIdsRole = Qt::UserRole + 4
     };
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent) const;

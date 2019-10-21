@@ -1,14 +1,14 @@
 #include <QDebug>
 #include "TranslationModel.h"
 
-TranslationModel::TranslationModel(int groupid, int wordid, QObject *parent)
+TranslationModel::TranslationModel(QList<int> groupids, int wordid, QObject *parent)
     : QAbstractListModel(parent)
 {
-    this->groupid = groupid;
+    this->groupids = groupids;
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
-    optionFlags = wordDao->translationFlags(groupid, wordid);
+    optionFlags = wordDao->translationFlags(groupids, wordid);
     qDebug() << options.size();
 }
 

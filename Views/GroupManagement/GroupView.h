@@ -17,7 +17,7 @@ class GroupView : public QWidget
 public:
 
     explicit GroupView(QWidget *parent = nullptr);
-    void switchGroup(int groupId);
+    void switchGroup(QList<int> groupids);
 
 private:
     ViewStates viewState;

@@ -4,9 +4,9 @@
 #include "TranslationEditor.h"
 #include "TranslationItemDelegate.h"
 
-TranslationEditor::TranslationEditor(int groupid, int wordid, QWidget *parent) : QWidget(parent)
+TranslationEditor::TranslationEditor(QList<int> groupids, int wordid, QWidget *parent) : QWidget(parent)
 {
-    this->groupid = groupid;
+    this->groupids = groupids;
     this->wordid = wordid;
     wordDao = new WordDao;
     options = wordDao->translations(wordid);
@@ -16,7 +16,7 @@ TranslationEditor::TranslationEditor(int groupid, int wordid, QWidget *parent) :
     translationInput = new QLineEdit;
     optionsView = new QListView;
     optionsView->setItemDelegate(new TranslationItemDelegate);
-    translationModel = new TranslationModel(groupid, wordid);
+    translationModel = new TranslationModel(groupids, wordid);
     optionsView->setModel(translationModel);
     translationInput->setPlaceholderText("Новый перевод");
     rootLayout->addWidget(translationInput, 0, Qt::AlignTop);

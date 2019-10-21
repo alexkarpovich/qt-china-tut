@@ -10,7 +10,7 @@
 class GroupEditView : public QWidget
 {
     Q_OBJECT
-    int groupid;
+    QList<int> groupids;
     WordModel *wordModel;
     QTableView *wordTableView;
     QLineEdit* wordInput;
@@ -20,7 +20,7 @@ class GroupEditView : public QWidget
     void buildLayout();
 public:
     explicit GroupEditView(QWidget *parent = nullptr);
-    void switchGroup(int groupid);
+    void switchGroup(QList<int> groupids);
 
 signals:
 

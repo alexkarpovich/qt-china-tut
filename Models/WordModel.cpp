@@ -1,12 +1,13 @@
 #include <QDebug>
+#include <QVariant>
 #include <Models/WordModel.h>
 
-WordModel::WordModel(int groupid, QObject *parent)
-    : QAbstractTableModel(parent), groupid(groupid)
+WordModel::WordModel(QList<int> groupids, QObject *parent)
+    : QAbstractTableModel(parent), groupids(groupids)
 {
     wordDao = new WordDao;
     groupDao = new GroupDao;
-    words = groupDao->words(groupid);
+    words = groupDao->words(groupids);
 }
 
 QVariant WordModel::data(const QModelIndex &index, int role) const
@@ -22,7 +23,7 @@ QVariant WordModel::data(const QModelIndex &index, int role) const
     case TextRole: return wrd->getText();
     case TranscriptionRole: return wrd->getTranscription();
     case TranslationsRole: return "TRANSLATIONS";
-    case GroupIdRole: return groupid;
+    case GroupIdsRole: return QVariant::fromValue(groupids);
     }
 
     return QVariant();
@@ -77,7 +78,7 @@ void WordModel::addWord(const QString &value)
     beginResetModel();
     GroupDao gd;
     WordDao wd;
-    Word *wrd = gd.addWord(1, value);
+    Word *wrd = gd.addWord(groupids, value);
     words << wrd;
     QList<Word *> translations = wd.translations(wrd->getId());
     options[wrd->getId()] = translations;

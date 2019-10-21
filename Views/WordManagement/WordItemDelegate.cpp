@@ -25,10 +25,10 @@ WordItemDelegate::WordItemDelegate(QObject *parent)
 QWidget *WordItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (index.column() == 2) {
-        int groupid = index.data(WordModel::GroupIdRole).toInt();
+        QList<int> groupids = qvariant_cast<QList<int>>(index.data(WordModel::GroupIdsRole));
         int wordid = index.data(WordModel::IdRole).toInt();
-        qDebug() << groupid << wordid;
-        TranslationEditor *editor = new TranslationEditor(groupid, wordid, parent);
+        qDebug() << groupids << wordid;
+        TranslationEditor *editor = new TranslationEditor(groupids, wordid, parent);
         return editor;
     } else {
         QLineEdit *editor = new QLineEdit(parent);

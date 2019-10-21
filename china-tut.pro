@@ -20,10 +20,12 @@ SOURCES += \
     Dao/GroupDao.cpp \
     Dao/LanguageDao.cpp \
     Dao/ProfileDao.cpp \
+    Dao/TrainingDao.cpp \
     Dao/WordDao.cpp \
     Entities/Group.cpp \
     Entities/Language.cpp \
     Entities/Profile.cpp \
+    Entities/Training.cpp \
     Entities/Word.cpp \
     Models/GroupModel.cpp \
     Models/TranslationModel.cpp \
@@ -49,10 +51,12 @@ HEADERS += \
     Dao/GroupDao.h \
     Dao/LanguageDao.h \
     Dao/ProfileDao.h \
+    Dao/TrainingDao.h \
     Dao/WordDao.h \
     Entities/Group.h \
     Entities/Language.h \
     Entities/Profile.h \
+    Entities/Training.h \
     Entities/Word.h \
     Models/GroupModel.h \
     Models/TranslationModel.h \
