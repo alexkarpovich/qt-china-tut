@@ -3,10 +3,11 @@
 
 #include <QVBoxLayout>
 
-CardAskView::CardAskView(QWidget *parent) : QWidget(parent)
+CardAskView::CardAskView(CardModel *model, QWidget *parent)
+    : QWidget(parent), model(model)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    textLbl = new QLabel("Text");
+    textLbl = new QLabel(model->getNativeWord()->getText());
     QFont lblFont;
     lblFont.setBold(true);
     lblFont.setPointSize(20);

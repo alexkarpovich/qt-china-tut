@@ -1,6 +1,7 @@
 #include "CardDetailView.h"
 
-CardDetailView::CardDetailView(QWidget *parent) : QWidget(parent)
+CardDetailView::CardDetailView(CardModel *model, QWidget *parent)
+    : QWidget(parent), model(model)
 {
 
 }

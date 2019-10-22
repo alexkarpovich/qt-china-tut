@@ -3,6 +3,8 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 
+#include <Dao/TrainingDao.h>
+#include <Entities/Training.h>
 #include <Views/GroupManagement/GroupEditView.h>
 #include <Views/PageSwitch.h>
 #include <Views/WordManagement/WordItemDelegate.h>
@@ -32,7 +34,7 @@ void GroupEditView::buildLayout()
     wordInput->setPlaceholderText("Введите слово...");
     wordInput->setStyleSheet("padding: 3px 10px;");
     wordInput->setMinimumWidth(100);
-    connect(wordInput, SIGNAL( returnPressed() ), SLOT(onWordInputReturnPressed()));
+    connect(wordInput, SIGNAL(returnPressed()), SLOT(onWordInputReturnPressed()));
     wiLayout->addItem(leftSpacer);
     wiLayout->addWidget(wordInput);
     wiLayout->addItem(rightSpacer);
@@ -73,6 +75,9 @@ void GroupEditView::onWordInputReturnPressed()
 
 void GroupEditView::onStartTrainingClicked()
 {
+    TrainingDao trainingDao;
+    Training * tr = new Training;
+    trainingDao.create(groupids, tr);
     PageSwitch *pageSwitch = static_cast<PageSwitch *>(parent()->parent()->parent()->parent());
     pageSwitch->setLearningView();
 }

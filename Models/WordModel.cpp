@@ -80,8 +80,6 @@ void WordModel::addWord(const QString &value)
     WordDao wd;
     Word *wrd = gd.addWord(groupids.first(), value);
     words << wrd;
-    QList<Word *> translations = wd.translations(wrd->getId());
-    options[wrd->getId()] = translations;
     endResetModel();
 }
 

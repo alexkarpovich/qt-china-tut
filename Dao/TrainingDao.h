@@ -10,6 +10,7 @@ class TrainingDao
     Profile *profile;
 public:
     TrainingDao();
+    Training *latest();
     Training *create(QList<int> groupids, Training *trn);
     Word *nextTranslation(int trainingid);
     void completeWord(int trainingid, int wordid);

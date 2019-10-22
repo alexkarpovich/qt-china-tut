@@ -1,6 +1,7 @@
 #include "Training.h"
 
 Training::Training()
+    : type(TypeNtvFgn)
 {
 
 }

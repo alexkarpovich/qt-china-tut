@@ -3,11 +3,15 @@
 
 #include <QWidget>
 
+#include <Models/CardModel.h>
+
 class CardDetailView : public QWidget
 {
     Q_OBJECT
+
+    CardModel *model;
 public:
-    explicit CardDetailView(QWidget *parent = nullptr);
+    explicit CardDetailView(CardModel *model, QWidget *parent = nullptr);
 
 signals:
 

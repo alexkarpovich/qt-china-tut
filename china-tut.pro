@@ -27,6 +27,7 @@ SOURCES += \
     Entities/Profile.cpp \
     Entities/Training.cpp \
     Entities/Word.cpp \
+    Models/CardModel.cpp \
     Models/GroupModel.cpp \
     Models/TranslationModel.cpp \
     Models/WordModel.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     Entities/Profile.h \
     Entities/Training.h \
     Entities/Word.h \
+    Models/CardModel.h \
     Models/GroupModel.h \
     Models/TranslationModel.h \
     Models/WordModel.h \
