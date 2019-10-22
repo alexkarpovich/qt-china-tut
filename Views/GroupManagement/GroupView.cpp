@@ -1,38 +1,23 @@
 #include <QDebug>
-#include <Views/GroupManagement/GroupView.h>
-#include <Views/GroupManagement/GroupNotSelectedView.h>
-
 #include <QHBoxLayout>
+#include "GroupView.h"
 
 GroupView::GroupView(QWidget *parent) : QWidget(parent)
 {
-    viewState = NotSelectedState;
     buildLayout();
 }
 
-void GroupView::switchGroup(QList<int> groupids)
+void GroupView::setGroups(QList<int> groupids)
 {
-    editView->switchGroup(groupids);
-    setViewState(EditState);
+    this->groupids = groupids;
+    //editView->switchGroup(groupids);
+    //setViewState(EditState);
 }
 
 void GroupView::buildLayout()
 {
     QHBoxLayout *rootLayout = new QHBoxLayout;
-    QWidget *notSelectedView = new GroupNotSelectedView;
-    editView = new GroupEditView(this);
-    views = new QStackedWidget;
-    views->addWidget(notSelectedView);
-    views->addWidget(editView);
-    views->setCurrentIndex(viewState);
-    rootLayout->addWidget(views);
+    page = new GroupPage(this);
+    rootLayout->addWidget(page);
     setLayout(rootLayout);
-}
-
-void GroupView::setViewState(GroupView::ViewStates _viewState)
-{
-    if (viewState != _viewState) {
-        viewState = _viewState;
-        views->setCurrentIndex(viewState);
-    }
 }

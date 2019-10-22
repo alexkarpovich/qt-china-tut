@@ -29,7 +29,7 @@ Card::Card(QWidget *parent)
     : QWidget(parent), viewState(AskState)
 {
     model = new CardModel();
-    QObject::connect(model, SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
+    connect(model, SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     QVBoxLayout *rootLayout = new QVBoxLayout;
     views = new QStackedWidget;
     CardAskView *cardAskView = new CardAskView(model, this);

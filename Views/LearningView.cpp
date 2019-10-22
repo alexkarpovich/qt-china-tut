@@ -10,8 +10,8 @@ LearningView::LearningView(QWidget *parent) : QWidget(parent)
 {
     QVBoxLayout * rootLayout = new QVBoxLayout;
 
-    Card *card = new Card;
-    rootLayout->addWidget(card, 1, Qt::AlignHCenter);
+    //Card *card = new Card;
+    //rootLayout->addWidget(card, 1, Qt::AlignHCenter);
 
     setLayout(rootLayout);
 }

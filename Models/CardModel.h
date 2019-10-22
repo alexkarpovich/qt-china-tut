@@ -1,6 +1,7 @@
 #ifndef CARDMODEL_H
 #define CARDMODEL_H
 
+#include <QObject>
 #include <Dao/TrainingDao.h>
 
 class CardModel : public QObject
