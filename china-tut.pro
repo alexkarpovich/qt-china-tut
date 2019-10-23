@@ -34,19 +34,19 @@ SOURCES += \
     Views/Cards/Card.cpp \
     Views/Cards/CardAskView.cpp \
     Views/Cards/CardDetailView.cpp \
-    Views/GroupManagement/GroupEditView.cpp \
-    Views/GroupManagement/GroupListItemDelegate.cpp \
-    Views/GroupManagement/GroupNotSelectedView.cpp \
-    Views/GroupManagement/GroupPage.cpp \
-    Views/GroupManagement/GroupTrainingView.cpp \
-    Views/GroupManagement/GroupView.cpp \
+    Views/Groups/GroupEditView.cpp \
+    Views/Groups/GroupListItemDelegate.cpp \
+    Views/Groups/GroupNotSelectedView.cpp \
+    Views/Groups/GroupPage.cpp \
+    Views/Groups/GroupTrainingView.cpp \
+    Views/Groups/GroupView.cpp \
     Views/LearningView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
     Views/PageSwitch.cpp \
-    Views/WordManagement/TranslationEditor.cpp \
-    Views/WordManagement/TranslationItemDelegate.cpp \
-    Views/WordManagement/WordItemDelegate.cpp \
+    Views/Words/TranslationEditor.cpp \
+    Views/Words/TranslationItemDelegate.cpp \
+    Views/Words/WordItemDelegate.cpp \
     main.cpp
 
 HEADERS += \
@@ -68,19 +68,19 @@ HEADERS += \
     Views/Cards/Card.h \
     Views/Cards/CardAskView.h \
     Views/Cards/CardDetailView.h \
-    Views/GroupManagement/GroupEditView.h \
-    Views/GroupManagement/GroupListItemDelegate.h \
-    Views/GroupManagement/GroupNotSelectedView.h \
-    Views/GroupManagement/GroupPage.h \
-    Views/GroupManagement/GroupTrainingView.h \
-    Views/GroupManagement/GroupView.h \
+    Views/Groups/GroupEditView.h \
+    Views/Groups/GroupListItemDelegate.h \
+    Views/Groups/GroupNotSelectedView.h \
+    Views/Groups/GroupPage.h \
+    Views/Groups/GroupTrainingView.h \
+    Views/Groups/GroupView.h \
     Views/LearningView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
     Views/PageSwitch.h \
-    Views/WordManagement/TranslationEditor.h \
-    Views/WordManagement/TranslationItemDelegate.h \
-    Views/WordManagement/WordItemDelegate.h
+    Views/Words/TranslationEditor.h \
+    Views/Words/TranslationItemDelegate.h \
+    Views/Words/WordItemDelegate.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

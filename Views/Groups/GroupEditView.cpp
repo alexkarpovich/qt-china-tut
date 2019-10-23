@@ -5,9 +5,10 @@
 
 #include <Dao/TrainingDao.h>
 #include <Entities/Training.h>
-#include <Views/GroupManagement/GroupEditView.h>
 #include <Views/PageSwitch.h>
-#include <Views/WordManagement/WordItemDelegate.h>
+#include <Views/Words/WordItemDelegate.h>
+#include "GroupEditView.h"
+
 
 GroupEditView::GroupEditView(QWidget *parent)
     : QWidget(parent)

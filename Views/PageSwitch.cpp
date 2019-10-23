@@ -1,6 +1,6 @@
-#include <Views/PageSwitch.h>
-#include <Views/ManagementView.h>
-#include <Views/LearningView.h>
+#include "PageSwitch.h"
+#include "ManagementView.h"
+#include "LearningView.h"
 
 void PageSwitch::setCurrentView(PageSwitch::ViewStates _viewState)
 {

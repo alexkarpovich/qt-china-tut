@@ -1,6 +1,7 @@
 #include <QVBoxLayout>
 #include <QEvent>
 #include <QKeyEvent>
+
 #include "TranslationEditor.h"
 #include "TranslationItemDelegate.h"
 

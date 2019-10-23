@@ -1,7 +1,8 @@
-#include "GroupNotSelectedView.h"
-
 #include <QVBoxLayout>
 #include <QLabel>
+
+#include "GroupNotSelectedView.h"
+
 
 GroupNotSelectedView::GroupNotSelectedView(QWidget *parent)
     : QWidget(parent)

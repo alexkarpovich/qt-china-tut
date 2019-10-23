@@ -3,9 +3,9 @@
 
 #include <QStackedWidget>
 #include <QWidget>
-#include <Views/GroupManagement/GroupPage.h>
-#include <Views/GroupManagement/GroupEditView.h>
-#include <Views/GroupManagement/GroupTrainingView.h>
+#include "GroupPage.h"
+#include "GroupEditView.h"
+#include "GroupTrainingView.h"
 
 class GroupView : public QWidget
 {

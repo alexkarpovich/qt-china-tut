@@ -2,8 +2,8 @@
 #include <QStylePainter>
 #include <QApplication>
 
-#include <Views/GroupManagement/GroupListItemDelegate.h>
 #include <Models/GroupModel.h>
+#include "GroupListItemDelegate.h"
 
 GroupListItemDelegate::GroupListItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)

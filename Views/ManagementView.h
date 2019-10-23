@@ -1,14 +1,14 @@
 #ifndef MANAGEMENTVIEW_H
 #define MANAGEMENTVIEW_H
 
-#include "PageSwitch.h"
 
 #include <QListView>
 #include <QPushButton>
 #include <QWidget>
 
 #include <Models/GroupModel.h>
-#include <Views/GroupManagement/GroupView.h>
+#include "PageSwitch.h"
+#include "Groups/GroupView.h"
 
 class ManagementView : public QWidget
 {

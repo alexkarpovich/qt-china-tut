@@ -1,8 +1,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
+
 #include "Card.h"
-#include <Views/Cards/CardAskView.h>
-#include <Views/Cards/CardDetailView.h>
+#include "CardAskView.h"
+#include "CardDetailView.h"
 
 CardModel *Card::getModel() const
 {

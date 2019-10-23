@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QHBoxLayout>
+
 #include "GroupView.h"
 
 GroupView::GroupView(QWidget *parent) : QWidget(parent)

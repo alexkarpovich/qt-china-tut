@@ -2,8 +2,9 @@
 #include <QStylePainter>
 #include <QApplication>
 
-#include <Views/WordManagement/WordItemDelegate.h>
-#include <Views/WordManagement/TranslationEditor.h>
+#include "WordItemDelegate.h"
+#include "TranslationEditor.h"
+
 
 WordModel::WordRoles WordItemDelegate::getWordRoleByColumn(int column) const
 {

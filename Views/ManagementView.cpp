@@ -3,8 +3,8 @@
 #include <QHeaderView>
 
 #include <Dao/GroupDao.h>
-#include <Views/ManagementView.h>
-#include <Views/GroupManagement/GroupListItemDelegate.h>
+#include "ManagementView.h"
+#include "Groups/GroupListItemDelegate.h"
 
 ManagementView::ManagementView(QWidget *parent)
     : QWidget(parent)

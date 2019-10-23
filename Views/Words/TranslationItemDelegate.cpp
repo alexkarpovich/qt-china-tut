@@ -1,6 +1,7 @@
 #include <Application.h>
-#include "TranslationItemDelegate.h"
 #include <Models/TranslationModel.h>
+#include "TranslationItemDelegate.h"
+
 
 TranslationItemDelegate::TranslationItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)

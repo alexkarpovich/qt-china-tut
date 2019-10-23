@@ -1,7 +1,7 @@
+#include <QVBoxLayout>
+
 #include "Card.h"
 #include "CardAskView.h"
-
-#include <QVBoxLayout>
 
 CardAskView::CardAskView(CardModel *model, QWidget *parent)
     : QWidget(parent), model(model)
