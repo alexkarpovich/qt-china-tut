@@ -78,7 +78,6 @@ void GroupEditView::onStartTrainingClicked()
     TrainingDao trainingDao;
     Training * tr = new Training;
     trainingDao.create(getGroupids(), tr);
-    PageSwitch *pageSwitch = static_cast<PageSwitch *>(parent()->parent()->parent()->parent());
-    pageSwitch->setLearningView();
+    setTrainingView();
 }
 
