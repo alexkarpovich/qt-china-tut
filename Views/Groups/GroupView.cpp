@@ -11,14 +11,7 @@ GroupView::GroupView(QWidget *parent)
 
 void GroupView::buildLayout()
 {
-    QHBoxLayout *rootLayout = new QHBoxLayout;
-    notSelectedView = new GroupNotSelectedView(this);
-    trainingView = new GroupTrainingView(this);
-    editView = new GroupEditView(this);
-    getContainer()->addWidget(notSelectedView);
-    getContainer()->addWidget(editView);
-    getContainer()->addWidget(trainingView);
-    setNotSelectedView();
+    QHBoxLayout *rootLayout = new QHBoxLayout;    
     rootLayout->addWidget(getContainer());
     setLayout(rootLayout);
 }

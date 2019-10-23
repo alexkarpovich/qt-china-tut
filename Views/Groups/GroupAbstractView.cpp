@@ -1,4 +1,7 @@
 #include "GroupAbstractView.h"
+#include "GroupNotSelectedView.h"
+#include "GroupEditView.h"
+#include "GroupTrainingView.h"
 
 QStackedWidget *GroupAbstractView::getContainer() const
 {
@@ -17,6 +20,7 @@ void GroupAbstractView::setNotSelectedView()
 
 void GroupAbstractView::setEditView()
 {
+    editView->switchGroup(groupids);
     container->setCurrentIndex(EditState);
 }
 
@@ -35,8 +39,7 @@ void GroupAbstractView::setGroupids(const QList<int> &value)
     groupids = value;
 
     if (groupids.size() && viewState == NotSelectedState) {
-        viewState = EditState;
-        container->setCurrentIndex(viewState);
+        setEditView();
     }
 }
 
@@ -44,6 +47,12 @@ GroupAbstractView::GroupAbstractView(QWidget *parent)
     : QWidget(parent), viewState(NotSelectedState)
 {
     container = new QStackedWidget;
+    notSelectedView = new GroupNotSelectedView(this);
+    editView = new GroupEditView(this);
+    trainingView = new GroupTrainingView(this);
+    container->addWidget(notSelectedView);
+    container->addWidget(editView);
+    container->addWidget(trainingView);
 }
 
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)

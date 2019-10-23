@@ -18,8 +18,8 @@ GroupEditView::GroupEditView(GroupAbstractView *view)
 
 void GroupEditView::switchGroup(QList<int> groupids)
 {
-    //wordModel = new WordModel(groupids);
-    //wordTableView->setModel(wordModel);
+    wordModel = new WordModel(groupids);
+    wordTableView->setModel(wordModel);
 }
 
 void GroupEditView::buildLayout()

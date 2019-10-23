@@ -12,10 +12,6 @@ class GroupView : public GroupAbstractView
 {
     Q_OBJECT
 
-    GroupEditView *editView;
-    GroupNotSelectedView *notSelectedView;
-    GroupTrainingView *trainingView;
-
     void buildLayout();
 public:
     explicit GroupView(QWidget *parent = nullptr);

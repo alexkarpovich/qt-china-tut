@@ -4,6 +4,10 @@
 #include <QStackedWidget>
 #include <QWidget>
 
+class GroupNotSelectedView;
+class GroupEditView;
+class GroupTrainingView;
+
 class GroupAbstractView : public QWidget
 {
     Q_OBJECT
@@ -15,6 +19,10 @@ class GroupAbstractView : public QWidget
     ViewStates viewState;
     QList<int> groupids;
     QStackedWidget *container;
+    GroupNotSelectedView *notSelectedView;
+    GroupEditView *editView;
+    GroupTrainingView *trainingView;
+
 public:
     explicit GroupAbstractView(QWidget *parent = nullptr);
     GroupAbstractView(GroupAbstractView *clone);
