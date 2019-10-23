@@ -10,17 +10,16 @@
 #include "GroupEditView.h"
 
 
-GroupEditView::GroupEditView(QWidget *parent)
-    : QWidget(parent)
+GroupEditView::GroupEditView(GroupAbstractView *view)
+    : GroupAbstractView(view)
 {
     buildLayout();
 }
 
 void GroupEditView::switchGroup(QList<int> groupids)
 {
-    this->groupids = groupids;
-    wordModel = new WordModel(groupids);
-    wordTableView->setModel(wordModel);
+    //wordModel = new WordModel(groupids);
+    //wordTableView->setModel(wordModel);
 }
 
 void GroupEditView::buildLayout()
@@ -44,7 +43,7 @@ void GroupEditView::buildLayout()
     setLayout(wlSectionLayout);
 
     wordTableView = new QTableView;
-    wordModel = new WordModel(groupids);
+    wordModel = new WordModel(getGroupids());
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     wordTableView->horizontalHeader()->setStretchLastSection(true);
@@ -78,7 +77,7 @@ void GroupEditView::onStartTrainingClicked()
 {
     TrainingDao trainingDao;
     Training * tr = new Training;
-    trainingDao.create(groupids, tr);
+    trainingDao.create(getGroupids(), tr);
     PageSwitch *pageSwitch = static_cast<PageSwitch *>(parent()->parent()->parent()->parent());
     pageSwitch->setLearningView();
 }

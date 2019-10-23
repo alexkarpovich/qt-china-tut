@@ -1,6 +1,7 @@
 #include "GroupTrainingView.h"
 
-GroupTrainingView::GroupTrainingView(QWidget *parent) : QWidget(parent)
+GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
+    : GroupAbstractView(view)
 {
 
 }

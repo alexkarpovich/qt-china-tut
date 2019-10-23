@@ -3,23 +3,22 @@
 
 #include <QStackedWidget>
 #include <QWidget>
-#include "GroupPage.h"
+#include "GroupAbstractView.h"
+#include "GroupNotSelectedView.h"
 #include "GroupEditView.h"
 #include "GroupTrainingView.h"
 
-class GroupView : public QWidget
+class GroupView : public GroupAbstractView
 {
     Q_OBJECT
+
+    GroupEditView *editView;
+    GroupNotSelectedView *notSelectedView;
+    GroupTrainingView *trainingView;
+
     void buildLayout();
 public:
-
     explicit GroupView(QWidget *parent = nullptr);
-    void setGroups(QList<int> groupids);
-
-private:
-    QList<int> groupids;
-
-    GroupPage *page;
 
 signals:
 

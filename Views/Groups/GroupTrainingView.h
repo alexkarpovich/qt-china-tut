@@ -3,11 +3,14 @@
 
 #include <QWidget>
 
-class GroupTrainingView : public QWidget
+#include "GroupAbstractView.h"
+
+
+class GroupTrainingView : public GroupAbstractView
 {
     Q_OBJECT
 public:
-    explicit GroupTrainingView(QWidget *parent = nullptr);
+    explicit GroupTrainingView(GroupAbstractView *view);
 
 signals:
 

@@ -6,11 +6,12 @@
 #include <QWidget>
 
 #include <Models/WordModel.h>
+#include "GroupAbstractView.h"
 
-class GroupEditView : public QWidget
+
+class GroupEditView : public GroupAbstractView
 {
     Q_OBJECT
-    QList<int> groupids;
     WordModel *wordModel;
     QTableView *wordTableView;
     QLineEdit* wordInput;
@@ -19,7 +20,7 @@ class GroupEditView : public QWidget
 
     void buildLayout();
 public:
-    explicit GroupEditView(QWidget *parent = nullptr);
+    explicit GroupEditView(GroupAbstractView *view);
     void switchGroup(QList<int> groupids);
 
 signals:

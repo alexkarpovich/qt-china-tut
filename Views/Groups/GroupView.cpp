@@ -3,22 +3,22 @@
 
 #include "GroupView.h"
 
-GroupView::GroupView(QWidget *parent) : QWidget(parent)
+GroupView::GroupView(QWidget *parent)
+    : GroupAbstractView(parent)
 {
     buildLayout();
-}
-
-void GroupView::setGroups(QList<int> groupids)
-{
-    this->groupids = groupids;
-    //editView->switchGroup(groupids);
-    //setViewState(EditState);
 }
 
 void GroupView::buildLayout()
 {
     QHBoxLayout *rootLayout = new QHBoxLayout;
-    page = new GroupPage(this);
-    rootLayout->addWidget(page);
+    notSelectedView = new GroupNotSelectedView(this);
+    trainingView = new GroupTrainingView(this);
+    editView = new GroupEditView(this);
+    getContainer()->addWidget(notSelectedView);
+    getContainer()->addWidget(editView);
+    getContainer()->addWidget(trainingView);
+    setNotSelectedView();
+    rootLayout->addWidget(getContainer());
     setLayout(rootLayout);
 }

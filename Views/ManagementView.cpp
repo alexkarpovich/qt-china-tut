@@ -83,6 +83,6 @@ void ManagementView::onGroupSelectionChanged(const QItemSelection& selection)
             groupids << model.data(GroupModel::IdRole).toInt();
         }
         qDebug() << QString("Group selection changed %1").arg(groupids.size());
-        groupView->setGroups(groupids);
+        groupView->setGroupids(groupids);
     }
 }

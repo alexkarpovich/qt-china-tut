@@ -3,11 +3,14 @@
 
 #include <QWidget>
 
-class GroupNotSelectedView : public QWidget
+#include "GroupAbstractView.h"
+
+
+class GroupNotSelectedView : public GroupAbstractView
 {
     Q_OBJECT
 public:
-    explicit GroupNotSelectedView(QWidget *parent = nullptr);
+    explicit GroupNotSelectedView(GroupAbstractView *view);
 
 signals:
 

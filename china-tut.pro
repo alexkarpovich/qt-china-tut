@@ -34,10 +34,10 @@ SOURCES += \
     Views/Cards/Card.cpp \
     Views/Cards/CardAskView.cpp \
     Views/Cards/CardDetailView.cpp \
+    Views/Groups/GroupAbstractView.cpp \
     Views/Groups/GroupEditView.cpp \
     Views/Groups/GroupListItemDelegate.cpp \
     Views/Groups/GroupNotSelectedView.cpp \
-    Views/Groups/GroupPage.cpp \
     Views/Groups/GroupTrainingView.cpp \
     Views/Groups/GroupView.cpp \
     Views/LearningView.cpp \
@@ -68,10 +68,10 @@ HEADERS += \
     Views/Cards/Card.h \
     Views/Cards/CardAskView.h \
     Views/Cards/CardDetailView.h \
+    Views/Groups/GroupAbstractView.h \
     Views/Groups/GroupEditView.h \
     Views/Groups/GroupListItemDelegate.h \
     Views/Groups/GroupNotSelectedView.h \
-    Views/Groups/GroupPage.h \
     Views/Groups/GroupTrainingView.h \
     Views/Groups/GroupView.h \
     Views/LearningView.h \
