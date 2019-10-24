@@ -13,6 +13,7 @@ public:
     Training *latest();
     Training *create(QList<int> groupids, Training *trn);
     Word *nextTranslation(int trainingid);
+    QList<Word *> translationWords(int trainingid, int translationid);
     void completeWord(int trainingid, int wordid);
 
 };

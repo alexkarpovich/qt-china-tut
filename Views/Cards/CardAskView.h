@@ -20,6 +20,7 @@ public:
 signals:
 
 public slots:
+    void onModelChanged();
     void onShowBtnClicked();
 };
 

@@ -3,17 +3,15 @@
 
 #include <QObject>
 #include <Dao/TrainingDao.h>
+#include <Dao/WordDao.h>
 
 class CardModel : public QObject
 {
     Q_OBJECT
 
     TrainingDao *trainingDao;
+    WordDao *wordDao;
 public:
-    enum State {
-        StateAsk = 0,
-        StateDetail = 1
-    };
     explicit CardModel(QObject *parent = nullptr);
     Word *getForeignWord() const;
     void setForeignWord(Word *value);
@@ -21,10 +19,7 @@ public:
     Word *getNativeWord() const;
     void setNativeWord(Word *value);
 
-    State getState() const;
-
 public slots:
-    void setState(const State &value);
     void next();
     void complete();
 
@@ -32,7 +27,7 @@ signals:
     void dataChanged();
 
 private:
-    State state;
+    Training *training;
     Word *foreignWord;
     Word *nativeWord;
 

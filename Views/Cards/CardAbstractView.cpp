@@ -6,6 +6,7 @@ CardAbstractView::CardAbstractView(QWidget *parent)
     : QWidget(parent), viewState(new ViewState)
 {
     *viewState = AskState;
+    model = new CardModel;
     container = new QStackedWidget;
     askView = new CardAskView(this);
     detailView = new CardDetailView(this);
@@ -29,6 +30,7 @@ CardAbstractView::ViewState *CardAbstractView::getViewState() const
 void CardAbstractView::setViewState(ViewState value)
 {
     *viewState = value;
+    container->setCurrentIndex(value);
 }
 
 CardModel *CardAbstractView::getModel() const
