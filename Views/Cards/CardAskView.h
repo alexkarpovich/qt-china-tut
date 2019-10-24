@@ -6,16 +6,16 @@
 #include <QWidget>
 
 #include <Models/CardModel.h>
+#include "CardAbstractView.h"
 
-class CardAskView : public QWidget
+class CardAskView : public CardAbstractView
 {
     Q_OBJECT
 
-    CardModel *model;
     QLabel *textLbl;
     QPushButton *showBtn;
 public:
-    explicit CardAskView(CardModel *model, QWidget *parent = nullptr);
+    explicit CardAskView(CardAbstractView *view);
 
 signals:
 

@@ -32,4 +32,5 @@ void GroupTrainingView::onTrainingOptionClicked(int type)
     Training * tr = new Training;
     tr->setType(static_cast<Training::Type>(type));
     trainingDao.create(*getGroupids(), tr);
+    getPageView()->setTrainingView();
 }

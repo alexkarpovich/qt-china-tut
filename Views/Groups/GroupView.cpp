@@ -3,8 +3,8 @@
 
 #include "GroupView.h"
 
-GroupView::GroupView(QWidget *parent)
-    : GroupAbstractView(parent)
+GroupView::GroupView(PageAbstractView *pageView)
+    : GroupAbstractView(pageView)
 {
     buildLayout();
 }

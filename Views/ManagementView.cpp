@@ -58,7 +58,6 @@ QWidget *ManagementView::buildGroupListSection()
     groupListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     groupListView->setModel(groupModel);
     connect(groupListView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onGroupSelectionChanged(QItemSelection)));
-    //groupListView->setStyleSheet("GroupListWidget {border: none;} GroupListWidget::item:selected {background-color: #323232;}");
     connect(addGroupBtn, SIGNAL(clicked()), SLOT(onAddGroupBtnClicked()));
 
     glSection->setMaximumWidth(250);

@@ -52,8 +52,13 @@ void GroupAbstractView::setViewState(ViewState value)
     container->setCurrentIndex(value);
 }
 
-GroupAbstractView::GroupAbstractView(QWidget *parent)
-    : QWidget(parent), viewState(new ViewState), groupids(new QList<int>)
+PageAbstractView *GroupAbstractView::getPageView() const
+{
+    return pageView;
+}
+
+GroupAbstractView::GroupAbstractView(PageAbstractView *pageView)
+    : QWidget(pageView), viewState(new ViewState), pageView(pageView), groupids(new QList<int>)
 {
     *viewState = NotSelectedState;
     container = new QStackedWidget;
@@ -70,5 +75,6 @@ GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
 {
     viewState = clone->getViewState();
     container = clone->getContainer();
+    pageView = clone->getPageView();
     groupids = clone->getGroupids();
 }

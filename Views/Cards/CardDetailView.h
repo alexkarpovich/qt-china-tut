@@ -4,14 +4,14 @@
 #include <QWidget>
 
 #include <Models/CardModel.h>
+#include "CardAbstractView.h"
 
-class CardDetailView : public QWidget
+class CardDetailView : public CardAbstractView
 {
     Q_OBJECT
 
-    CardModel *model;
 public:
-    explicit CardDetailView(CardModel *model, QWidget *parent = nullptr);
+    explicit CardDetailView(CardAbstractView *view);
 
 signals:
 

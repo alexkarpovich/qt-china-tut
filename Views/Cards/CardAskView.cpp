@@ -1,13 +1,13 @@
 #include <QVBoxLayout>
 
-#include "Card.h"
+#include "CardView.h"
 #include "CardAskView.h"
 
-CardAskView::CardAskView(CardModel *model, QWidget *parent)
-    : QWidget(parent), model(model)
+CardAskView::CardAskView(CardAbstractView *view)
+    : CardAbstractView(view)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    textLbl = new QLabel(model->getNativeWord()->getText());
+    textLbl = new QLabel("TEXT" /*view->getNativeWord()->getText()*/);
     QFont lblFont;
     lblFont.setBold(true);
     lblFont.setPointSize(20);
@@ -22,6 +22,5 @@ CardAskView::CardAskView(CardModel *model, QWidget *parent)
 
 void CardAskView::onShowBtnClicked()
 {
-    Card * cardView = qobject_cast<Card *>(parent()->parent());
-    cardView->setDetailView();
+    setDetailView();
 }

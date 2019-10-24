@@ -4,6 +4,8 @@
 #include <QStackedWidget>
 #include <QWidget>
 
+#include <Views/PageAbstractView.h>
+
 // Forward declaration to avoid cyclic inclusion
 class GroupNotSelectedView;
 class GroupEditView;
@@ -19,7 +21,7 @@ public:
         TrainingState = 2
     };
 
-    explicit GroupAbstractView(QWidget *parent = nullptr);
+    explicit GroupAbstractView(PageAbstractView *pageView);
     GroupAbstractView(GroupAbstractView *clone);
 
     QStackedWidget *getContainer() const;
@@ -33,10 +35,13 @@ public:
 
     ViewState *getViewState() const;
     void setViewState(ViewState value);
+    PageAbstractView *getPageView() const;
+
 private:
     ViewState *viewState;
     QList<int> *groupids;
     QStackedWidget *container;
+    PageAbstractView *pageView;
     GroupNotSelectedView *notSelectedView;
     GroupEditView *editView;
     GroupTrainingView *trainingView;

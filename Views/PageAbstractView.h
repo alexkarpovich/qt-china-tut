@@ -25,6 +25,9 @@ public:
     QStackedWidget *getContainer() const;
     void setContainer(QStackedWidget *value);
 
+    void setManagementView();
+    void setTrainingView();
+
 private:
     ViewState *viewState;
     QStackedWidget *container;

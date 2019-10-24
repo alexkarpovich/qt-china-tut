@@ -29,6 +29,7 @@ PageAbstractView::ViewState *PageAbstractView::getViewState() const
 void PageAbstractView::setViewState(ViewState value)
 {
     *viewState = value;
+    container->setCurrentIndex(value);
 }
 
 QStackedWidget *PageAbstractView::getContainer() const
@@ -39,4 +40,14 @@ QStackedWidget *PageAbstractView::getContainer() const
 void PageAbstractView::setContainer(QStackedWidget *value)
 {
     container = value;
+}
+
+void PageAbstractView::setManagementView()
+{
+    setViewState(ManagementState);
+}
+
+void PageAbstractView::setTrainingView()
+{
+    setViewState(TrainingState);
 }

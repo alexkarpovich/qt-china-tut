@@ -31,9 +31,10 @@ SOURCES += \
     Models/GroupModel.cpp \
     Models/TranslationModel.cpp \
     Models/WordModel.cpp \
-    Views/Cards/Card.cpp \
+    Views/Cards/CardAbstractView.cpp \
     Views/Cards/CardAskView.cpp \
     Views/Cards/CardDetailView.cpp \
+    Views/Cards/CardView.cpp \
     Views/Groups/GroupAbstractView.cpp \
     Views/Groups/GroupEditView.cpp \
     Views/Groups/GroupListItemDelegate.cpp \
@@ -66,9 +67,10 @@ HEADERS += \
     Models/GroupModel.h \
     Models/TranslationModel.h \
     Models/WordModel.h \
-    Views/Cards/Card.h \
+    Views/Cards/CardAbstractView.h \
     Views/Cards/CardAskView.h \
     Views/Cards/CardDetailView.h \
+    Views/Cards/CardView.h \
     Views/Groups/GroupAbstractView.h \
     Views/Groups/GroupEditView.h \
     Views/Groups/GroupListItemDelegate.h \

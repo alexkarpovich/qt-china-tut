@@ -10,7 +10,7 @@ class GroupView : public GroupAbstractView
 
     void buildLayout();
 public:
-    explicit GroupView(QWidget *parent = nullptr);
+    explicit GroupView(PageAbstractView *pageView);
 
 signals:
 
