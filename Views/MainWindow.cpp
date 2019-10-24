@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     rootWidget = new QWidget(this);
-    views = new PageSwitch;
+    page = new PageView;
     QHBoxLayout* rootLayout = new QHBoxLayout;
-    rootLayout->addWidget(views);
+    rootLayout->addWidget(page);
     rootLayout->setMargin(0);
     rootWidget->setLayout(rootLayout);
     resize(740, 600);

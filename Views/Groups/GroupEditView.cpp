@@ -5,7 +5,6 @@
 
 #include <Dao/TrainingDao.h>
 #include <Entities/Training.h>
-#include <Views/PageSwitch.h>
 #include <Views/Words/WordItemDelegate.h>
 #include "GroupEditView.h"
 
@@ -14,11 +13,16 @@ GroupEditView::GroupEditView(GroupAbstractView *view)
     : GroupAbstractView(view)
 {
     buildLayout();
+    connect(view, SIGNAL(dataChanged()), this, SLOT(onDataChanged()));
 }
 
-void GroupEditView::switchGroup(QList<int> groupids)
+void GroupEditView::onDataChanged()
 {
-    wordModel = new WordModel(groupids);
+    if (*getViewState() == NotSelectedState) {
+        setEditView();
+    }
+
+    wordModel = new WordModel(*getGroupids());
     wordTableView->setModel(wordModel);
 }
 
@@ -43,7 +47,7 @@ void GroupEditView::buildLayout()
     setLayout(wlSectionLayout);
 
     wordTableView = new QTableView;
-    wordModel = new WordModel(getGroupids());
+    wordModel = new WordModel(*getGroupids());
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     wordTableView->horizontalHeader()->setStretchLastSection(true);
@@ -74,10 +78,7 @@ void GroupEditView::onWordInputReturnPressed()
 }
 
 void GroupEditView::onStartTrainingClicked()
-{
-    TrainingDao trainingDao;
-    Training * tr = new Training;
-    trainingDao.create(getGroupids(), tr);
+{    
     setTrainingView();
 }
 

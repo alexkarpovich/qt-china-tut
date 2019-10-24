@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "GroupAbstractView.h"
 #include "GroupNotSelectedView.h"
 #include "GroupEditView.h"
@@ -15,49 +17,58 @@ void GroupAbstractView::setContainer(QStackedWidget *value)
 
 void GroupAbstractView::setNotSelectedView()
 {
-    container->setCurrentIndex(NotSelectedState);
+    setViewState(NotSelectedState);
 }
 
 void GroupAbstractView::setEditView()
-{
-    editView->switchGroup(groupids);
-    container->setCurrentIndex(EditState);
+{    
+    setViewState(EditState);
 }
 
 void GroupAbstractView::setTrainingView()
 {
-    container->setCurrentIndex(TrainingState);
+    setViewState(TrainingState);
 }
 
-QList<int> GroupAbstractView::getGroupids() const
+QList<int> *GroupAbstractView::getGroupids() const
 {
     return groupids;
 }
 
-void GroupAbstractView::setGroupids(const QList<int> &value)
+void GroupAbstractView::setGroupids(QList<int> value)
 {
-    groupids = value;
+    *groupids = value;
+    emit dataChanged();
+}
 
-    if (groupids.size() && viewState == NotSelectedState) {
-        setEditView();
-    }
+GroupAbstractView::ViewState *GroupAbstractView::getViewState() const
+{
+    return viewState;
+}
+
+void GroupAbstractView::setViewState(ViewState value)
+{
+    *viewState = value;
+    container->setCurrentIndex(value);
 }
 
 GroupAbstractView::GroupAbstractView(QWidget *parent)
-    : QWidget(parent), viewState(NotSelectedState)
+    : QWidget(parent), viewState(new ViewState), groupids(new QList<int>)
 {
+    *viewState = NotSelectedState;
     container = new QStackedWidget;
     notSelectedView = new GroupNotSelectedView(this);
     editView = new GroupEditView(this);
     trainingView = new GroupTrainingView(this);
     container->addWidget(notSelectedView);
     container->addWidget(editView);
-    container->addWidget(trainingView);
+    container->addWidget(trainingView);    
 }
 
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
     : QWidget(clone)
 {
+    viewState = clone->getViewState();
     container = clone->getContainer();
     groupids = clone->getGroupids();
 }

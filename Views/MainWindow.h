@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QWidget>
 
-#include "PageSwitch.h"
+#include "PageView.h"
 
 
 class MainWindow : public QMainWindow
@@ -12,7 +12,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     QWidget* rootWidget;
-    PageSwitch* views;
+    PageView* page;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

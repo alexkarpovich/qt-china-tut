@@ -1,12 +1,8 @@
 #ifndef GROUPVIEW_H
 #define GROUPVIEW_H
 
-#include <QStackedWidget>
 #include <QWidget>
 #include "GroupAbstractView.h"
-#include "GroupNotSelectedView.h"
-#include "GroupEditView.h"
-#include "GroupTrainingView.h"
 
 class GroupView : public GroupAbstractView
 {

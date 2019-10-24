@@ -4,6 +4,7 @@
 #include <QStackedWidget>
 #include <QWidget>
 
+// Forward declaration to avoid cyclic inclusion
 class GroupNotSelectedView;
 class GroupEditView;
 class GroupTrainingView;
@@ -11,19 +12,13 @@ class GroupTrainingView;
 class GroupAbstractView : public QWidget
 {
     Q_OBJECT
-    enum ViewStates {
+public:
+    enum ViewState {
         NotSelectedState = 0,
         EditState = 1,
         TrainingState = 2
     };
-    ViewStates viewState;
-    QList<int> groupids;
-    QStackedWidget *container;
-    GroupNotSelectedView *notSelectedView;
-    GroupEditView *editView;
-    GroupTrainingView *trainingView;
 
-public:
     explicit GroupAbstractView(QWidget *parent = nullptr);
     GroupAbstractView(GroupAbstractView *clone);
 
@@ -33,10 +28,20 @@ public:
     void setEditView();
     void setTrainingView();
 
-    QList<int> getGroupids() const;
-    void setGroupids(const QList<int> &value);
+    QList<int> *getGroupids() const;
+    void setGroupids(QList<int> value);
 
+    ViewState *getViewState() const;
+    void setViewState(ViewState value);
+private:
+    ViewState *viewState;
+    QList<int> *groupids;
+    QStackedWidget *container;
+    GroupNotSelectedView *notSelectedView;
+    GroupEditView *editView;
+    GroupTrainingView *trainingView;
 signals:
+    void dataChanged();
 
 public slots:
 };

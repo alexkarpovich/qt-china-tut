@@ -21,11 +21,11 @@ class GroupEditView : public GroupAbstractView
     void buildLayout();
 public:
     explicit GroupEditView(GroupAbstractView *view);
-    void switchGroup(QList<int> groupids);
 
 signals:
 
 public slots:
+    void onDataChanged();
     void onWordInputReturnPressed();
     void onStartTrainingClicked();
 

@@ -7,10 +7,10 @@
 #include <QWidget>
 
 #include <Models/GroupModel.h>
-#include "PageSwitch.h"
+#include "PageAbstractView.h"
 #include "Groups/GroupView.h"
 
-class ManagementView : public QWidget
+class ManagementView : public PageAbstractView
 {
     Q_OBJECT
     QPushButton* addGroupBtn;
@@ -24,7 +24,7 @@ class ManagementView : public QWidget
     void buildLayout();
     void initializeWidgets();
 public:
-    explicit ManagementView(QWidget *parent = nullptr);
+    explicit ManagementView(PageAbstractView *view);
 
 public slots:
     void onAddGroupBtnClicked();

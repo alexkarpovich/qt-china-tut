@@ -6,8 +6,8 @@
 #include "ManagementView.h"
 #include "Groups/GroupListItemDelegate.h"
 
-ManagementView::ManagementView(QWidget *parent)
-    : QWidget(parent)
+ManagementView::ManagementView(PageAbstractView *view)
+    : PageAbstractView(view)
 {
     buildLayout();
 }

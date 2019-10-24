@@ -1,4 +1,4 @@
-#include "LearningView.h"
+#include "TrainingView.h"
 
 #include <QLabel>
 #include <QListWidget>
@@ -6,7 +6,8 @@
 
 #include <Views/Cards/Card.h>
 
-LearningView::LearningView(QWidget *parent) : QWidget(parent)
+TrainingView::TrainingView(PageAbstractView *view)
+    : PageAbstractView(view)
 {
     QVBoxLayout * rootLayout = new QVBoxLayout;
 

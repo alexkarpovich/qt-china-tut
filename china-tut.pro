@@ -40,10 +40,11 @@ SOURCES += \
     Views/Groups/GroupNotSelectedView.cpp \
     Views/Groups/GroupTrainingView.cpp \
     Views/Groups/GroupView.cpp \
-    Views/LearningView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
-    Views/PageSwitch.cpp \
+    Views/PageAbstractView.cpp \
+    Views/PageView.cpp \
+    Views/TrainingView.cpp \
     Views/Words/TranslationEditor.cpp \
     Views/Words/TranslationItemDelegate.cpp \
     Views/Words/WordItemDelegate.cpp \
@@ -74,10 +75,11 @@ HEADERS += \
     Views/Groups/GroupNotSelectedView.h \
     Views/Groups/GroupTrainingView.h \
     Views/Groups/GroupView.h \
-    Views/LearningView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
-    Views/PageSwitch.h \
+    Views/PageAbstractView.h \
+    Views/PageView.h \
+    Views/TrainingView.h \
     Views/Words/TranslationEditor.h \
     Views/Words/TranslationItemDelegate.h \
     Views/Words/WordItemDelegate.h

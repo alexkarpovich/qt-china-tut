@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QWidget>
 
+#include <Entities/Training.h>
 #include "GroupAbstractView.h"
 
 
@@ -18,6 +19,7 @@ public:
 signals:
 
 public slots:
+    void onTrainingOptionClicked(int type);
 };
 
 #endif // GROUPTRAININGVIEW_H
