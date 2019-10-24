@@ -19,14 +19,19 @@ public:
     Word *getNativeWord() const;
     void setNativeWord(Word *value);
 
+    bool isComplete() const;
+    void setCompletance(bool value);
+
 public slots:
     void next();
     void complete();
+    void reset();
 
 signals:
     void dataChanged();
 
 private:
+    bool m_isComplete;
     Training *training;
     Word *foreignWord;
     Word *nativeWord;

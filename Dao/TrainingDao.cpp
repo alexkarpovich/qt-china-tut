@@ -52,6 +52,17 @@ Training *TrainingDao::create(QList<int> groupids, Training *trn)
     return nullptr;
 }
 
+void TrainingDao::reset(int trainingid)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE training_translations SET status=0 WHERE training_id=:trainingid");
+    query.bindValue(":trainingid", trainingid);
+
+    if (!query.exec()) {
+        qDebug() << "Training reset error: " + query.lastError().text();
+    }
+}
+
 Word *TrainingDao::nextTranslation(int trainingid)
 {
     QSqlQuery query;

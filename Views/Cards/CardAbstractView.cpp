@@ -1,6 +1,7 @@
 #include "CardAbstractView.h"
 #include "CardAskView.h"
 #include "CardDetailView.h"
+#include "CardCompleteView.h"
 
 CardAbstractView::CardAbstractView(QWidget *parent)
     : QWidget(parent), viewState(new ViewState)
@@ -10,8 +11,10 @@ CardAbstractView::CardAbstractView(QWidget *parent)
     container = new QStackedWidget;
     askView = new CardAskView(this);
     detailView = new CardDetailView(this);
+    completeView = new CardCompleteView(this);
     container->addWidget(askView);
     container->addWidget(detailView);
+    container->addWidget(completeView);
 }
 
 CardAbstractView::CardAbstractView(CardAbstractView *clone)
@@ -56,4 +59,9 @@ void CardAbstractView::setAskView()
 void CardAbstractView::setDetailView()
 {
     setViewState(DetailState);
+}
+
+void CardAbstractView::setCompleteView()
+{
+    setViewState(CompleteState);
 }

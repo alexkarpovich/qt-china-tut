@@ -1,7 +1,7 @@
 #include "CardModel.h"
 
 CardModel::CardModel(QObject *parent)
-    : QObject(parent), trainingDao(new TrainingDao), wordDao(new WordDao)
+    : QObject(parent), trainingDao(new TrainingDao), wordDao(new WordDao), m_isComplete(false)
 {
     training = trainingDao->latest();
     next();
@@ -32,6 +32,7 @@ void CardModel::next()
     nativeWord = trainingDao->nextTranslation(training->getId());
 
     if (!nativeWord) {
+        setCompletance(true);
         return;
     }
 
@@ -44,3 +45,21 @@ void CardModel::complete()
     trainingDao->completeWord(training->getId(), nativeWord->getId());
     next();
 }
+
+void CardModel::reset()
+{
+    trainingDao->reset(training->getId());
+    next();
+}
+
+bool CardModel::isComplete() const
+{
+    return m_isComplete;
+}
+
+void CardModel::setCompletance(bool value)
+{
+    m_isComplete = value;
+    emit dataChanged();
+}
+

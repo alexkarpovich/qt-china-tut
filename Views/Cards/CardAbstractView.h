@@ -8,6 +8,7 @@
 
 class CardAskView;
 class CardDetailView;
+class CardCompleteView;
 
 class CardAbstractView : public QWidget
 {
@@ -15,7 +16,8 @@ class CardAbstractView : public QWidget
 public:
     enum ViewState {
         AskState = 0,
-        DetailState = 1
+        DetailState = 1,
+        CompleteState = 2
     };
 
     explicit CardAbstractView(QWidget *parent = nullptr);
@@ -31,6 +33,7 @@ public:
 
     void setAskView();
     void setDetailView();
+    void setCompleteView();
 
 private:
     ViewState *viewState;
@@ -38,6 +41,7 @@ private:
     QStackedWidget *container;
     CardAskView *askView;
     CardDetailView *detailView;
+    CardCompleteView *completeView;
 
 signals:
 

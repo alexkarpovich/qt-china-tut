@@ -33,6 +33,7 @@ SOURCES += \
     Models/WordModel.cpp \
     Views/Cards/CardAbstractView.cpp \
     Views/Cards/CardAskView.cpp \
+    Views/Cards/CardCompleteView.cpp \
     Views/Cards/CardDetailView.cpp \
     Views/Cards/CardView.cpp \
     Views/Groups/GroupAbstractView.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     Models/WordModel.h \
     Views/Cards/CardAbstractView.h \
     Views/Cards/CardAskView.h \
+    Views/Cards/CardCompleteView.h \
     Views/Cards/CardDetailView.h \
     Views/Cards/CardView.h \
     Views/Groups/GroupAbstractView.h \

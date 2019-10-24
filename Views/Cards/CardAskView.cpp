@@ -7,7 +7,7 @@ CardAskView::CardAskView(CardAbstractView *view)
     : CardAbstractView(view)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    textLbl = new QLabel(getModel()->getNativeWord()->getText());
+    textLbl = new QLabel;
     QFont lblFont;
     lblFont.setBold(true);
     lblFont.setPointSize(20);
@@ -16,6 +16,7 @@ CardAskView::CardAskView(CardAbstractView *view)
     rootLayout->addWidget(textLbl, 0, Qt::AlignCenter);
     rootLayout->addWidget(showBtn, 0, Qt::AlignBottom);
     setLayout(rootLayout);
+    onModelChanged();
 
     connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(showBtn, SIGNAL(clicked()), this, SLOT(onShowBtnClicked()));
@@ -23,7 +24,9 @@ CardAskView::CardAskView(CardAbstractView *view)
 
 void CardAskView::onModelChanged()
 {
-    textLbl->setText(getModel()->getNativeWord()->getText());
+    if (!getModel()->isComplete()) {
+        textLbl->setText(getModel()->getNativeWord()->getText());
+    }
 }
 
 void CardAskView::onShowBtnClicked()

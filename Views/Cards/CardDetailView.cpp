@@ -7,9 +7,9 @@ CardDetailView::CardDetailView(CardAbstractView *view)
     : CardAbstractView(view)
 {
     QGridLayout *rootLayout = new QGridLayout;
-    wordLbl = new QLabel(getModel()->getForeignWord()->getText());
-    transcriptionLbl = new QLabel(getModel()->getForeignWord()->getTranscription());
-    translationLbl = new QLabel(getModel()->getNativeWord()->getText());
+    wordLbl = new QLabel;
+    transcriptionLbl = new QLabel;
+    translationLbl = new QLabel;
     completeBtn = new QPushButton("дальше");
     repeatBtn = new QPushButton("повторить");
     QFont lblFont;
@@ -23,6 +23,7 @@ CardDetailView::CardDetailView(CardAbstractView *view)
     rootLayout->addWidget(completeBtn, 2, 1);
 
     setLayout(rootLayout);
+    onModelChanged();
 
     connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(completeBtn, SIGNAL(clicked()), this, SLOT(onCompleteBtnClicked()));
@@ -31,9 +32,11 @@ CardDetailView::CardDetailView(CardAbstractView *view)
 
 void CardDetailView::onModelChanged()
 {
-    wordLbl->setText(getModel()->getForeignWord()->getText());
-    transcriptionLbl->setText(getModel()->getForeignWord()->getTranscription());
-    translationLbl->setText(getModel()->getNativeWord()->getText());
+    if (!getModel()->isComplete()) {
+        wordLbl->setText(getModel()->getForeignWord()->getText());
+        transcriptionLbl->setText(getModel()->getForeignWord()->getTranscription());
+        translationLbl->setText(getModel()->getNativeWord()->getText());
+    }
 }
 
 void CardDetailView::onRepeatBtnClicked()
