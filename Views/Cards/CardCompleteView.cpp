@@ -6,22 +6,24 @@ CardCompleteView::CardCompleteView(CardAbstractView *view)
     : CardAbstractView(view)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    resetBtn = new QPushButton("Начать заново");
+    resetBtn = new QPushButton("ЗАНОВО");
+    continueBtn = new QPushButton("ПРОДОЛЖИТЬ");
     rootLayout->addWidget(resetBtn);
+    rootLayout->addWidget(continueBtn);
     setLayout(rootLayout);
 
-    connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(resetBtn, SIGNAL(clicked()), this, SLOT(onResetBtnClicked()));
-}
-
-void CardCompleteView::onModelChanged()
-{
-    if (getModel()->isComplete()) {
-        setCompleteView();
-    }
+    connect(continueBtn, SIGNAL(clicked()), this, SLOT(onContinueBtnClicked()));
 }
 
 void CardCompleteView::onResetBtnClicked()
 {
     getModel()->reset();
+    setAskView();
+}
+
+void CardCompleteView::onContinueBtnClicked()
+{
+    getModel()->next();
+    setAskView();
 }

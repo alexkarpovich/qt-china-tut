@@ -42,12 +42,20 @@ void PageAbstractView::setContainer(QStackedWidget *value)
     container = value;
 }
 
+void PageAbstractView::activate()
+{
+    PageAbstractView *view = qobject_cast<PageAbstractView *>(container->currentWidget());
+    view->activate();
+}
+
 void PageAbstractView::setManagementView()
 {
     setViewState(ManagementState);
+    activate();
 }
 
 void PageAbstractView::setTrainingView()
 {
     setViewState(TrainingState);
+    activate();
 }

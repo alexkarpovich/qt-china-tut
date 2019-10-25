@@ -16,7 +16,6 @@ CardAskView::CardAskView(CardAbstractView *view)
     rootLayout->addWidget(textLbl, 0, Qt::AlignCenter);
     rootLayout->addWidget(showBtn, 0, Qt::AlignBottom);
     setLayout(rootLayout);
-    onModelChanged();
 
     connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(showBtn, SIGNAL(clicked()), this, SLOT(onShowBtnClicked()));

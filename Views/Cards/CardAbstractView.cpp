@@ -51,6 +51,11 @@ QStackedWidget *CardAbstractView::getContainer() const
     return container;
 }
 
+void CardAbstractView::activate()
+{
+    model->initialize();
+}
+
 void CardAbstractView::setAskView()
 {
     setViewState(AskState);

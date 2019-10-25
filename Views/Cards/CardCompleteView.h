@@ -11,12 +11,13 @@ class CardCompleteView : public CardAbstractView
     Q_OBJECT
 
     QPushButton *resetBtn;
+    QPushButton *continueBtn;
 public:
     CardCompleteView(CardAbstractView *view);
 
 public slots:
-    void onModelChanged();
     void onResetBtnClicked();
+    void onContinueBtnClicked();
 };
 
 #endif // CARDCOMPLETEVIEW_H

@@ -20,9 +20,10 @@ public:
     void setNativeWord(Word *value);
 
     bool isComplete() const;
-    void setCompletance(bool value);
+    void setCompleteness(bool value);
 
 public slots:
+    void initialize();
     void next();
     void complete();
     void reset();

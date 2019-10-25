@@ -55,7 +55,7 @@ Training *TrainingDao::create(QList<int> groupids, Training *trn)
 void TrainingDao::reset(int trainingid)
 {
     QSqlQuery query;
-    query.prepare("UPDATE training_translations SET status=0 WHERE training_id=:trainingid");
+    query.prepare("UPDATE trainings_translations SET status=0 WHERE training_id=:trainingid");
     query.bindValue(":trainingid", trainingid);
 
     if (!query.exec()) {
@@ -120,7 +120,7 @@ QList<Word *> TrainingDao::translationWords(int trainingid, int translationid)
 void TrainingDao::completeWord(int trainingid, int wordid)
 {
     QSqlQuery query;
-    QString sql = "INSERT INTO trainings_translations (training_id, translation_id, status) "
+    QString sql = "INSERT OR REPLACE INTO trainings_translations (training_id, translation_id, status) "
                   "SELECT gtr.training_id, gt.translation_id, 1 FROM groups_translations gt "
                   "LEFT JOIN translations t on gt.translation_id = t.id "
                   "LEFT JOIN groups_trainings gtr ON gtr.group_id=gt.group_id "

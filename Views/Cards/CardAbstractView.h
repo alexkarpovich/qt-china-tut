@@ -31,6 +31,7 @@ public:
 
     QStackedWidget *getContainer() const;
 
+    void activate();
     void setAskView();
     void setDetailView();
     void setCompleteView();

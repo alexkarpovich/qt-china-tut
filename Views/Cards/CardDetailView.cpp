@@ -23,7 +23,6 @@ CardDetailView::CardDetailView(CardAbstractView *view)
     rootLayout->addWidget(completeBtn, 2, 1);
 
     setLayout(rootLayout);
-    onModelChanged();
 
     connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(completeBtn, SIGNAL(clicked()), this, SLOT(onCompleteBtnClicked()));
@@ -48,5 +47,10 @@ void CardDetailView::onRepeatBtnClicked()
 void CardDetailView::onCompleteBtnClicked()
 {
     getModel()->complete();
-    setAskView();
+
+    if (!getModel()->isComplete()) {
+        setAskView();
+    } else {
+        setCompleteView();
+    }
 }

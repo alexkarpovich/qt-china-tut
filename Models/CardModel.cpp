@@ -3,8 +3,7 @@
 CardModel::CardModel(QObject *parent)
     : QObject(parent), trainingDao(new TrainingDao), wordDao(new WordDao), m_isComplete(false)
 {
-    training = trainingDao->latest();
-    next();
+
 }
 
 Word *CardModel::getForeignWord() const
@@ -32,11 +31,12 @@ void CardModel::next()
     nativeWord = trainingDao->nextTranslation(training->getId());
 
     if (!nativeWord) {
-        setCompletance(true);
+        setCompleteness(true);
         return;
+    } else {
+        foreignWord = trainingDao->translationWords(training->getId(), nativeWord->getId()).first();
     }
 
-    foreignWord = trainingDao->translationWords(training->getId(), nativeWord->getId()).first();
     emit dataChanged();
 }
 
@@ -49,6 +49,7 @@ void CardModel::complete()
 void CardModel::reset()
 {
     trainingDao->reset(training->getId());
+    setCompleteness(false);
     next();
 }
 
@@ -57,9 +58,14 @@ bool CardModel::isComplete() const
     return m_isComplete;
 }
 
-void CardModel::setCompletance(bool value)
+void CardModel::setCompleteness(bool value)
 {
     m_isComplete = value;
-    emit dataChanged();
+}
+
+void CardModel::initialize()
+{
+    training = trainingDao->latest();
+    next();
 }
 
