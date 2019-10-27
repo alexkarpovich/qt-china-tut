@@ -6,10 +6,15 @@
 #include "ManagementView.h"
 #include "Groups/GroupListItemDelegate.h"
 
-ManagementView::ManagementView(PageAbstractView *view)
-    : PageAbstractView(view)
+ManagementView::ManagementView(AbstractMainView *view)
+    : AbstractMainView(view)
 {
     buildLayout();
+}
+
+void ManagementView::activate()
+{
+    qDebug() << "Management activated";
 }
 
 void ManagementView::buildLayout()

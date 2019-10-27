@@ -4,6 +4,7 @@
 #include <QStackedWidget>
 #include <QWidget>
 
+#include <Views/AbstractMainView.h>
 #include <Models/CardModel.h>
 #include "CardAbstractView.h"
 
@@ -13,7 +14,7 @@ class CardView : public CardAbstractView
     Q_OBJECT
 
 public:
-    explicit CardView(QWidget *parent = nullptr);
+    explicit CardView(AbstractMainView *parent);
 
 signals:
 

@@ -4,28 +4,23 @@
 #include <QStackedWidget>
 #include <QWidget>
 
-#include <Views/PageAbstractView.h>
+#include <Views/AbstractPageView.h>
+#include <Views/AbstractMainView.h>
 
 // Forward declaration to avoid cyclic inclusion
 class GroupNotSelectedView;
 class GroupEditView;
 class GroupTrainingView;
 
-class GroupAbstractView : public QWidget
+class GroupAbstractView : public AbstractPageView
 {
     Q_OBJECT
-public:
-    enum ViewState {
-        NotSelectedState = 0,
-        EditState = 1,
-        TrainingState = 2
-    };
 
-    explicit GroupAbstractView(PageAbstractView *pageView);
+public:
+
+    explicit GroupAbstractView(AbstractMainView *pageView);
     GroupAbstractView(GroupAbstractView *clone);
 
-    QStackedWidget *getContainer() const;
-    void setContainer(QStackedWidget *value);
     void setNotSelectedView();
     void setEditView();
     void setTrainingView();
@@ -33,15 +28,19 @@ public:
     QList<int> *getGroupids() const;
     void setGroupids(QList<int> value);
 
-    ViewState *getViewState() const;
-    void setViewState(ViewState value);
-    PageAbstractView *getPageView() const;
+    AbstractMainView *getPageView() const;
+
+    bool isNotSelectedView();
+
+    GroupNotSelectedView *getNotSelectedView() const;
+
+    GroupEditView *getEditView() const;
+
+    GroupTrainingView *getTrainingView() const;
 
 private:
-    ViewState *viewState;
     QList<int> *groupids;
-    QStackedWidget *container;
-    PageAbstractView *pageView;
+    AbstractMainView *pageView;
     GroupNotSelectedView *notSelectedView;
     GroupEditView *editView;
     GroupTrainingView *trainingView;
@@ -49,6 +48,7 @@ signals:
     void dataChanged();
 
 public slots:
+    void activate() override;
 };
 
 #endif // GROUPABSTRACTVIEW_H

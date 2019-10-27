@@ -6,8 +6,8 @@
 
 #include "Cards/CardView.h"
 
-TrainingView::TrainingView(PageAbstractView *view)
-    : PageAbstractView(view)
+TrainingView::TrainingView(AbstractMainView *view)
+    : AbstractMainView(view)
 {
     QVBoxLayout * rootLayout = new QVBoxLayout;
 

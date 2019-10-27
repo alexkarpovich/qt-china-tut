@@ -1,10 +1,10 @@
 #ifndef PAGEVIEW_H
 #define PAGEVIEW_H
 
-#include "PageAbstractView.h"
+#include "AbstractMainView.h"
 
 
-class PageView : public PageAbstractView
+class PageView : public AbstractMainView
 {
     Q_OBJECT
 public:

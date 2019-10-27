@@ -1,45 +1,38 @@
 #ifndef CARDABSTRACTVIEW_H
 #define CARDABSTRACTVIEW_H
 
-#include <QStackedWidget>
 #include <QWidget>
 
 #include <Models/CardModel.h>
+#include <Views/AbstractPageView.h>
 
 class CardAskView;
 class CardDetailView;
 class CardCompleteView;
 
-class CardAbstractView : public QWidget
+class CardAbstractView : public AbstractPageView
 {
     Q_OBJECT
 public:
-    enum ViewState {
-        AskState = 0,
-        DetailState = 1,
-        CompleteState = 2
-    };
-
-    explicit CardAbstractView(QWidget *parent = nullptr);
+    explicit CardAbstractView(AbstractPageView *parent);
     CardAbstractView(CardAbstractView *clone);
-
-    ViewState *getViewState() const;
-    void setViewState(ViewState value);
 
     CardModel *getModel() const;
     void setModel(CardModel *value);
-
-    QStackedWidget *getContainer() const;
 
     void activate();
     void setAskView();
     void setDetailView();
     void setCompleteView();
 
+    CardAskView *getAskView() const;
+
+    CardDetailView *getDetailView() const;
+
+    CardCompleteView *getCompleteView() const;
+
 private:
-    ViewState *viewState;
     CardModel *model;
-    QStackedWidget *container;
     CardAskView *askView;
     CardDetailView *detailView;
     CardCompleteView *completeView;

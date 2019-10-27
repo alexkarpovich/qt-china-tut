@@ -60,7 +60,7 @@ Group *GroupDao::create(Group *value)
     query.bindValue(":name", value->getName());
     query.bindValue(":langid", profile->getLearningLang()->getId());
 
-    if (query.exec() && query.next()) {
+    if (query.exec()) {
         value->setId(query.lastInsertId().toInt());
 
         return value;

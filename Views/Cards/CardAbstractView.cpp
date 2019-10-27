@@ -3,37 +3,23 @@
 #include "CardDetailView.h"
 #include "CardCompleteView.h"
 
-CardAbstractView::CardAbstractView(QWidget *parent)
-    : QWidget(parent), viewState(new ViewState)
+CardAbstractView::CardAbstractView(AbstractPageView *parent)
+    : AbstractPageView(parent)
 {
-    *viewState = AskState;
     model = new CardModel;
-    container = new QStackedWidget;
+    setContainer(new QStackedWidget(this));
     askView = new CardAskView(this);
     detailView = new CardDetailView(this);
     completeView = new CardCompleteView(this);
-    container->addWidget(askView);
-    container->addWidget(detailView);
-    container->addWidget(completeView);
 }
 
 CardAbstractView::CardAbstractView(CardAbstractView *clone)
-    : QWidget(clone)
+    : AbstractPageView(clone)
 {
-    viewState = clone->getViewState();
     model = clone->getModel();
-    container = clone->getContainer();
-}
-
-CardAbstractView::ViewState *CardAbstractView::getViewState() const
-{
-    return viewState;
-}
-
-void CardAbstractView::setViewState(ViewState value)
-{
-    *viewState = value;
-    container->setCurrentIndex(value);
+    askView = clone->getAskView();
+    detailView = clone->getDetailView();
+    completeView = clone->getCompleteView();
 }
 
 CardModel *CardAbstractView::getModel() const
@@ -46,11 +32,6 @@ void CardAbstractView::setModel(CardModel *value)
     model = value;
 }
 
-QStackedWidget *CardAbstractView::getContainer() const
-{
-    return container;
-}
-
 void CardAbstractView::activate()
 {
     model->initialize();
@@ -58,15 +39,30 @@ void CardAbstractView::activate()
 
 void CardAbstractView::setAskView()
 {
-    setViewState(AskState);
+    setCurrentWidget(askView);
 }
 
 void CardAbstractView::setDetailView()
 {
-    setViewState(DetailState);
+    setCurrentWidget(detailView);
 }
 
 void CardAbstractView::setCompleteView()
 {
-    setViewState(CompleteState);
+    setCurrentWidget(completeView);
+}
+
+CardAskView *CardAbstractView::getAskView() const
+{
+    return askView;
+}
+
+CardDetailView *CardAbstractView::getDetailView() const
+{
+    return detailView;
+}
+
+CardCompleteView *CardAbstractView::getCompleteView() const
+{
+    return completeView;
 }

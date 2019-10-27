@@ -2,6 +2,7 @@
 #define GROUPVIEW_H
 
 #include <QWidget>
+#include <Views/AbstractMainView.h>
 #include "GroupAbstractView.h"
 
 class GroupView : public GroupAbstractView
@@ -10,7 +11,7 @@ class GroupView : public GroupAbstractView
 
     void buildLayout();
 public:
-    explicit GroupView(PageAbstractView *pageView);
+    explicit GroupView(AbstractMainView *pageView);
 
 signals:
 

@@ -13,8 +13,6 @@ GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
     QGridLayout *rootLayout = new QGridLayout;
     QPushButton *tmp;
 
-    qDebug() << getViewState() << *getViewState();
-
     for(int i = 0; i < 4; i++) {
         tmp = new QPushButton(QString::number(i), this);
         tmp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -27,7 +25,6 @@ GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
 
 void GroupTrainingView::onTrainingOptionClicked(int type)
 {
-    qDebug() << getViewState() << type << getGroupids();
     TrainingDao trainingDao;
     Training * tr = new Training;
     tr->setType(static_cast<Training::Type>(type));

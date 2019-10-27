@@ -5,29 +5,19 @@
 #include "GroupEditView.h"
 #include "GroupTrainingView.h"
 
-QStackedWidget *GroupAbstractView::getContainer() const
-{
-    return container;
-}
-
-void GroupAbstractView::setContainer(QStackedWidget *value)
-{
-    container = value;
-}
-
 void GroupAbstractView::setNotSelectedView()
 {
-    setViewState(NotSelectedState);
+    setCurrentWidget(notSelectedView);
 }
 
 void GroupAbstractView::setEditView()
 {    
-    setViewState(EditState);
+    setCurrentWidget(editView);
 }
 
 void GroupAbstractView::setTrainingView()
 {
-    setViewState(TrainingState);
+    setCurrentWidget(trainingView);
 }
 
 QList<int> *GroupAbstractView::getGroupids() const
@@ -41,40 +31,54 @@ void GroupAbstractView::setGroupids(QList<int> value)
     emit dataChanged();
 }
 
-GroupAbstractView::ViewState *GroupAbstractView::getViewState() const
-{
-    return viewState;
-}
-
-void GroupAbstractView::setViewState(ViewState value)
-{
-    *viewState = value;
-    container->setCurrentIndex(value);
-}
-
-PageAbstractView *GroupAbstractView::getPageView() const
+AbstractMainView *GroupAbstractView::getPageView() const
 {
     return pageView;
 }
 
-GroupAbstractView::GroupAbstractView(PageAbstractView *pageView)
-    : QWidget(pageView), viewState(new ViewState), pageView(pageView), groupids(new QList<int>)
+bool GroupAbstractView::isNotSelectedView()
 {
-    *viewState = NotSelectedState;
-    container = new QStackedWidget;
+    return container()->currentWidget() == notSelectedView;
+}
+
+GroupNotSelectedView *GroupAbstractView::getNotSelectedView() const
+{
+    return notSelectedView;
+}
+
+GroupEditView *GroupAbstractView::getEditView() const
+{
+    return editView;
+}
+
+GroupTrainingView *GroupAbstractView::getTrainingView() const
+{
+    return trainingView;
+}
+
+void GroupAbstractView::activate()
+{
+
+}
+
+GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
+    : AbstractPageView(pageView), groupids(new QList<int>), pageView(pageView)
+{
+    setContainer(new QStackedWidget(this));
     notSelectedView = new GroupNotSelectedView(this);
     editView = new GroupEditView(this);
     trainingView = new GroupTrainingView(this);
-    container->addWidget(notSelectedView);
-    container->addWidget(editView);
-    container->addWidget(trainingView);    
+    notSelectedView->setVisible(false);
+    editView->setVisible(false);
+    trainingView->setVisible(false);
 }
 
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
-    : QWidget(clone)
+    : AbstractPageView(clone)
 {
-    viewState = clone->getViewState();
-    container = clone->getContainer();
     pageView = clone->getPageView();
     groupids = clone->getGroupids();
+    notSelectedView = clone->getNotSelectedView();
+    editView = clone->getEditView();
+    trainingView = clone->getTrainingView();
 }

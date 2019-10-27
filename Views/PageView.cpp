@@ -4,9 +4,9 @@
 
 
 PageView::PageView(QWidget *parent)
-    : PageAbstractView(parent)
+    : AbstractMainView(parent)
 {
     QHBoxLayout *rootLayout = new QHBoxLayout;
-    rootLayout->addWidget(getContainer());
+    rootLayout->addWidget(container());
     setLayout(rootLayout);
 }

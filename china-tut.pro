@@ -29,8 +29,11 @@ SOURCES += \
     Entities/Word.cpp \
     Models/CardModel.cpp \
     Models/GroupModel.cpp \
+    Models/TrainingModel.cpp \
     Models/TranslationModel.cpp \
     Models/WordModel.cpp \
+    Views/AbstractMainView.cpp \
+    Views/AbstractPageView.cpp \
     Views/Cards/CardAbstractView.cpp \
     Views/Cards/CardAskView.cpp \
     Views/Cards/CardCompleteView.cpp \
@@ -44,7 +47,6 @@ SOURCES += \
     Views/Groups/GroupView.cpp \
     Views/MainWindow.cpp \
     Views/ManagementView.cpp \
-    Views/PageAbstractView.cpp \
     Views/PageView.cpp \
     Views/TrainingView.cpp \
     Views/Words/TranslationEditor.cpp \
@@ -66,8 +68,11 @@ HEADERS += \
     Entities/Word.h \
     Models/CardModel.h \
     Models/GroupModel.h \
+    Models/TrainingModel.h \
     Models/TranslationModel.h \
     Models/WordModel.h \
+    Views/AbstractMainView.h \
+    Views/AbstractPageView.h \
     Views/Cards/CardAbstractView.h \
     Views/Cards/CardAskView.h \
     Views/Cards/CardCompleteView.h \
@@ -81,7 +86,6 @@ HEADERS += \
     Views/Groups/GroupView.h \
     Views/MainWindow.h \
     Views/ManagementView.h \
-    Views/PageAbstractView.h \
     Views/PageView.h \
     Views/TrainingView.h \
     Views/Words/TranslationEditor.h \

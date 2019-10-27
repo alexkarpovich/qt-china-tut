@@ -3,7 +3,7 @@
 
 #include "GroupView.h"
 
-GroupView::GroupView(PageAbstractView *pageView)
+GroupView::GroupView(AbstractMainView *pageView)
     : GroupAbstractView(pageView)
 {
     buildLayout();
@@ -11,7 +11,8 @@ GroupView::GroupView(PageAbstractView *pageView)
 
 void GroupView::buildLayout()
 {
-    QHBoxLayout *rootLayout = new QHBoxLayout;    
-    rootLayout->addWidget(getContainer());
+    QHBoxLayout *rootLayout = new QHBoxLayout;
+    setNotSelectedView();
+    rootLayout->addWidget(container());
     setLayout(rootLayout);
 }

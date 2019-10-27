@@ -2,11 +2,11 @@
 
 #include "CardView.h"
 
-CardView::CardView(QWidget *parent)
+CardView::CardView(AbstractMainView *parent)
     : CardAbstractView(parent)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    rootLayout->addWidget(getContainer());
+    rootLayout->addWidget(container());
     setFixedSize(350, 200);
     setLayout(rootLayout);
 }

@@ -11,7 +11,9 @@ class TrainingDao
 public:
     TrainingDao();
     Training *latest();
+    Training *get(int trainingid);
     Training *create(QList<int> groupids, Training *trn);
+    Training *getOrCreate(QList<int> groupids, Training *trn);
     void reset(int trainingid);
     Word *nextTranslation(int trainingid);
     QList<Word *> translationWords(int trainingid, int translationid);

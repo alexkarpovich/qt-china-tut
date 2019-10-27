@@ -2,16 +2,16 @@
 #define TRAININGVIEW_H
 
 #include <QWidget>
-#include "PageAbstractView.h"
+#include "AbstractMainView.h"
 #include "Cards/CardView.h"
 
-class TrainingView : public PageAbstractView
+class TrainingView : public AbstractMainView
 {
     Q_OBJECT
 
     CardView *cardView;
 public:
-    explicit TrainingView(PageAbstractView *view = nullptr);
+    explicit TrainingView(AbstractMainView *view = nullptr);
 
 signals:
 

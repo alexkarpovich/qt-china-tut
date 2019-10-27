@@ -18,7 +18,7 @@ GroupEditView::GroupEditView(GroupAbstractView *view)
 
 void GroupEditView::onDataChanged()
 {
-    if (*getViewState() == NotSelectedState) {
+    if (isNotSelectedView()) {
         setEditView();
     }
 
@@ -47,7 +47,6 @@ void GroupEditView::buildLayout()
     setLayout(wlSectionLayout);
 
     wordTableView = new QTableView;
-    wordModel = new WordModel(*getGroupids());
     wordTableView->setFrameStyle(QFrame::NoFrame);
     wordTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     wordTableView->horizontalHeader()->setStretchLastSection(true);
@@ -56,7 +55,6 @@ void GroupEditView::buildLayout()
     wordTableView->setItemDelegate(new WordItemDelegate);
     wordTableView->setEditTriggers(QAbstractItemView::DoubleClicked
                                     | QAbstractItemView::SelectedClicked);
-    wordTableView->setModel(wordModel);
 
     QHBoxLayout *controlsLayout = new QHBoxLayout;
     startTrainingBtn = new QPushButton("Тренировка");

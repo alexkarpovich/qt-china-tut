@@ -26,6 +26,23 @@ Training *TrainingDao::latest()
     return nullptr;
 }
 
+Training *TrainingDao::get(int trainingid)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM trainings WHERE id=:trainingid");
+    query.bindValue(":trainingid", trainingid);
+
+    if (query.exec() && query.next()) {
+        Training *trn = new Training;
+        trn->setId(query.value(0).toInt());
+        trn->setType(static_cast<Training::Type>(query.value(0).toInt()));
+
+        return trn;
+    }
+
+    return nullptr;
+}
+
 Training *TrainingDao::create(QList<int> groupids, Training *trn)
 {
     QSqlQuery query;
@@ -50,6 +67,27 @@ Training *TrainingDao::create(QList<int> groupids, Training *trn)
     }
 
     return nullptr;
+}
+
+Training *TrainingDao::getOrCreate(QList<int> groupids, Training *trn)
+{
+    QSqlQuery query;
+    QStringList strnum;
+    foreach(int id, groupids) {
+        strnum << QString::number(id);
+    }
+    QString sql = "SELECT a.training_id FROM groups_trainings a "
+            "WHERE a.group_id IN (%1) AND %2="
+                  "(SELECT count(group_id) FROM groups_trainings b WHERE b.training_id=a.training_id) "
+            "GROUP BY a.training_id";
+    sql = sql.arg(strnum.join(","), QString::number(groupids.size()));
+    if (query.exec(sql) && query.next()) {
+        int trainingid = query.value(0).toInt();
+
+        return get(trainingid);
+    }
+
+    return create(groupids, trn);
 }
 
 void TrainingDao::reset(int trainingid)

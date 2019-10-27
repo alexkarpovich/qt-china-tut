@@ -7,10 +7,10 @@
 #include <QWidget>
 
 #include <Models/GroupModel.h>
-#include "PageAbstractView.h"
+#include "AbstractMainView.h"
 #include "Groups/GroupView.h"
 
-class ManagementView : public PageAbstractView
+class ManagementView : public AbstractMainView
 {
     Q_OBJECT
     QPushButton* addGroupBtn;
@@ -24,9 +24,10 @@ class ManagementView : public PageAbstractView
     void buildLayout();
     void initializeWidgets();
 public:
-    explicit ManagementView(PageAbstractView *view);
+    explicit ManagementView(AbstractMainView *view);
 
 public slots:
+    virtual void activate();
     void onAddGroupBtnClicked();
     void onGroupSelectionChanged(const QItemSelection& selection);
 };
