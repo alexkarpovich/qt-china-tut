@@ -8,27 +8,26 @@ AbstractMainView::AbstractMainView(QWidget *parent)
     setContainer(new QStackedWidget(this));
     managementView = new ManagementView(this);
     trainingView = new TrainingView(this);
-    managementView->setVisible(false);
-    trainingView->setVisible(false);
+    addPage(typeid(ManagementView), managementView);
+    addPage(typeid(TrainingView), trainingView);
     setManagementView();
 }
 
 AbstractMainView::AbstractMainView(AbstractMainView *clone)
     : AbstractPageView(clone)
 {
-    managementView = clone->getManagementView();
-    trainingView = clone->getTrainingView();
+    setVisible(false);
 }
 
 void AbstractMainView::setManagementView()
 {
-    setCurrentWidget(managementView);
+    setCurrentWidget(typeid(ManagementView));
     activate();
 }
 
 void AbstractMainView::setTrainingView()
 {
-    setCurrentWidget(trainingView);
+    setCurrentWidget(typeid(TrainingView));
     activate();
 }
 

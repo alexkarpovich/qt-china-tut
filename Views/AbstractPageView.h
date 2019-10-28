@@ -1,6 +1,9 @@
 #ifndef ABSTRACTPAGEVIEW_H
 #define ABSTRACTPAGEVIEW_H
 
+#include <typeindex>
+#include <typeinfo>
+#include <QMap>
 #include <QStackedWidget>
 #include <QWidget>
 
@@ -13,12 +16,18 @@ public:
 
     QStackedWidget *container() const;
     void setContainer(QStackedWidget *value);
-    void setCurrentWidget(QWidget *widget);
+    void setCurrentWidget(std::type_index id);
 
     virtual void activate();
 
+    QMap<std::type_index, AbstractPageView *> *pageMap() const;
+    void addPage(std::type_index id, AbstractPageView *page);
+    AbstractPageView *page(std::type_index id);
+
+
 private:
     QStackedWidget *m_container;
+    QMap<std::type_index, AbstractPageView *> *m_pageMap;
 signals:
 
 public slots:

@@ -7,17 +7,17 @@
 
 void GroupAbstractView::setNotSelectedView()
 {
-    setCurrentWidget(notSelectedView);
+    setCurrentWidget(typeid(GroupNotSelectedView));
 }
 
 void GroupAbstractView::setEditView()
 {    
-    setCurrentWidget(editView);
+    setCurrentWidget(typeid(GroupEditView));
 }
 
 void GroupAbstractView::setTrainingView()
 {
-    setCurrentWidget(trainingView);
+    setCurrentWidget(typeid(GroupTrainingView));
 }
 
 QList<int> *GroupAbstractView::getGroupids() const
@@ -38,7 +38,7 @@ AbstractMainView *GroupAbstractView::getPageView() const
 
 bool GroupAbstractView::isNotSelectedView()
 {
-    return container()->currentWidget() == notSelectedView;
+    return container()->currentWidget() == page(typeid(GroupNotSelectedView));
 }
 
 GroupNotSelectedView *GroupAbstractView::getNotSelectedView() const
@@ -68,17 +68,15 @@ GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
     notSelectedView = new GroupNotSelectedView(this);
     editView = new GroupEditView(this);
     trainingView = new GroupTrainingView(this);
-    notSelectedView->setVisible(false);
-    editView->setVisible(false);
-    trainingView->setVisible(false);
+    addPage(typeid(GroupNotSelectedView), notSelectedView);
+    addPage(typeid(GroupEditView), editView);
+    addPage(typeid(GroupTrainingView), trainingView);
 }
 
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
     : AbstractPageView(clone)
 {
+    setVisible(false);
     pageView = clone->getPageView();
     groupids = clone->getGroupids();
-    notSelectedView = clone->getNotSelectedView();
-    editView = clone->getEditView();
-    trainingView = clone->getTrainingView();
 }

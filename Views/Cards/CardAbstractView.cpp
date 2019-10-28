@@ -6,20 +6,21 @@
 CardAbstractView::CardAbstractView(AbstractPageView *parent)
     : AbstractPageView(parent)
 {
-    model = new CardModel;
     setContainer(new QStackedWidget(this));
+    model = new CardModel;
     askView = new CardAskView(this);
     detailView = new CardDetailView(this);
     completeView = new CardCompleteView(this);
+    addPage(typeid(CardAskView), askView);
+    addPage(typeid(CardDetailView), detailView);
+    addPage(typeid(CardCompleteView), completeView);
 }
 
 CardAbstractView::CardAbstractView(CardAbstractView *clone)
     : AbstractPageView(clone)
 {
+    setVisible(false);
     model = clone->getModel();
-    askView = clone->getAskView();
-    detailView = clone->getDetailView();
-    completeView = clone->getCompleteView();
 }
 
 CardModel *CardAbstractView::getModel() const
@@ -39,17 +40,17 @@ void CardAbstractView::activate()
 
 void CardAbstractView::setAskView()
 {
-    setCurrentWidget(askView);
+    setCurrentWidget(typeid(CardAskView));
 }
 
 void CardAbstractView::setDetailView()
 {
-    setCurrentWidget(detailView);
+    setCurrentWidget(typeid(CardDetailView));
 }
 
 void CardAbstractView::setCompleteView()
 {
-    setCurrentWidget(completeView);
+    setCurrentWidget(typeid(CardCompleteView));
 }
 
 CardAskView *CardAbstractView::getAskView() const

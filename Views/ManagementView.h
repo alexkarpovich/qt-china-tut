@@ -27,7 +27,7 @@ public:
     explicit ManagementView(AbstractMainView *view);
 
 public slots:
-    virtual void activate();
+    void activate();
     void onAddGroupBtnClicked();
     void onGroupSelectionChanged(const QItemSelection& selection);
 };

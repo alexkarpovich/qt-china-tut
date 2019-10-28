@@ -16,7 +16,7 @@ public:
 signals:
 
 public slots:
-    virtual void activate();
+    void activate();
 };
 
 #endif // TRAININGVIEW_H
