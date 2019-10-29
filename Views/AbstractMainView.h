@@ -18,10 +18,6 @@ public:
     void setManagementView();
     void setTrainingView();
 
-    ManagementView *getManagementView() const;
-
-    TrainingView *getTrainingView() const;
-
 private:
     ManagementView *managementView;
     TrainingView *trainingView;

@@ -19,7 +19,7 @@ public:
 signals:
 
 public slots:
-    void onTrainingOptionClicked(int type);
+    void onTrainingOptionClicked(Training::Type type);
 };
 
 #endif // GROUPTRAININGVIEW_H

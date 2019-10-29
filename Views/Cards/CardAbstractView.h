@@ -25,12 +25,6 @@ public:
     void setDetailView();
     void setCompleteView();
 
-    CardAskView *getAskView() const;
-
-    CardDetailView *getDetailView() const;
-
-    CardCompleteView *getCompleteView() const;
-
 private:
     CardModel *model;
     CardAskView *askView;

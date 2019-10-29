@@ -1,16 +1,16 @@
 #include "TrainingView.h"
-
+#include <QDebug>
 #include <QLabel>
 #include <QListWidget>
 #include <QVBoxLayout>
 
 #include "Cards/CardView.h"
 
-TrainingView::TrainingView(AbstractMainView *view)
+TrainingView::TrainingView(QList<int> groupids, Training::Type type, AbstractMainView *view)
     : AbstractMainView(view)
 {
     QVBoxLayout * rootLayout = new QVBoxLayout;
-
+    trainingModel = new TrainingModel(groupids, type);
     cardView = new CardView(this);
     rootLayout->addWidget(cardView, 1, Qt::AlignHCenter);
 
@@ -19,5 +19,6 @@ TrainingView::TrainingView(AbstractMainView *view)
 
 void TrainingView::activate()
 {
+    qDebug() << "Training activated";
     cardView->activate();
 }

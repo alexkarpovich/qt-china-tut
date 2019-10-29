@@ -4,15 +4,16 @@
 #include <QStackedWidget>
 #include <QWidget>
 
+#include <Models/TrainingModel.h>
+
 #include <Views/AbstractMainView.h>
-#include <Models/CardModel.h>
 #include "CardAbstractView.h"
 
 
 class CardView : public CardAbstractView
 {
     Q_OBJECT
-
+    TrainingModel *trainingModel;
 public:
     explicit CardView(AbstractMainView *parent);
 

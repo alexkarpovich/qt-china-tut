@@ -32,12 +32,6 @@ public:
 
     bool isNotSelectedView();
 
-    GroupNotSelectedView *getNotSelectedView() const;
-
-    GroupEditView *getEditView() const;
-
-    GroupTrainingView *getTrainingView() const;
-
 private:
     QList<int> *groupids;
     AbstractMainView *pageView;

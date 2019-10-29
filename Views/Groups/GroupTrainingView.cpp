@@ -3,8 +3,9 @@
 #include <QSignalMapper>
 
 #include <Dao/TrainingDao.h>
-
+#include <Views/TrainingView.h>
 #include "GroupTrainingView.h"
+
 
 
 GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
@@ -17,17 +18,17 @@ GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
         tmp = new QPushButton(QString::number(i), this);
         tmp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         btns.append(tmp);
-        connect(btns[i], &QPushButton::clicked, [this, i]() { onTrainingOptionClicked(i); });
+        connect(btns[i], &QPushButton::clicked, [this, i]() {
+            onTrainingOptionClicked(static_cast<Training::Type>(i));
+        });
         rootLayout->addWidget(tmp, i/2, i%2);
     }
     setLayout(rootLayout);
 }
 
-void GroupTrainingView::onTrainingOptionClicked(int type)
+void GroupTrainingView::onTrainingOptionClicked(Training::Type type)
 {
-    TrainingDao trainingDao;
-    Training * tr = new Training;
-    tr->setType(static_cast<Training::Type>(type));
-    trainingDao.create(*getGroupids(), tr);
+    TrainingView *trainingView = new TrainingView(*getGroupids(), type, getPageView());
+    getPageView()->addPage(typeid(TrainingView), trainingView);
     getPageView()->setTrainingView();
 }

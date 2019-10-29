@@ -41,21 +41,6 @@ bool GroupAbstractView::isNotSelectedView()
     return container()->currentWidget() == page(typeid(GroupNotSelectedView));
 }
 
-GroupNotSelectedView *GroupAbstractView::getNotSelectedView() const
-{
-    return notSelectedView;
-}
-
-GroupEditView *GroupAbstractView::getEditView() const
-{
-    return editView;
-}
-
-GroupTrainingView *GroupAbstractView::getTrainingView() const
-{
-    return trainingView;
-}
-
 void GroupAbstractView::activate()
 {
 

@@ -52,18 +52,3 @@ void CardAbstractView::setCompleteView()
 {
     setCurrentWidget(typeid(CardCompleteView));
 }
-
-CardAskView *CardAbstractView::getAskView() const
-{
-    return askView;
-}
-
-CardDetailView *CardAbstractView::getDetailView() const
-{
-    return detailView;
-}
-
-CardCompleteView *CardAbstractView::getCompleteView() const
-{
-    return completeView;
-}
