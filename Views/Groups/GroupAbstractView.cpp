@@ -41,11 +41,6 @@ bool GroupAbstractView::isNotSelectedView()
     return container()->currentWidget() == page(typeid(GroupNotSelectedView));
 }
 
-void GroupAbstractView::activate()
-{
-
-}
-
 GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
     : AbstractPageView(pageView), groupids(new QList<int>), pageView(pageView)
 {
@@ -55,7 +50,7 @@ GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
     : AbstractPageView(clone)
 {
-    setVisible(false);
+    //setVisible(false);
     pageView = clone->getPageView();
     groupids = clone->getGroupids();
 }

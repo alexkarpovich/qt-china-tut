@@ -18,6 +18,8 @@ public:
     Word *nextTranslation(int trainingid);
     QList<Word *> translationWords(int trainingid, int translationid);
     void completeWord(int trainingid, int wordid);
+    bool isComplete(int trainingid);
+    bool isNew(int trainingid);
 
 };
 

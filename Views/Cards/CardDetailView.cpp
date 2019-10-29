@@ -31,7 +31,7 @@ CardDetailView::CardDetailView(CardAbstractView *view)
 
 void CardDetailView::onModelChanged()
 {
-    if (!getModel()->hasCompleted()) {
+    if (!getModel()->isComplete()) {
         wordLbl->setText(getModel()->foreigh()->getText());
         transcriptionLbl->setText(getModel()->foreigh()->getTranscription());
         translationLbl->setText(getModel()->native()->getText());
@@ -48,7 +48,7 @@ void CardDetailView::onCompleteBtnClicked()
 {
     getModel()->completeWord();
 
-    if (!getModel()->hasCompleted()) {
+    if (!getModel()->isComplete()) {
         setAskView();
     } else {
         setCompleteView();

@@ -27,19 +27,13 @@ void AbstractPageView::setCurrentWidget(std::type_index id)
     QWidget *current = m_container->currentWidget();
 
     if (current) {
-        current->setVisible(false);
+        //current->setVisible(false);
         m_container->removeWidget(current);
     }
     auto widget = page(id);
     m_container->addWidget(widget);
     m_container->setCurrentWidget(widget);
-    widget->activate();
-    widget->setVisible(true);
-}
-
-void AbstractPageView::activate()
-{
-
+    //widget->setVisible(true);
 }
 
 QMap<std::type_index, AbstractPageView *> *AbstractPageView::pageMap() const

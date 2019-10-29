@@ -14,7 +14,7 @@ CardAbstractView::CardAbstractView(TrainingView *parent)
 CardAbstractView::CardAbstractView(CardAbstractView *clone)
     : AbstractPageView(clone)
 {
-    setVisible(false);
+    //setVisible(false);
     model = clone->getModel();
 }
 
@@ -28,43 +28,47 @@ void CardAbstractView::setModel(TrainingModel *value)
     model = value;
 }
 
-void CardAbstractView::activate()
-{
-    model->nextWord();
-}
-
 void CardAbstractView::setAskView(CardAskView *view)
 {
-    if (view) {
-        askView = view;
-    } else {
-        askView = askView ? askView : new CardAskView(this);
+    CardAskView *existingView = static_cast<CardAskView *>(page(typeid (CardAskView)));
+
+    if (!existingView && !view) {
+        view = new CardAskView(this);
     }
 
-    addPage(typeid(CardAskView), askView);
+    if (!existingView) {
+        addPage(typeid(CardAskView), view);
+    }
+
     setCurrentWidget(typeid(CardAskView));
 }
 
 void CardAbstractView::setDetailView(CardDetailView *view)
 {
-    if (view) {
-        detailView = view;
-    } else {
-        detailView = detailView ? detailView : new CardDetailView(this);
+    CardDetailView *existingView = static_cast<CardDetailView *>(page(typeid (CardDetailView)));
+
+    if (!existingView && !view) {
+        view = new CardDetailView(this);
     }
 
-    addPage(typeid(CardDetailView), detailView);
+    if (!existingView) {
+        addPage(typeid(CardDetailView), view);
+    }
+
     setCurrentWidget(typeid(CardDetailView));
 }
 
 void CardAbstractView::setCompleteView(CardCompleteView *view)
 {
-    if (view) {
-        completeView = view;
-    } else {
-        completeView = completeView ? completeView : new CardCompleteView(this);
+    CardCompleteView *existingView = static_cast<CardCompleteView *>(page(typeid (CardCompleteView)));
+
+    if (!existingView && !view) {
+        view = new CardCompleteView(this);
     }
 
-    addPage(typeid(CardCompleteView), completeView);
+    if (!existingView) {
+        addPage(typeid(CardCompleteView), view);
+    }
+
     setCurrentWidget(typeid(CardCompleteView));
 }

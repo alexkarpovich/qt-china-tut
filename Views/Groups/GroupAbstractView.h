@@ -35,7 +35,6 @@ signals:
     void dataChanged();
 
 public slots:
-    void activate() override;
 };
 
 #endif // GROUPABSTRACTVIEW_H

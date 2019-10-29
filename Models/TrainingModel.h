@@ -25,16 +25,16 @@ public:
     void completeWord();
 
     void reset();
-    bool hasCompleted();
+    bool isComplete();
     void setCompleteness(bool value);
-    bool hasCanceled();
+    bool isNew();
 
 private:
     Training *m_training;
     Word *m_foreigh;
     Word *m_native;
-    bool m_hasCompleted;
-    bool m_hasCanceled;
+    bool m_isComplete;
+    bool m_isNew;
 
 signals:
     void dataChanged();

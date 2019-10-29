@@ -7,7 +7,7 @@ CardAskView::CardAskView(CardAbstractView *view)
     : CardAbstractView(view)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    textLbl = new QLabel;
+    textLbl = new QLabel("hello");
     QFont lblFont;
     lblFont.setBold(true);
     lblFont.setPointSize(20);
@@ -23,8 +23,9 @@ CardAskView::CardAskView(CardAbstractView *view)
 
 void CardAskView::onModelChanged()
 {
-    if (!getModel()->hasCompleted()) {
-        textLbl->setText(getModel()->native()->getText());
+    if (!getModel()->isComplete()) {
+        QString text = getModel()->native()->getText();
+        textLbl->setText(text);
     }
 }
 

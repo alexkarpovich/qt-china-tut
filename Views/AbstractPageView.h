@@ -18,8 +18,6 @@ public:
     void setContainer(QStackedWidget *value);
     void setCurrentWidget(std::type_index id);
 
-    virtual void activate();
-
     QMap<std::type_index, AbstractPageView *> *pageMap() const;
     void addPage(std::type_index id, AbstractPageView *page);
     AbstractPageView *page(std::type_index id);

@@ -21,16 +21,12 @@ public:
     TrainingModel *getModel() const;
     void setModel(TrainingModel *value);
 
-    void activate();
     void setAskView(CardAskView *view = nullptr);
     void setDetailView(CardDetailView *view = nullptr);
     void setCompleteView(CardCompleteView *view = nullptr);
 
 private:
     TrainingModel *model;
-    CardAskView *askView = nullptr;
-    CardDetailView *detailView = nullptr;
-    CardCompleteView *completeView = nullptr;
 
 signals:
 

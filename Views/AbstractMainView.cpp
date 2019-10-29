@@ -11,7 +11,7 @@ AbstractMainView::AbstractMainView(QWidget *parent)
 AbstractMainView::AbstractMainView(AbstractMainView *clone)
     : AbstractPageView(clone)
 {
-    setVisible(false);
+    //setVisible(false);
 }
 
 void AbstractMainView::setManagementView()

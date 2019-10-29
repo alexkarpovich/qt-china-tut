@@ -6,6 +6,8 @@ TrainingModel::TrainingModel(QList<int> groupids, Training::Type type, QObject *
     Training *trn = new Training;
     trn->setType(type);
     m_training = trainingDao->getOrCreate(groupids, trn);
+    m_isNew = trainingDao->isNew(m_training->getId());
+    m_isComplete = trainingDao->isComplete(m_training->getId());
 }
 
 Training *TrainingModel::training() const
@@ -65,17 +67,18 @@ void TrainingModel::reset()
     nextWord();
 }
 
-bool TrainingModel::hasCompleted()
+bool TrainingModel::isComplete()
 {
-    return m_hasCompleted;
+    return m_isComplete;
 }
 
 void TrainingModel::setCompleteness(bool value)
 {
-    m_hasCompleted = value;
+    m_isComplete = value;
+    emit dataChanged();
 }
 
-bool TrainingModel::hasCanceled()
+bool TrainingModel::isNew()
 {
-    return m_hasCanceled;
+    return m_isNew;
 }

@@ -20,7 +20,6 @@ public:
 signals:
 
 public slots:
-    void activate();
 };
 
 #endif // TRAININGVIEW_H

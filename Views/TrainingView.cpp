@@ -22,8 +22,3 @@ TrainingView::TrainingView(QList<int> groupids, Training::Type type, AbstractMai
     setLayout(rootLayout);
 }
 
-void TrainingView::activate()
-{
-    qDebug() << "Training activated";
-    cardView->activate();
-}
