@@ -23,8 +23,8 @@ CardAskView::CardAskView(CardAbstractView *view)
 
 void CardAskView::onModelChanged()
 {
-    if (!getModel()->isComplete()) {
-        textLbl->setText(getModel()->getNativeWord()->getText());
+    if (!getModel()->hasCompleted()) {
+        textLbl->setText(getModel()->native()->getText());
     }
 }
 

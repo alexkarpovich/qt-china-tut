@@ -7,10 +7,6 @@
 #include <Views/AbstractPageView.h>
 #include <Views/AbstractMainView.h>
 
-// Forward declaration to avoid cyclic inclusion
-class GroupNotSelectedView;
-class GroupEditView;
-class GroupTrainingView;
 
 class GroupAbstractView : public AbstractPageView
 {
@@ -35,9 +31,6 @@ public:
 private:
     QList<int> *groupids;
     AbstractMainView *pageView;
-    GroupNotSelectedView *notSelectedView;
-    GroupEditView *editView;
-    GroupTrainingView *trainingView;
 signals:
     void dataChanged();
 

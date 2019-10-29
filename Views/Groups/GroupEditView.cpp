@@ -7,21 +7,19 @@
 #include <Entities/Training.h>
 #include <Views/Words/WordItemDelegate.h>
 #include "GroupEditView.h"
+#include "GroupTrainingView.h"
 
 
 GroupEditView::GroupEditView(GroupAbstractView *view)
     : GroupAbstractView(view)
 {
     buildLayout();
-    connect(view, SIGNAL(dataChanged()), this, SLOT(onDataChanged()));
+    wordModel = new WordModel(*getGroupids());
+    wordTableView->setModel(wordModel);
 }
 
 void GroupEditView::onDataChanged()
 {
-    if (isNotSelectedView()) {
-        setEditView();
-    }
-
     wordModel = new WordModel(*getGroupids());
     wordTableView->setModel(wordModel);
 }
@@ -77,6 +75,8 @@ void GroupEditView::onWordInputReturnPressed()
 
 void GroupEditView::onStartTrainingClicked()
 {    
+    GroupTrainingView *trainingView = new GroupTrainingView(this);
+    addPage(typeid (GroupTrainingView), trainingView);
     setTrainingView();
 }
 

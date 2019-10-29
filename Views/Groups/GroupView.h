@@ -16,6 +16,7 @@ public:
 signals:
 
 public slots:
+    void onDataChanged();
 };
 
 #endif // GROUPVIEW_H

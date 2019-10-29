@@ -1,19 +1,14 @@
+#include <Views/TrainingView.h>
 #include "CardAbstractView.h"
 #include "CardAskView.h"
 #include "CardDetailView.h"
 #include "CardCompleteView.h"
 
-CardAbstractView::CardAbstractView(AbstractPageView *parent)
+CardAbstractView::CardAbstractView(TrainingView *parent)
     : AbstractPageView(parent)
 {
     setContainer(new QStackedWidget(this));
-    model = new CardModel;
-    askView = new CardAskView(this);
-    detailView = new CardDetailView(this);
-    completeView = new CardCompleteView(this);
-    addPage(typeid(CardAskView), askView);
-    addPage(typeid(CardDetailView), detailView);
-    addPage(typeid(CardCompleteView), completeView);
+    model = parent->getTrainingModel();
 }
 
 CardAbstractView::CardAbstractView(CardAbstractView *clone)
@@ -23,32 +18,53 @@ CardAbstractView::CardAbstractView(CardAbstractView *clone)
     model = clone->getModel();
 }
 
-CardModel *CardAbstractView::getModel() const
+TrainingModel *CardAbstractView::getModel() const
 {
     return model;
 }
 
-void CardAbstractView::setModel(CardModel *value)
+void CardAbstractView::setModel(TrainingModel *value)
 {
     model = value;
 }
 
 void CardAbstractView::activate()
 {
-    model->initialize();
+    model->nextWord();
 }
 
-void CardAbstractView::setAskView()
+void CardAbstractView::setAskView(CardAskView *view)
 {
+    if (view) {
+        askView = view;
+    } else {
+        askView = askView ? askView : new CardAskView(this);
+    }
+
+    addPage(typeid(CardAskView), askView);
     setCurrentWidget(typeid(CardAskView));
 }
 
-void CardAbstractView::setDetailView()
+void CardAbstractView::setDetailView(CardDetailView *view)
 {
+    if (view) {
+        detailView = view;
+    } else {
+        detailView = detailView ? detailView : new CardDetailView(this);
+    }
+
+    addPage(typeid(CardDetailView), detailView);
     setCurrentWidget(typeid(CardDetailView));
 }
 
-void CardAbstractView::setCompleteView()
+void CardAbstractView::setCompleteView(CardCompleteView *view)
 {
+    if (view) {
+        completeView = view;
+    } else {
+        completeView = completeView ? completeView : new CardCompleteView(this);
+    }
+
+    addPage(typeid(CardCompleteView), completeView);
     setCurrentWidget(typeid(CardCompleteView));
 }

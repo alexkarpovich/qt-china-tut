@@ -3,9 +3,10 @@
 
 #include <QWidget>
 
-#include <Models/CardModel.h>
+#include <Models/TrainingModel.h>
 #include <Views/AbstractPageView.h>
 
+class TrainingView;
 class CardAskView;
 class CardDetailView;
 class CardCompleteView;
@@ -14,22 +15,22 @@ class CardAbstractView : public AbstractPageView
 {
     Q_OBJECT
 public:
-    explicit CardAbstractView(AbstractPageView *parent);
-    CardAbstractView(CardAbstractView *clone);
+    explicit CardAbstractView(CardAbstractView *clone);
+    CardAbstractView(TrainingView *parent);
 
-    CardModel *getModel() const;
-    void setModel(CardModel *value);
+    TrainingModel *getModel() const;
+    void setModel(TrainingModel *value);
 
     void activate();
-    void setAskView();
-    void setDetailView();
-    void setCompleteView();
+    void setAskView(CardAskView *view = nullptr);
+    void setDetailView(CardDetailView *view = nullptr);
+    void setCompleteView(CardCompleteView *view = nullptr);
 
 private:
-    CardModel *model;
-    CardAskView *askView;
-    CardDetailView *detailView;
-    CardCompleteView *completeView;
+    TrainingModel *model;
+    CardAskView *askView = nullptr;
+    CardDetailView *detailView = nullptr;
+    CardCompleteView *completeView = nullptr;
 
 signals:
 

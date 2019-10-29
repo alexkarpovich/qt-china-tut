@@ -6,6 +6,11 @@
 
 #include "Cards/CardView.h"
 
+TrainingModel *TrainingView::getTrainingModel() const
+{
+    return trainingModel;
+}
+
 TrainingView::TrainingView(QList<int> groupids, Training::Type type, AbstractMainView *view)
     : AbstractMainView(view)
 {

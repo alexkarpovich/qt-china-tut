@@ -15,6 +15,8 @@ class TrainingView : public AbstractMainView
 public:
     explicit TrainingView(QList<int> groupids, Training::Type type, AbstractMainView *view = nullptr);
 
+    TrainingModel *getTrainingModel() const;
+
 signals:
 
 public slots:

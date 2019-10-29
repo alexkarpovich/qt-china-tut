@@ -5,9 +5,6 @@
 #include <QWidget>
 #include "AbstractPageView.h"
 
-class ManagementView;
-class TrainingView;
-
 class AbstractMainView : public AbstractPageView
 {
     Q_OBJECT
@@ -19,8 +16,7 @@ public:
     void setTrainingView();
 
 private:
-    ManagementView *managementView;
-    TrainingView *trainingView;
+
 signals:
 
 public slots:

@@ -24,6 +24,6 @@ void CardCompleteView::onResetBtnClicked()
 
 void CardCompleteView::onContinueBtnClicked()
 {
-    getModel()->next();
+    getModel()->nextWord();
     setAskView();
 }

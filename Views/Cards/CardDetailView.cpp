@@ -31,24 +31,24 @@ CardDetailView::CardDetailView(CardAbstractView *view)
 
 void CardDetailView::onModelChanged()
 {
-    if (!getModel()->isComplete()) {
-        wordLbl->setText(getModel()->getForeignWord()->getText());
-        transcriptionLbl->setText(getModel()->getForeignWord()->getTranscription());
-        translationLbl->setText(getModel()->getNativeWord()->getText());
+    if (!getModel()->hasCompleted()) {
+        wordLbl->setText(getModel()->foreigh()->getText());
+        transcriptionLbl->setText(getModel()->foreigh()->getTranscription());
+        translationLbl->setText(getModel()->native()->getText());
     }
 }
 
 void CardDetailView::onRepeatBtnClicked()
 {
-    getModel()->next();
+    getModel()->nextWord();
     setAskView();
 }
 
 void CardDetailView::onCompleteBtnClicked()
 {
-    getModel()->complete();
+    getModel()->completeWord();
 
-    if (!getModel()->isComplete()) {
+    if (!getModel()->hasCompleted()) {
         setAskView();
     } else {
         setCompleteView();

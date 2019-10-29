@@ -50,12 +50,6 @@ GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
     : AbstractPageView(pageView), groupids(new QList<int>), pageView(pageView)
 {
     setContainer(new QStackedWidget(this));
-    notSelectedView = new GroupNotSelectedView(this);
-    editView = new GroupEditView(this);
-    trainingView = new GroupTrainingView(this);
-    addPage(typeid(GroupNotSelectedView), notSelectedView);
-    addPage(typeid(GroupEditView), editView);
-    addPage(typeid(GroupTrainingView), trainingView);
 }
 
 GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)

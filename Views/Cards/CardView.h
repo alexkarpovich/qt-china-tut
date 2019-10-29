@@ -15,7 +15,7 @@ class CardView : public CardAbstractView
     Q_OBJECT
     TrainingModel *trainingModel;
 public:
-    explicit CardView(AbstractMainView *parent);
+    CardView(TrainingView *parent);
 
 signals:
 

@@ -35,7 +35,7 @@ Training *TrainingDao::get(int trainingid)
     if (query.exec() && query.next()) {
         Training *trn = new Training;
         trn->setId(query.value(0).toInt());
-        trn->setType(static_cast<Training::Type>(query.value(0).toInt()));
+        trn->setType(static_cast<Training::Type>(query.value(1).toInt()));
 
         return trn;
     }
