@@ -8,13 +8,14 @@ CardDetailView::CardDetailView(CardAbstractView *view)
 {
     QGridLayout *rootLayout = new QGridLayout;
     wordLbl = new QLabel;
+    QFont lblFont;
+    lblFont.setBold(true);
+    lblFont.setPointSize(16);
+    wordLbl->setFont(lblFont);
     transcriptionLbl = new QLabel;
     translationLbl = new QLabel;
     completeBtn = new QPushButton("дальше");
     repeatBtn = new QPushButton("повторить");
-    QFont lblFont;
-    lblFont.setBold(true);
-    lblFont.setPointSize(20);
 
     rootLayout->addWidget(wordLbl, 0, 0, 2, 1);
     rootLayout->addWidget(transcriptionLbl, 0, 1);
@@ -24,6 +25,7 @@ CardDetailView::CardDetailView(CardAbstractView *view)
 
     setLayout(rootLayout);
 
+    onModelChanged();
     connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(completeBtn, SIGNAL(clicked()), this, SLOT(onCompleteBtnClicked()));
     connect(repeatBtn, SIGNAL(clicked()), this, SLOT(onRepeatBtnClicked()));

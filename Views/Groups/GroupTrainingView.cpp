@@ -13,6 +13,10 @@ GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
 {
     QGridLayout *rootLayout = new QGridLayout;
     QPushButton *tmp;
+    backBtn = new QPushButton("Вернуться");
+
+    rootLayout->addWidget(backBtn, 0, 0, 1, 2);
+    connect(backBtn, SIGNAL(clicked()), this, SLOT(onBackBtnClicked()));
 
     for(int i = 0; i < 4; i++) {
         tmp = new QPushButton(QString::number(i), this);
@@ -21,14 +25,18 @@ GroupTrainingView::GroupTrainingView(GroupAbstractView *view)
         connect(btns[i], &QPushButton::clicked, [this, i]() {
             onTrainingOptionClicked(static_cast<Training::Type>(i));
         });
-        rootLayout->addWidget(tmp, i/2, i%2);
+        rootLayout->addWidget(tmp, i/2 + 1, i%2);
     }
     setLayout(rootLayout);
+}
+
+void GroupTrainingView::onBackBtnClicked()
+{
+    setEditView();
 }
 
 void GroupTrainingView::onTrainingOptionClicked(Training::Type type)
 {
     TrainingView *trainingView = new TrainingView(*getGroupids(), type, getPageView());
-    getPageView()->addPage(typeid(TrainingView), trainingView);
-    getPageView()->setTrainingView();
+    getPageView()->setTrainingView(trainingView);
 }

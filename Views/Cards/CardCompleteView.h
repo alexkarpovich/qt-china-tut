@@ -16,6 +16,7 @@ public:
     CardCompleteView(CardAbstractView *view);
 
 public slots:
+    void onModelChanged();
     void onResetBtnClicked();
     void onContinueBtnClicked();
 };

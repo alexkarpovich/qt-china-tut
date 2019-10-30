@@ -12,18 +12,31 @@ CardCompleteView::CardCompleteView(CardAbstractView *view)
     rootLayout->addWidget(continueBtn);
     setLayout(rootLayout);
 
+    connect(getModel(), SIGNAL(dataChanged()), this, SLOT(onModelChanged()));
     connect(resetBtn, SIGNAL(clicked()), this, SLOT(onResetBtnClicked()));
     connect(continueBtn, SIGNAL(clicked()), this, SLOT(onContinueBtnClicked()));
+
+    onModelChanged();
+}
+
+
+void CardCompleteView::onModelChanged()
+{
+    if (getModel()->isComplete()) {
+        continueBtn->setVisible(false);
+    } else {
+        continueBtn->setVisible(true);
+    }
 }
 
 void CardCompleteView::onResetBtnClicked()
 {
-    getModel()->reset();
     setAskView();
+    getModel()->reset();
 }
 
 void CardCompleteView::onContinueBtnClicked()
 {
-    getModel()->nextWord();
     setAskView();
+    getModel()->nextWord();
 }

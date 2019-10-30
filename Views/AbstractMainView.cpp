@@ -11,15 +11,30 @@ AbstractMainView::AbstractMainView(QWidget *parent)
 AbstractMainView::AbstractMainView(AbstractMainView *clone)
     : AbstractPageView(clone)
 {
-    //setVisible(false);
 }
 
-void AbstractMainView::setManagementView()
+void AbstractMainView::setManagementView(ManagementView *view)
 {
+    ManagementView *existingView = static_cast<ManagementView *>(page(typeid(ManagementView)));
+
+    if (!existingView && !view) {
+        view = new ManagementView(this);
+    }
+
+    if (!existingView) {
+        addPage(typeid(ManagementView), view);
+    }
+
     setCurrentWidget(typeid(ManagementView));
 }
 
-void AbstractMainView::setTrainingView()
-{
+void AbstractMainView::setTrainingView(TrainingView *view)
+{    
+    TrainingView *existingView = static_cast<TrainingView *>(page(typeid(TrainingView)));
+
+    if (!existingView) {
+        addPage(typeid(TrainingView), view);
+    }
+
     setCurrentWidget(typeid(TrainingView));
 }

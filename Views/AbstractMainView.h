@@ -5,6 +5,9 @@
 #include <QWidget>
 #include "AbstractPageView.h"
 
+class ManagementView;
+class TrainingView;
+
 class AbstractMainView : public AbstractPageView
 {
     Q_OBJECT
@@ -12,8 +15,8 @@ public:
     explicit AbstractMainView(QWidget *parent = nullptr);
     AbstractMainView(AbstractMainView *clone);
 
-    void setManagementView();
-    void setTrainingView();
+    void setManagementView(ManagementView *view = nullptr);
+    void setTrainingView(TrainingView *view = nullptr);
 
 private:
 

@@ -173,16 +173,16 @@ void TrainingDao::completeWord(int trainingid, int wordid)
 bool TrainingDao::isComplete(int trainingid)
 {
     QSqlQuery query;
-    QString sql = "SELECT 1 FROM "
-                "(select count(translation_id) size from trainings_translations where training_id=%1 AND status=1) complete, "
-                "(select count(translation_id) size from groups_translations a LEFT JOIN groups_trainings b ON b.group_id=a.group_id WHERE b.training_id=%1) existing "
-            "WHERE complete.size = existing.size AND complete.size > 0";
+    QString sql = "SELECT EXISTS(SELECT 1 FROM "
+                   "(select count(translation_id) size from trainings_translations where training_id=%1 AND status=1) complete, "
+                   "(select count(translation_id) size from groups_translations a LEFT JOIN groups_trainings b ON b.group_id=a.group_id WHERE b.training_id=%1) existing "
+                   "WHERE complete.size = existing.size AND complete.size > 0)";
     sql = sql.arg(trainingid);
 
     if (query.exec(sql) && query.next()) {
-        return true;
+        return query.value(0).toBool();
     } else {
-        qDebug() << "Training has completed error: " + query.lastError().text();
+        qDebug() << "Training is complete error: " << trainingid << query.lastError().text();
     }
 
     return false;

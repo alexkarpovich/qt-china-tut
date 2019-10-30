@@ -12,6 +12,7 @@
 class GroupTrainingView : public GroupAbstractView
 {
     Q_OBJECT
+    QPushButton *backBtn;
     QList<QPushButton *> btns;
 public:
     explicit GroupTrainingView(GroupAbstractView *view);
@@ -19,6 +20,7 @@ public:
 signals:
 
 public slots:
+    void onBackBtnClicked();
     void onTrainingOptionClicked(Training::Type type);
 };
 

@@ -7,7 +7,7 @@ CardAskView::CardAskView(CardAbstractView *view)
     : CardAbstractView(view)
 {
     QVBoxLayout *rootLayout = new QVBoxLayout;
-    textLbl = new QLabel("hello");
+    textLbl = new QLabel;
     QFont lblFont;
     lblFont.setBold(true);
     lblFont.setPointSize(20);

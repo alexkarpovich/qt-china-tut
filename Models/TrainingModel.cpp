@@ -8,6 +8,8 @@ TrainingModel::TrainingModel(QList<int> groupids, Training::Type type, QObject *
     m_training = trainingDao->getOrCreate(groupids, trn);
     m_isNew = trainingDao->isNew(m_training->getId());
     m_isComplete = trainingDao->isComplete(m_training->getId());
+
+    nextWord();
 }
 
 Training *TrainingModel::training() const
@@ -46,7 +48,6 @@ void TrainingModel::nextWord()
 
     if (!m_native) {
         setCompleteness(true);
-        return;
     } else {
         m_foreigh = trainingDao->translationWords(m_training->getId(), m_native->getId()).first();
     }
@@ -75,7 +76,6 @@ bool TrainingModel::isComplete()
 void TrainingModel::setCompleteness(bool value)
 {
     m_isComplete = value;
-    emit dataChanged();
 }
 
 bool TrainingModel::isNew()
