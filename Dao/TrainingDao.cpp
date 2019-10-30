@@ -174,7 +174,7 @@ bool TrainingDao::isComplete(int trainingid)
 {
     QSqlQuery query;
     QString sql = "SELECT 1 FROM "
-                "(select count(translation_id) size from trainings_translations where training_id=%1) complete, "
+                "(select count(translation_id) size from trainings_translations where training_id=%1 AND status=1) complete, "
                 "(select count(translation_id) size from groups_translations a LEFT JOIN groups_trainings b ON b.group_id=a.group_id WHERE b.training_id=%1) existing "
             "WHERE complete.size = existing.size AND complete.size > 0";
     sql = sql.arg(trainingid);
@@ -191,7 +191,7 @@ bool TrainingDao::isComplete(int trainingid)
 bool TrainingDao::isNew(int trainingid)
 {
     QSqlQuery query;
-    QString sql = "select exists(select 1 from trainings_translations where training_id=%1)";
+    QString sql = "select exists(select 1 from trainings_translations where training_id=%1 AND status=1)";
     sql = sql.arg(trainingid);
 
     if (query.exec(sql) && query.next()) {
