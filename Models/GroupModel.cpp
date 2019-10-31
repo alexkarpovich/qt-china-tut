@@ -62,6 +62,18 @@ void GroupModel::addGroup(const QString& name)
     endResetModel();
 }
 
+void GroupModel::increaseWordCount(int groupid)
+{
+    beginResetModel();
+    foreach (Group* group, groups){
+        if (group->getId() == groupid){
+            group->increaseWordCount();
+            break;
+        }
+    }
+    endResetModel();
+}
+
 QHash<int, QByteArray> GroupModel::roleNames() const
 {
     QHash<int, QByteArray> roles;

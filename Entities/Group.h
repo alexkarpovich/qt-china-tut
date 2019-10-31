@@ -16,6 +16,7 @@ public:
     void setId(int value);
     int getWordCount() const;
     void setWordCount(int value);
+    void increaseWordCount();
 };
 
 #endif // GROUP_H

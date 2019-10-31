@@ -31,6 +31,7 @@ public:
               int role = Qt::EditRole);
 public slots:
     void addGroup(const QString& name);
+    void increaseWordCount(int groupid);
 private:
     QHash<int, QByteArray> roleNames() const;
 };

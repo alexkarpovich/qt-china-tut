@@ -7,14 +7,15 @@
 #include <Views/AbstractPageView.h>
 #include <Views/AbstractMainView.h>
 
+#include <Models/GroupModel.h>
+
 
 class GroupAbstractView : public AbstractPageView
 {
     Q_OBJECT
 
 public:
-
-    explicit GroupAbstractView(AbstractMainView *pageView);
+    GroupAbstractView(ManagementView *parent);
     GroupAbstractView(GroupAbstractView *clone);
 
     void setNotSelectedView();
@@ -28,8 +29,12 @@ public:
 
     bool isNotSelectedView();
 
+    GroupModel *getGroupModel() const;
+    void setGroupModel(GroupModel *value);
+
 private:
     QList<int> *groupids;
+    GroupModel *groupModel;
     AbstractMainView *pageView;
 signals:
     void dataChanged();

@@ -22,6 +22,7 @@ public:
     Word *addTranslation(int groupid, int wordid, const QString& text);
     QMap<int, bool> translationFlags(int groupid, int wordid);
     void updateTranslationFlags(int groupid, int wordid, int twordid, bool value);
+
 };
 
 #endif // WORDDAO_H

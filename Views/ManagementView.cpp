@@ -12,6 +12,11 @@ ManagementView::ManagementView(AbstractMainView *view)
     buildLayout();
 }
 
+GroupModel *ManagementView::getGroupModel()
+{
+    return groupModel;
+}
+
 void ManagementView::activate()
 {
     qDebug() << "Management activated";
@@ -38,9 +43,9 @@ void ManagementView::buildControlsSection()
 
 void ManagementView::buildWorkSection()
 {
-    QHBoxLayout *workSectionLayout = new QHBoxLayout;
-    groupView = new GroupView(this);
+    QHBoxLayout *workSectionLayout = new QHBoxLayout;    
     workSectionLayout->addWidget(buildGroupListSection());
+    groupView = new GroupView(this);
     workSectionLayout->addWidget(groupView);
 
     QVBoxLayout* rootLayout = qobject_cast<QVBoxLayout*>(layout());

@@ -20,6 +20,11 @@ void Group::setWordCount(int value)
     wordCount = value;
 }
 
+void Group::increaseWordCount()
+{
+    ++wordCount;
+}
+
 Group::Group()
 {
     id = 0;

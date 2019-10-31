@@ -11,7 +11,7 @@ class GroupView : public GroupAbstractView
 
     void buildLayout();
 public:
-    explicit GroupView(AbstractMainView *pageView);
+    explicit GroupView(ManagementView *view);
 
 signals:
 

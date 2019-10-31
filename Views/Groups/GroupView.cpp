@@ -5,8 +5,8 @@
 #include "GroupNotSelectedView.h"
 #include "GroupView.h"
 
-GroupView::GroupView(AbstractMainView *pageView)
-    : GroupAbstractView(pageView)
+GroupView::GroupView(ManagementView *view)
+    : GroupAbstractView(view)
 {
     buildLayout();
 }

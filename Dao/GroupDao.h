@@ -21,6 +21,7 @@ public:
     void del(Group *value);
     QList<Word *> words(QList<int> groupids);
     Word *addWord(int groupid, const QString &text);
+    QMap<int, QString> translationLines(QList<int> groupids);
 };
 
 #endif // GROUPDAO_H

@@ -8,6 +8,7 @@ WordModel::WordModel(QList<int> groupids, QObject *parent)
     wordDao = new WordDao;
     groupDao = new GroupDao;
     words = groupDao->words(groupids);
+    formattedOptions = groupDao->translationLines(groupids);
 }
 
 QVariant WordModel::data(const QModelIndex &index, int role) const
@@ -22,7 +23,7 @@ QVariant WordModel::data(const QModelIndex &index, int role) const
     case IdRole: return wrd->getId();
     case TextRole: return wrd->getText();
     case TranscriptionRole: return wrd->getTranscription();
-    case TranslationsRole: return "TRANSLATIONS";
+    case TranslationsRole: return formattedOptions[wrd->getId()];
     case GroupIdsRole: return QVariant::fromValue(groupids);
     }
 

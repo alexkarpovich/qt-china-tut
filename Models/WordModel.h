@@ -19,6 +19,7 @@ class WordModel : public QAbstractTableModel
     QList<Word*> words;
     QMap<int, QList<Word *>> options;
     QMap<int, bool> optionFlags;
+    QMap<int, QString> formattedOptions;
     WordDao *wordDao;
     GroupDao *groupDao;
 

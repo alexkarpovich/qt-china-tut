@@ -159,3 +159,35 @@ Word *GroupDao::addWord(int groupid, const QString &text)
         qDebug() << "Add word to group error: " + query.lastError().text();
     }
 }
+
+QMap<int, QString> GroupDao::translationLines(QList<int> groupids)
+{
+    QSqlQuery query;
+    QStringList strnum;
+    QMap<int, QString> mapping;
+
+    foreach(int id, groupids) {
+        strnum << QString::number(id);
+    }
+
+    QString sql = "SELECT t.%1_id, GROUP_CONCAT(r.text, ', ') FROM groups_translations gt "
+                  "LEFT JOIN translations t on gt.translation_id = t.id "
+                  "LEFT JOIN %2 r on t.%2_id = r.id "
+                  "WHERE gt.group_id in (%3) "
+                  "GROUP BY t.%1_id";
+    sql = sql.arg(profile->getLearningLang()->getCode(),
+                  profile->getNativeLang()->getCode(),
+                  strnum.join(","));
+
+    if (query.exec(sql)) {
+        while (query.next()) {
+            mapping[query.value(0).toInt()] = query.value(1).toString();
+        }
+    } else {
+        qDebug() << "Translation lines error: " + query.lastError().text();
+    }
+
+    return mapping;
+}
+
+

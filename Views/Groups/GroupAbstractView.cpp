@@ -1,5 +1,6 @@
 #include <QDebug>
 
+#include <Views/ManagementView.h>
 #include "GroupAbstractView.h"
 #include "GroupNotSelectedView.h"
 #include "GroupEditView.h"
@@ -41,9 +42,20 @@ bool GroupAbstractView::isNotSelectedView()
     return container()->currentWidget() == page(typeid(GroupNotSelectedView));
 }
 
-GroupAbstractView::GroupAbstractView(AbstractMainView *pageView)
-    : AbstractPageView(pageView), groupids(new QList<int>), pageView(pageView)
+GroupModel *GroupAbstractView::getGroupModel() const
 {
+    return groupModel;
+}
+
+void GroupAbstractView::setGroupModel(GroupModel *value)
+{
+    groupModel = value;
+}
+
+GroupAbstractView::GroupAbstractView(ManagementView *parent)
+    : AbstractPageView(parent), groupids(new QList<int>), pageView(parent)
+{
+    groupModel = parent->getGroupModel();
     setContainer(new QStackedWidget(this));
 }
 
@@ -53,4 +65,5 @@ GroupAbstractView::GroupAbstractView(GroupAbstractView *clone)
     //setVisible(false);
     pageView = clone->getPageView();
     groupids = clone->getGroupids();
+    groupModel = clone->getGroupModel();
 }

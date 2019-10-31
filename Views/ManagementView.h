@@ -25,6 +25,7 @@ class ManagementView : public AbstractMainView
     void initializeWidgets();
 public:
     explicit ManagementView(AbstractMainView *view);
+    GroupModel *getGroupModel();
 
 public slots:
     void activate();

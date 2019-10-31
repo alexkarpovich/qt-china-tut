@@ -71,6 +71,7 @@ void GroupEditView::onWordInputReturnPressed()
 {
     wordModel->addWord(wordInput->text());
     wordInput->clear();
+    getGroupModel()->increaseWordCount(getGroupids()->first());
 }
 
 void GroupEditView::onStartTrainingClicked()
