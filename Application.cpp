@@ -4,6 +4,7 @@
 #include <QStandardPaths>
 #include <QStyleFactory>
 #include <QSqlDatabase>
+#include <QFontDatabase>
 
 #include <Application.h>
 #include <Dao/ProfileDao.h>
@@ -18,6 +19,7 @@ Application::Application(int &argc, char **argv)
 
 bool Application::init()
 {
+    initializeFonts();
     initializePalette();
     initializeStorage();
 
@@ -28,6 +30,19 @@ bool Application::init()
     initProfile();
 
     return true;
+}
+
+void Application::initializeFonts()
+{
+    QFontDatabase fontDB;
+    int fontId = fontDB.addApplicationFont(":/fonts/KaiTi.ttf");
+    if(fontId != -1){
+        QStringList font_families = QFontDatabase::applicationFontFamilies(fontId);
+        qDebug()<< font_families;
+        QFont kaiti;
+        kaiti.setFamilies(font_families);
+        setFont(kaiti);
+    }
 }
 
 void Application::initializePalette()

@@ -2,4 +2,7 @@
     <qresource prefix="/static">
         <file>db.sqlite</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>KaiTi.ttf</file>
+    </qresource>
 </RCC>

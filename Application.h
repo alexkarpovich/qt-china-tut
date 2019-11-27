@@ -9,6 +9,7 @@ class Application : public QApplication
     Q_OBJECT
     QString dbFilePath;
 
+    void initializeFonts();
     void initializePalette();
     void initializeStorage();
     bool openConnection();
