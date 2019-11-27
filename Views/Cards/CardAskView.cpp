@@ -10,8 +10,9 @@ CardAskView::CardAskView(CardAbstractView *view)
     textLbl = new QLabel;
     QFont lblFont;
     lblFont.setBold(true);
-    lblFont.setPointSize(20);
+    lblFont.setPointSize(14);
     textLbl->setFont(lblFont);
+    textLbl->setWordWrap(true);
     showBtn = new QPushButton("Показать");
     rootLayout->addWidget(textLbl, 0, Qt::AlignCenter);
     rootLayout->addWidget(showBtn, 0, Qt::AlignBottom);
