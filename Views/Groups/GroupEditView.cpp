@@ -32,7 +32,10 @@ void GroupEditView::buildLayout()
     wiLayout->setMargin(0);
     QSpacerItem* leftSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding);
     QSpacerItem* rightSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding);
+    QFont inputFont;
+    inputFont.setFamily("KaiTi");
     wordInput = new QLineEdit;
+    wordInput->setFont(inputFont);
     wordInput->setPlaceholderText("Введите слово...");
     wordInput->setStyleSheet("padding: 3px 10px;");
     wordInput->setMinimumWidth(100);

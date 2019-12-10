@@ -39,9 +39,6 @@ void Application::initializeFonts()
     if(fontId != -1){
         QStringList font_families = QFontDatabase::applicationFontFamilies(fontId);
         qDebug()<< font_families;
-        QFont kaiti;
-        kaiti.setFamilies(font_families);
-        setFont(kaiti);
     }
 }
 

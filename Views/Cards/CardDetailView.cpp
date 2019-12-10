@@ -9,9 +9,10 @@ CardDetailView::CardDetailView(CardAbstractView *view)
     QGridLayout *rootLayout = new QGridLayout;
     wordLbl = new QLabel;
     QFont lblFont;
-    lblFont.setBold(true);
-    lblFont.setPointSize(16);
+    lblFont.setPointSize(25);
+    lblFont.setFamily("KaiTi");
     wordLbl->setFont(lblFont);
+    wordLbl->setTextInteractionFlags(Qt::TextSelectableByMouse);
     transcriptionLbl = new QLabel;
     translationLbl = new QLabel;
     completeBtn = new QPushButton("дальше");

@@ -89,16 +89,19 @@ void WordItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     font.setPointSize(16);
 
     if (index.column() == 0) {
+        font.setFamily("KaiTi");
         QString zh = index.data(WordModel::TextRole).toString();
         painter->setFont(font);
         painter->drawText(option.rect.x() + 10, option.rect.y(), option.rect.width() - 10, option.rect.height(), Qt::AlignLeft, zh);
     } else if (index.column() == 1) {
+        font.setFamily("Tahoma");
         QString transcription = index.data(WordModel::TranscriptionRole).toString();
         font.setPointSize(10);
         font.setBold(false);
         painter->setFont(font);
         painter->drawText(option.rect.x() + 10, option.rect.y(), option.rect.width() - 10, option.rect.height(), Qt::AlignLeft, transcription);
     } else if (index.column() == 2) {
+        font.setFamily("Tahoma");
         QString translations = index.data(WordModel::TranslationsRole).toString();
         font.setPointSize(10);
         font.setBold(false);
